@@ -1,0 +1,11 @@
+@main("Create Book") {
+    
+  <form method="POST" action="@routes.Application.newBook()">
+    Id:
+    <input type="text" name="id"><br/>
+    Title:
+    <input type="text" name="title"><br/>
+    Credits needed:
+    <input type="text" name="credit"><br/>
+    <input type="submit" value="Add"><br/>
+}

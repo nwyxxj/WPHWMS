@@ -1,0 +1,15 @@
+@main("Login"){
+  <form action="@routes.StudentManager.authenticate()" method="POST">
+    @if(flash.get("error")) {
+      <div class="notification failure">
+      @flash.get("error")
+    }
+    Username
+    <input type="textbox" name="user"><br/>
+    Password
+    <input type="textbox" name="password"><br/>
+    <input type="submit" value="Login"><br/>
+  </form>
+
+}
+  

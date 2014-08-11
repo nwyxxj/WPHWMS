@@ -1,0 +1,23 @@
+@(books: List[Book])
+
+@main("Delete book(s)") {
+  <table border="1">
+    <tr>
+      <th>Id</th>
+      <th>Title</th>
+      <th>Credit needed</th>
+    </tr>    
+    @for(b <- books){
+      @defining(0) { count=>
+      <tr>
+        <td><form action="@routes.Application.removeNow()">@b.getId()
+        <input type = "hidden" name="id" value=@b.getId() ></td>
+        <td><input type = "hidden" name="title" value=@b.getTitle() >@b.getTitle()</td> 
+        <td><input type = "hidden" name="credit" value=@b.getCredit() >@b.getCredit()</td>
+        <td><input type="checkbox" name="delete[@count]" value=@b.getId()></td>
+      </tr>
+      }
+    }
+  </table>
+  <input type = "submit" value="Delete"></form>
+}
