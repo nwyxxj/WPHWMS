@@ -1,0 +1,14 @@
+SMAP
+patientInformation_jsp.java
+JSP
+*S JSP
+*F
++ 0 patientInformation.jsp
+patientInformation.jsp
++ 1 topbar.jsp
+topbar/topbar.jsp
+*L
+5,11:49
+5#1,33:60
+15#0,33:92
+*E
