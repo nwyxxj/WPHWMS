@@ -12,19 +12,23 @@ package entity;
  */
 public class Case {
     
-    private int caseID;
+    private String caseID;
     private String caseName;
     private String caseDescription;
     private String status;
     private String admissionInfo;
-    
-    public Case(int caseID, String caseName, String caseDescription, String status, String admissionInfo) {
+
+    public Case(String caseID, String caseName, String caseDescription, String status, String admissionInfo) {
         this.caseID = caseID;
         this.caseName = caseName;
-        
+        this.caseDescription = caseDescription;
+        this.status = status;
+        this.admissionInfo = admissionInfo;
     }
+    
+    
 
-    public int getCaseID() {
+    public String getCaseID() {
         return caseID;
     }
 
@@ -44,7 +48,7 @@ public class Case {
         return admissionInfo;
     }
 
-    public void setCaseID(int caseID) {
+    public void setCaseID(String caseID) {
         this.caseID = caseID;
     }
 
