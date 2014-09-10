@@ -9,11 +9,13 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <link rel="stylesheet" href="css/foundation.css" />
+        <%@include file="/topbar/topbarAdmin.jsp" %>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
          <title>Hospital Ward Management System for NP Health Sciences</title>
     </head>
     <body>
-        <a href = "ProcessLogout"> Log Out </a>
+        
         <h1>Welcome, Admin</h1>
         
         
