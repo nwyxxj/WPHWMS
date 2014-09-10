@@ -5,32 +5,32 @@
  */
 
 package dao;
-
-import entity.Nurse;
+import entity.Lecturer;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
+import java.sql.Time;
+import java.util.*;
 /**
  *
  * @author weiyi.ngow.2012
  */
-public class NurseDAO {
-        public Nurse retrieve(String userid){
+public class LecturerDAO {
+    public Lecturer retrieve(String userid) {
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
-        Nurse nurse = null; 
+        Lecturer lecturer = null;
         
         try {
             conn = ConnectionManager.getConnection();
-            stmt = conn.prepareStatement("select * from NURSE where nurseID = ?");
+            stmt = conn.prepareStatement("select * from LECTURER where LecturerID = ?");
             stmt.setString(1, userid);
             
             rs = stmt.executeQuery();
             while (rs.next()) {
-               nurse = new Nurse(rs.getString(1), rs.getString(2));
+                lecturer = new Lecturer(rs.getString(1), rs.getString(2));
             }
 
         } catch (SQLException e) {
@@ -38,6 +38,7 @@ public class NurseDAO {
         } finally {
             ConnectionManager.close(conn, stmt, rs);
         }
-        return nurse;
+        
+        return lecturer;
     }
 }

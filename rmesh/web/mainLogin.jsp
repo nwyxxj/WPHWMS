@@ -14,7 +14,8 @@
     <center>
         <h1>HSEMR</h1>
         <h2>Enriching Lives, Enriching You</h2> 
-        
+        <div class="large-centered large-4 columns">
+            
         <% 
             
             String userid = ""; 
@@ -25,7 +26,7 @@
             }
             
         %> 
-        
+        <div class="card">
         <form action = "ProcessLogin" method = "post">
             <table>
                 <tr>
@@ -61,4 +62,6 @@
         </form>
     </center>
     </body>
+    </div>
+    </div>
 </html>

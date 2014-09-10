@@ -8,6 +8,8 @@ package controller;
 
 import dao.AdminDAO;
 import dao.NurseDAO;
+import dao.LecturerDAO;
+import entity.Lecturer;
 import entity.Admin;
 import entity.Nurse;
 import java.io.IOException;
@@ -100,7 +102,6 @@ public class ProcessLogin extends HttpServlet {
         
         if (userType.equals("admin")) {
             AdminDAO adminDAO = new AdminDAO();
-            userid = request.getParameter("userid");
             Admin admin = adminDAO.retrieve(userid);
             
             // If such userid does not exist in DB
@@ -121,30 +122,43 @@ public class ProcessLogin extends HttpServlet {
                     rd.forward(request, response);
                 }
             }
-        } else { 
-            NurseDAO nurseDAO = new NurseDAO();
-            userid = request.getParameter("userid");
+        } else if (userType.equals("lecturer")) {
+            LecturerDAO lecturerDAO = new LecturerDAO();
+            Lecturer lecturer = lecturerDAO.retrieve(userid);
             
-            // If userid or password is blank 
-            // Or student userid is not 10 characters long (i.e. S10012345A)
-            if (userid == null || password == null || userid.length() != 10) {
+            if (lecturer == null) {
                 request.setAttribute("error", "Invalid userid/password");
                 RequestDispatcher rd = request.getRequestDispatcher("mainLogin.jsp");
                 rd.forward(request, response);
+            } else {
+                String correctPassword = lecturer.getLecturerPassword();
+                
+                // If password matches the one in DB
+                if (correctPassword.equals(password)) {
+                    session.setAttribute("User", userid);
+                    response.sendRedirect("lecturerHomePage.jsp");
+                } else {
+                    request.setAttribute("error", "Invalid userid/password");
+                    RequestDispatcher rd = request.getRequestDispatcher("mainLogin.jsp");
+                    rd.forward(request, response);
+                }
             }
-            Nurse student = nurseDAO.retrieve(userid);
+            
+        } else { 
+            NurseDAO nurseDAO = new NurseDAO();
+            Nurse nurse = nurseDAO.retrieve(userid);
             
             // If no such student exist in DB
-            if (student == null) {
+            if (nurse == null) {
                 request.setAttribute("error", "Invalid userid/password");
                 RequestDispatcher rd = request.getRequestDispatcher("mainLogin.jsp");
                 rd.forward(request, response);
             } else { 
-                String correctPassword = student.getNursePassword();
+                String correctPassword = nurse.getNursePassword();
 
                 if (correctPassword.equals(password)) {
                     session.setAttribute("User", userid);
-                    response.sendRedirect("studentHomePage.jsp");
+                    response.sendRedirect("nurseHomePage.jsp");
                 } else {
                     request.setAttribute("error", "Invalid userid/password");
                     RequestDispatcher rd = request.getRequestDispatcher("mainLogin.jsp");

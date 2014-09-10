@@ -25,7 +25,7 @@ public class AdminDAO {
         
         try {
             conn = ConnectionManager.getConnection();
-            stmt = conn.prepareStatement("select * from ADMIN where AdminID = ?");
+            stmt = conn.prepareStatement("select * from ADMIN where adminID = ?");
             stmt.setString(1, userid);
             
             rs = stmt.executeQuery();
