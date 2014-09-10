@@ -11,6 +11,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -40,4 +42,28 @@ public class NurseDAO {
         }
         return nurse;
     }
+    
+    public List<Nurse> retrieveAll() {
+        List<Nurse> list = new ArrayList<Nurse>();
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+
+        try {
+            conn = ConnectionManager.getConnection();
+            stmt = conn.prepareStatement("select * from NURSE");
+
+            rs = stmt.executeQuery();
+            while (rs.next()) {
+                Nurse nurse = new Nurse(rs.getString(1), rs.getString(2));
+                list.add(nurse);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionManager.close(conn, stmt, rs);
+        }
+        return list;
+    }
+
 }

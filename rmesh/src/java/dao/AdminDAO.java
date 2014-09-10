@@ -41,4 +41,27 @@ public class AdminDAO {
         
         return admin;
     }
+    
+    public List<Admin> retrieveAll(){
+        List<Admin> list = new ArrayList<Admin>();
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        
+        try {
+            conn = ConnectionManager.getConnection();
+            stmt = conn.prepareStatement("select * from ADMIN");
+            
+            rs = stmt.executeQuery();
+            while (rs.next()) {
+                Admin admin = new Admin(rs.getString(1), rs.getString(2));
+                list.add(admin);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionManager.close(conn, stmt, rs);
+        }
+        return list;
+    }
 }

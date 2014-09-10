@@ -24,8 +24,17 @@
                 <!-- Right Nav Section -->
 
                  <ul class="left">
+                    <li class="divider"></li>
                     <li><a href="#">Case Management</a></li>
-                    <li><a href="/adminAccountsView.jsp">User Management</a></li>
+                    <li class="divider"></li>
+                    <li class="has-dropdown">
+                    <a href="#">User Management</a>
+                    <ul class="dropdown">
+                        <li><a href="./adminAccountsView.jsp">Admin</a></li>
+                        <li><a href="#">Lecturer</a></li>
+                        <li><a href="#">Nurse</a></li>
+                    </ul>   
+                    </li>
                   </ul>
                 
                 <ul class="right"> 
@@ -36,5 +45,10 @@
             </secion>
         </nav>
 
+        <script src ="js/vendor/jquery.js"></script>
+        <script src="js/foundation.min.js"></script>
+        <script>
+            $(document).foundation();
+        </script>
     </body>
 </html>

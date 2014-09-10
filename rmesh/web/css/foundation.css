@@ -2594,6 +2594,13 @@ td {
   margin: 0;
   padding: 0; }
 
+#cssTable td 
+{
+    text-align:center; 
+    vertical-align:middle;
+}
+
+
 /* Default Link Styles */
 a {
   color: #008cba;
