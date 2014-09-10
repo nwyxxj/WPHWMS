@@ -2912,14 +2912,15 @@ blockquote p {
       display: block;
       background: #efefef;
       color: #222222;
-      padding: 1rem 2rem;
+      padding: 1rem 1rem;
       font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
-      font-size: 1rem; }
+      font-size: 0.9rem; }
       .tabs dd > a:hover, .tabs .tab-title > a:hover {
         background: #e1e1e1; }
     .tabs dd.active a, .tabs .tab-title.active a {
       background: white;
-      color: #222222; }
+      color: #222222; 
+    border: #000 solid 1px;}
   .tabs.radius dd:first-child a, .tabs.radius .tab:first-child a {
     border-bottom-left-radius: 3px;
     border-top-left-radius: 3px; }
@@ -2934,7 +2935,8 @@ blockquote p {
 
 .tabs-content {
   margin-bottom: 1.5rem;
-  width: 100%; }
+  width: 100%; border: solid #000 1px;}
+
   .tabs-content:before, .tabs-content:after {
     content: " ";
     display: table; }
@@ -2947,7 +2949,8 @@ blockquote p {
     width: 100%; }
     .tabs-content > .content.active {
       display: block;
-      float: none; }
+      float: none; 
+      border: #000 solid 1px;}
     .tabs-content > .content.contained {
       padding: 0.9375rem; }
   .tabs-content.vertical {
