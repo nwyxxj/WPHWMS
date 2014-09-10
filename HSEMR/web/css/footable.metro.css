@@ -1,0 +1,350 @@
+.footable {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  border-collapse: separate;
+  border-spacing: 0;
+  width: 85%;
+  font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
+  color: #444444;
+  background: #efefef ;
+  border: 1.5px solid #383838;
+  -moz-border-radius: 0;
+  -webkit-border-radius: 0;
+  border-radius: 0;
+}
+.footable.catalog{
+    width: 89%;
+}
+
+.footable.edit{
+    width: 30%;
+}
+
+.footable.bidDisplay{
+    width: 30%;
+}
+.footable.breakpoint > tbody > tr.footable-row-detail {
+    text-align: center;
+    background: #eeeeee;
+}
+
+.footable.breakpoint > tbody > tr:hover:not(.footable-row-detail) {
+  cursor: pointer;
+}
+.footable.breakpoint > tbody > tr > td.footable-row-detail-cell {
+  background: #fff;
+}
+.footable > tbody img {
+  vertical-align: middle;
+}
+.footable > tbody > tr:hover:not(.footable-row-detail) {
+    /* This one changes the scroll over color */
+    background: #FFFFE2;
+}
+.footable > tbody > tr:hover:not(.footable-row-detail) > td {
+  color: #000000;
+}
+.footable > tbody > tr:last-child > td {
+  border-bottom: none;
+}
+.footable > tbody > tr > td {
+  border-top: 1px solid #dddddd;
+  padding: 10px;
+  text-align: center;
+  border-left: none;
+}
+
+.footable > tbody > tr > td.footable-row-detail-cell,
+.footable > tbody > tr > td.footable-first-column {
+  border-left: none;
+  text-align: center;
+}
+.footable > thead > tr > th {
+    text-align: center;
+    font-weight: bold;
+    background-color:  #4682B4 ; 
+    color : whitesmoke;
+    /*border: 1px solid #000000;*/
+    padding: 10px;
+}
+
+.footable > thead > tr > td {
+  background-color: navy;
+  font-weight: bold;
+  /*border: 1px solid ;*/
+  color:black;
+  border-top: none;
+  border-left: none;
+  font-weight: normal;
+}
+.footable > thead > tr > th.footable-first-column,
+.footable > thead > tr > td.footable-first-column {
+  border-left: none;
+  font-weight: bold;
+}
+.footable > tfoot > tr > th,
+.footable > tfoot > tr > td {
+  background-color: #4682B4;
+  /*border: 1px solid #52b9e9;*/
+  color: whitesmoke;
+  border-top: none;
+  border-left: none;
+  padding: 5px;
+}
+.footable > tfoot .pagination {
+  text-align: center;
+}
+.footable > tfoot .pagination ul {
+  display: inline-block;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+  vertical-align: middle;
+  margin: 0;
+  padding: 0;
+}
+.footable > tfoot .pagination ul > li {
+  display: inline;
+}
+.footable > tfoot .pagination ul > li > a,
+.footable > tfoot .pagination ul > li > span {
+  float: left;
+  border: 2px solid transparent;
+  margin: 0 3px;
+  color: whitesmoke;
+  background: transparent;
+  padding: 1px 5px;
+  text-decoration: none;
+}
+.footable > tfoot .pagination ul > li.disabled > a {
+  color: #888;
+}
+.footable > tfoot .pagination ul > li.active > a {
+  border-color: #ffffff;
+}
+.footable > tfoot .pagination ul > li:first-child > a,
+.footable > tfoot .pagination ul > li:last-child > a,
+.footable > tfoot .pagination ul > li:first-child > span,
+.footable > tfoot .pagination ul > li:last-child > span {
+    color: whitesmoke;
+  -moz-border-radius: 0;
+  -webkit-border-radius: 0;
+  border-radius: 0;
+}
+
+
+
+
+/*This is for display bid results. */
+.footable.bidResults {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  border-collapse: separate;
+  border-spacing: 0;
+  border: 1.5px solid #A8A8A8;
+  width: 75%;
+  font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
+  -moz-border-radius: 0;
+  -webkit-border-radius: 0;
+  border-radius: 0;
+}
+
+.footable.bidResults > thead > tr > th {
+    background-color:  #FEC56B ; 
+    color : black;
+}
+
+.footable.bidResults > tbody > tr > td {
+  border-top: 1px solid #dddddd;
+  padding: 10px;
+  background: #efefef;
+  text-align: center;
+  border-left: none;
+}
+
+ /*This is for display confirmed exam timetable. */
+.footable.confirmedExamTimetable {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  border-collapse: separate;
+  border-spacing: 0;
+  border: 1.5px solid #A8A8A8;
+  width: 75%;
+  font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
+  -moz-border-radius: 0;
+  -webkit-border-radius: 0;
+  border-radius: 0;
+}
+
+.footable.confirmedExamTimetable > thead > tr > th {
+/*    background-color:  #4682B4 ; */
+    background-color:  palegreen ; 
+    color : black;
+}
+
+.footable.confirmedExamTimetable > tbody > tr > td {
+  border-top: 1px solid #dddddd;
+  padding: 10px;
+  background: #efefef;
+  text-align: center;
+  border-left: none;
+}
+    
+/*This is for display pending exam timetable. */
+.footable.pendingExamTimetable {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  border-collapse: separate;
+  border-spacing: 0;
+  border: 1.5px solid #A8A8A8;
+  width: 75%;
+  font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
+  -moz-border-radius: 0;
+  -webkit-border-radius: 0;
+  border-radius: 0;
+}
+
+.footable.pendingExamTimetable > thead > tr > th {
+    background-color:  gray ; 
+    color : white;
+}
+
+.footable.pendingExamTimetable > tbody > tr > td {
+  border-top: 1px solid #dddddd;
+  padding: 10px;
+  background: #efefef;
+  text-align: center;
+  border-left: none;
+}
+
+ /*This is for display courseCompleted table. */
+.footable.courseCompleted {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  border-collapse: separate;
+  border-spacing: 0;
+  border: 1.5px solid #A8A8A8;
+  width: 40%;
+  font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
+  -moz-border-radius: 0;
+  -webkit-border-radius: 0;
+  border-radius: 0;
+}
+
+.footable.courseCompleted > thead > tr > th {
+/*    background-color:  #4682B4 ; */
+    background-color:  palegreen ; 
+    color : black;
+}
+
+.footable.courseCompleted > tbody > tr > td {
+  border-top: 1px solid #dddddd;
+  padding: 10px;
+  background: #efefef;
+  text-align: center;
+  border-left: none;
+}
+
+
+
+
+
+/*This is for display bid results. */
+.footable.timetable {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  border-collapse: separate;
+  border-spacing: 0;
+  width: 80%;
+  border: 1.5px solid #A8A8A8;
+  font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
+  -moz-border-radius: 0;
+  -webkit-border-radius: 0;
+  border-radius: 0;
+}
+
+.footable.timetable > tbody > tr > td {
+  border-top: 1px solid #dddddd;
+  height: 100px;
+  width: 150px;
+  padding: 10px;
+  background: #efefef;
+  text-align: center;
+  border-left: none;
+}
+
+.footable.timetable > thead > tr > th {
+    text-align: center;
+    font-weight: bold;
+    height: 50px;
+    width: 100px;
+    background-color: #FEC56B;
+    color : black;
+    /*border: 1px solid #000000;*/
+    padding: 10px;
+}
+
+.footable.timetable > tbody > tr > td {
+  border: 1px solid #dddddd;
+  padding: 10px;
+  text-align: center;
+  border-left: none;
+}
+
+.footable.timetable > tbody > tr > td.pending{
+  border-top: 1px solid #dddddd;
+  padding: 10px;
+  background: lightgray;
+  text-align: center;
+  border-left: none;
+}
+
+.footable.timetable> tbody > tr> td.pending > a{
+    color: #D70133;
+}
+
+.footable.timetable > tbody > tr > td.successful {
+  border-top: 1px solid #dddddd;
+  padding: 10px;
+  background: palegreen;
+  text-align: center;
+  border-left: none;
+}
+
+.footable.timetable> tbody > tr> td.successful > a{
+    color: #D70133;
+}
+
+.successLegend{
+    display: inline-table;
+    width:15px;
+    height:15px;
+    background: palegreen;
+    /*float: right;*/
+    text-align: right;
+}
+
+.pendingLegend{
+    display: inline-table;
+    width:15px;
+    height:15px;
+    background: lightgray;
+    /*float: right;*/
+    text-align: right;
+}
+
+.footable.timetable > tfoot > tr > td {
+    text-align: center;
+    background-color: transparent;
+    font-weight:normal;
+    /*border: 1px solid #52b9e9;*/
+    color: black;
+    border-left: none;
+    padding: 5px;
+}
