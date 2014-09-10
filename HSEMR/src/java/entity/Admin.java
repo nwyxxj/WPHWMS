@@ -8,8 +8,12 @@ package entity;
 
 /**
  *
- * @author weiyi.ngow.2012
+ * @author weiyi.ngow.2012    
  */
 public class Admin {
+    private String adminID;
+    private String adminPassword;
+    
+    
     
 }
