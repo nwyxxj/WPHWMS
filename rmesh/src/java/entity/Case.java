@@ -17,6 +17,12 @@ public class Case {
     private String caseDescription;
     private String status;
     private String admissionInfo;
+    
+    public Case(int caseID, String caseName, String caseDescription, String status, String admissionInfo) {
+        this.caseID = caseID;
+        this.caseName = caseName;
+        
+    }
 
     public int getCaseID() {
         return caseID;
