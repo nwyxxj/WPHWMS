@@ -2284,7 +2284,7 @@ meta.foundation-mq-topbar {
     .orbit-container .orbit-prev:hover > span {
       border-right-color: white; }
   .orbit-container .orbit-next {
-    right: 0; }
+    right: 37px; }
     .orbit-container .orbit-next > span {
       border-color: transparent;
       border-left-style: solid;
