@@ -19,10 +19,9 @@ import java.util.List;
  *
  * @author hpkhoo.2012
  */
-public class CaseDAO {
+public class  CaseDAO{
   
-    
-    public Case retrieve(String caseid){
+    public static Case retrieve(String caseid){
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;

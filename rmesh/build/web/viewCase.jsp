@@ -4,6 +4,9 @@
     Author     : Jocelyn
 --%>
 
+<%@page import="java.util.List"%>
+<%@page import="dao.CaseDAO"%>
+<%@page import="entity.Case"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -22,22 +25,29 @@
     </head>
     <body>
         <%
+        List<Case> caseList= CaseDAO.retrieveAll(); 
+        out.print(caseList.size());
         String imgName="";
+        String caseID="";
         %>
          
         
         <div class="large-centered large-6 columns">
             <ul id="featured1" data-orbit>
                 <%
-
-                    for (int i = 0; i < 5; i++) {
+                    int numOfPage= caseList.size()/3 + 1;
+                    for (int i = 0; i < numOfPage; i++) {
                 %>
                 <li>
+                    <%=caseList.size()%>
                     <%
-                        for (int j = 1; j <= 3; j++) {
-                            imgName = "img/0" + j + ".jpg";
+                        for (int j = 0; j < caseList.size(); j++) {
+                            Case c= caseList.get(j);
+                            caseID= c.getCaseID();
+                            out.println(caseID);
+                            imgName = "img/0" + 1 + ".jpg";
                     %>
-                    <a href="#" data-reveal-id="imgName">
+                    <a href="#" data-reveal-id="1">
                         <img src="<%=imgName%>" style="float:left; padding-right:5px;" /></a>
 
                     <%
@@ -52,12 +62,22 @@
             </ul>
         </div>
                 
-        <div id="imgName" class="reveal-modal" data-reveal>
-            <h2>Bed 1 Information</h2>
-            <p class="lead">Your couch.  It is mine.</p>
+         <%
+        
+        for(int i=0; i<caseList.size(); i++){
+            Case c= caseList.get(i);
+        %>
+                
+        <div id="1" class="reveal-modal" data-reveal>
+            <h2>Case Information</h2>
+            <p class="lead">Case Number: <%=c.getCaseID()%> </p>
+            <p class="lead">Case Name: <%=c.getCaseName()%> </p>
+            <p class="lead">Case Description: <%=c.getCaseDescription()%> </p>
+            <p class="lead">Case Name: <%=c.getAdmissionInfo()%> </p>
             <a class="close-reveal-modal">&#215;</a>
          </div>
-                
+               
+        <% } %>
         <script src="js/vendor/jquery.js"></script>
         <script src="js/foundation.min.js"></script>
         <script>

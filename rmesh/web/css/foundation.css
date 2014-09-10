@@ -2785,7 +2785,8 @@ blockquote p {
   display: inline-block;
   margin: 0 0 1.25rem 0;
   border: 1px solid #dddddd;
-  padding: 0.625rem 0.75rem; }
+  padding: 0.625rem 0.75rem; 
+  width: 1050px}
   .vcard li {
     margin: 0;
     display: block; }
@@ -2897,17 +2898,22 @@ blockquote p {
     display: inherit !important; } }
 .tabs {
   margin-bottom: 0 !important;
-  margin-left: 0; }
+  margin-left: 0; 
+  border-bottom: solid #cccccc 1px;
+}
   .tabs:before, .tabs:after {
     content: " ";
     display: table; }
   .tabs:after {
-    clear: both; }
+    clear: both; 
+  }
   .tabs dd, .tabs .tab-title {
     position: relative;
     margin-bottom: 0 !important;
     list-style: none;
-    float: left; }
+    float: left; 
+    border: #cccccc solid 1px;
+    border-bottom: none;}
     .tabs dd > a, .tabs .tab-title > a {
       display: block;
       background: #efefef;
@@ -2920,13 +2926,14 @@ blockquote p {
     .tabs dd.active a, .tabs .tab-title.active a {
       background: white;
       color: #222222; 
-    border: #000 solid 1px;}
+      border-bottom: none;
+    }
   .tabs.radius dd:first-child a, .tabs.radius .tab:first-child a {
-    border-bottom-left-radius: 3px;
-    border-top-left-radius: 3px; }
+    border-bottom-left-radius: 1px;
+    border-top-left-radius: 1px; }
   .tabs.radius dd:last-child a, .tabs.radius .tab:last-child a {
-    border-bottom-right-radius: 3px;
-    border-top-right-radius: 3px; }
+    border-bottom-right-radius: 1px;
+    border-top-right-radius: 1px; }
   .tabs.vertical dd, .tabs.vertical .tab-title {
     position: inherit;
     float: none;
@@ -2934,8 +2941,12 @@ blockquote p {
     top: auto; }
 
 .tabs-content {
-  margin-bottom: 1.5rem;
-  width: 100%; border: solid #000 1px;}
+  margin-bottom: 0rem;
+  width: 100%; 
+  border-left: solid #cccccc 1px; 
+  border-right: solid #cccccc 1px;
+  border-bottom: solid #cccccc 1px;
+}
 
   .tabs-content:before, .tabs-content:after {
     content: " ";
@@ -2950,7 +2961,7 @@ blockquote p {
     .tabs-content > .content.active {
       display: block;
       float: none; 
-      border: #000 solid 1px;}
+      border: #000 #cccccc 1px;}
     .tabs-content > .content.contained {
       padding: 0.9375rem; }
   .tabs-content.vertical {
