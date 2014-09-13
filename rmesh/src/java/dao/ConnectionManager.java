@@ -103,4 +103,29 @@ public class ConnectionManager {
               "Unable to close Connection", ex);
     }
   }
+  
+  /**
+   * close the given connection, statement
+   *
+   * @param conn the connection object to be closed
+   * @param stmt the statement object to be closed
+   */
+  public static void close(Connection conn, Statement stmt) {
+    try {
+      if (stmt != null) {
+        stmt.close();
+      }
+    } catch (SQLException ex) {
+      Logger.getLogger(ConnectionManager.class.getName()).log(Level.WARNING,
+              "Unable to close Statement", ex);
+    }
+    try {
+      if (conn != null) {
+        conn.close();
+      }
+    } catch (SQLException ex) {
+      Logger.getLogger(ConnectionManager.class.getName()).log(Level.WARNING,
+              "Unable to close Connection", ex);
+    }
+  }
 }

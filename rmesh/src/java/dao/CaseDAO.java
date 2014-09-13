@@ -29,7 +29,7 @@ public class  CaseDAO{
         
         try {
             conn = ConnectionManager.getConnection();
-            stmt = conn.prepareStatement("select * from Case where caseID = ?");
+            stmt = conn.prepareStatement("select * from case where caseID = ?");
             stmt.setString(1, caseid);
             
             rs = stmt.executeQuery();
@@ -54,7 +54,7 @@ public class  CaseDAO{
         
         try {
             conn = ConnectionManager.getConnection();
-            stmt = conn.prepareStatement("SELECT * FROM case");
+            stmt = conn.prepareStatement("SELECT * FROM `case`");
             rs = stmt.executeQuery();
             
             while (rs.next()) {
@@ -68,6 +68,30 @@ public class  CaseDAO{
             ConnectionManager.close(conn, stmt, rs);
         }
         return caseList;
+    }
+     
+     
+      public static void caseStatusUpdate(String caseID, String status){
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        
+        try {
+            conn = ConnectionManager.getConnection();
+            stmt = conn.prepareStatement("UPDATE `case` SET `status`=? where caseID = ?");
+           
+           
+            stmt.setString(1, status);
+            stmt.setString(2, caseID);
+            
+            stmt.executeUpdate();
+           
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionManager.close(conn, stmt);
+        }
+      
     }
    
 }

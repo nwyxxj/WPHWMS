@@ -26,28 +26,33 @@
     <body>
         <%
         List<Case> caseList= CaseDAO.retrieveAll(); 
-        out.print(caseList.size());
+        
         String imgName="";
         String caseID="";
+
         %>
          
         
         <div class="large-centered large-6 columns">
             <ul id="featured1" data-orbit>
                 <%
-                    int numOfPage= caseList.size()/3 + 1;
+                    int sizeOfList= caseList.size();
+                    int numOfPage= sizeOfList/3;
+                    if(sizeOfList%3 != 0){
+                        numOfPage= numOfPage + 1;
+                    }
                     for (int i = 0; i < numOfPage; i++) {
                 %>
                 <li>
-                    <%=caseList.size()%>
                     <%
                         for (int j = 0; j < caseList.size(); j++) {
                             Case c= caseList.get(j);
                             caseID= c.getCaseID();
-                            out.println(caseID);
-                            imgName = "img/0" + 1 + ".jpg";
+                            int counter= j+1;
+                            imgName = "img/0" + counter + ".jpg";
                     %>
-                    <a href="#" data-reveal-id="1">
+                    <a href="#" data-reveal-id="<%=caseID%>">
+                        
                         <img src="<%=imgName%>" style="float:left; padding-right:5px;" /></a>
 
                     <%
@@ -63,25 +68,48 @@
         </div>
                 
          <%
-        
+        String successMsg= (String) request.getAttribute("successMsg");
+     
         for(int i=0; i<caseList.size(); i++){
             Case c= caseList.get(i);
+            String status= c.getStatus();
         %>
-                
-        <div id="1" class="reveal-modal" data-reveal>
-            <h2>Case Information</h2>
-            <p class="lead">Case Number: <%=c.getCaseID()%> </p>
-            <p class="lead">Case Name: <%=c.getCaseName()%> </p>
-            <p class="lead">Case Description: <%=c.getCaseDescription()%> </p>
-            <p class="lead">Case Name: <%=c.getAdmissionInfo()%> </p>
+       <form action= "ActivateCase" method = "post">   
+           <%    request.setAttribute("caseID", caseID); %>
+           
+        <div id="<%=c.getCaseID()%>" class="reveal-modal" data-reveal>
+            <h2>Case Information</h2> 
+            <% if(status.equals("activated")) { %>
+                Case is currently activated. 
+              
+               <input type ="hidden" name = "status" value = "deactivate">
+               <input type ="submit" class="button tiny" value = "Deactivate Case">
+                <% 
+                if(successMsg != null){ 
+                   out.println(successMsg); 
+                }
+            }else { %>
+               Case is deactivated. 
+               <input type ="submit" class="button tiny" value = "Activate Case">
+               <input type ="hidden" name = "status" value = "activate">
+               <% 
+                if(successMsg != null){ 
+                   out.println(successMsg); 
+                }
+             } %>
+            <p class="lead"><b>Case Number:</b> <%=c.getCaseID()%> </p>
+            <p class="lead"><b>Case Name:</b> <%=c.getCaseName()%> </p>
+            <p class="lead"><b>Case Description:</b> <%=c.getCaseDescription()%> </p>
+            <p class="lead"><b>Admission Info:</b> <%=c.getAdmissionInfo()%> </p>
             <a class="close-reveal-modal">&#215;</a>
          </div>
-               
+           
         <% } %>
         <script src="js/vendor/jquery.js"></script>
         <script src="js/foundation.min.js"></script>
         <script>
             $(document).foundation();
-        </script>
+        </script> 
+        <form>
     </body>
 </html>
