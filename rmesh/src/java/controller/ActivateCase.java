@@ -88,7 +88,7 @@ public class ActivateCase extends HttpServlet {
         //call caseDAO to update the status of the case
         CaseDAO.caseStatusUpdate(caseID, status);
         
-        if(status.equals("activate")){
+        if(status.equals("activated")){
             request.setAttribute("successMsg", "You have successfully activated the case!");
         }else {
             request.setAttribute("successMsg", "You have successfully deactivated the case!");

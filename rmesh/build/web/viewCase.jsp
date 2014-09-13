@@ -81,9 +81,9 @@
             <h2>Case Information</h2> 
             <% if(status.equals("activated")) { %>
                 Case is currently activated. 
-              
-               <input type ="hidden" name = "status" value = "deactivate">
+             
                <input type ="submit" class="button tiny" value = "Deactivate Case">
+               <input type ="hidden" id= "status" name = "status" value = "deactivated">
                 <% 
                 if(successMsg != null){ 
                    out.println(successMsg); 
@@ -91,7 +91,7 @@
             }else { %>
                Case is deactivated. 
                <input type ="submit" class="button tiny" value = "Activate Case">
-               <input type ="hidden" name = "status" value = "activate">
+               <input type ="hidden" id= "status" name = "status" value = "activated">
                <% 
                 if(successMsg != null){ 
                    out.println(successMsg); 
