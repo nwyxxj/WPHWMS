@@ -45,7 +45,7 @@ public class ProcessEditAccount extends HttpServlet {
         if (userType.equals("admin")) {
             AdminDAO.update(userID, password);
             response.sendRedirect("./adminAccountsView.jsp");
-        } else if (userType.equals("nurse")) {
+        } else if (userType.equals("lecturer")) {
             LecturerDAO.update(userID, password);
             response.sendRedirect("./lecturerAccountsView.jsp");
         } else { 
