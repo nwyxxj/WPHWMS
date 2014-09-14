@@ -26,14 +26,14 @@
         <title>Accounts Management</title>
     </head>
     <body>
-        <%            
-            List<Admin> adminList = AdminDAO.retrieveAll();
+        <%
+            List<Lecturer> lecturerList = LecturerDAO.retrieveAll();
         %>
 
         <div class="row" style="padding-top: 30px;">
             <div class="large-centered large-12 columns">
                 <center>
-                    <h1>Administrator Accounts Management</h1>
+                    <h1>Lecturer Accounts Management</h1>
 
                     <table class="responsive" id="cssTable">
                         <col width="40%">
@@ -45,16 +45,16 @@
                             <td>Password</td>
                             <td colspan="2" align="center" valign="middle">Actions</td>
                         </tr>
-                        <%                            for (Admin a : adminList) {
+                        <%                            for (Lecturer l : lecturerList) {
                         %>
                         <tr>
-                            <td> <%= a.getAdminID()%> </td>
-                            <td> <%= a.getAdminPassword()%> </td>
+                            <td> <%= l.getLecturerID()%> </td>
+                            <td> <%= l.getLecturerPassword()%> </td>
                             <td> 
                                 <form action = "EditAccount.jsp" method = "post">
-                                    <input type="hidden" name="userID" value="<%= a.getAdminID()%>">
-                                    <input type="hidden" name="password" value="<%= a.getAdminPassword()%>">
-                                    <input type="hidden" name="type" value="admin">
+                                    <input type="hidden" name="userID" value="<%= l.getLecturerID()%>">
+                                    <input type="hidden" name="password" value="<%= l.getLecturerPassword()%>">
+                                    <input type="hidden" name="type" value="lecturer">
                                     <input type = "submit" class="button tinytable" value="edit">
                                 </form>
                             </td>
@@ -64,11 +64,11 @@
                             %>
                             <td>
                                 <form action = "ProcessDeleteAccount" method = "post">
-                                    <input type="hidden" name="userID" value="<%= a.getAdminID()%>">
-                                    <input type="hidden" name="password" value="<%= a.getAdminPassword()%>">
-                                    <input type="hidden" name="type" value="admin">
+                                    <input type="hidden" name="userID" value="<%= l.getLecturerID()%>">
+                                    <input type="hidden" name="password" value="<%= l.getLecturerPassword()%>">
+                                    <input type="hidden" name="type" value="lecturer">
                                     <%
-                                        if (userLoggedIn != null && userLoggedIn.equals(a.getAdminID())) {
+                                        if (userLoggedIn != null && userLoggedIn.equals(l.getLecturerID())) {
                                     %>
                                     <!--<input type = "submit" class="button tinytable" value="delete" disabled>-->
                                     Logged in
@@ -88,7 +88,7 @@
 
                     </table>
                     <form action = "CreateAccount.jsp" method = "post">
-                        <input type="hidden" name="type" value="admin">
+                        <input type="hidden" name="type" value="lecturer">
                         <input type = "submit" class="button tiny" value="Create New Account">
                     </form>
 

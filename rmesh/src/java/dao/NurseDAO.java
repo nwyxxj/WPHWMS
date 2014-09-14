@@ -19,7 +19,7 @@ import java.util.List;
  * @author weiyi.ngow.2012
  */
 public class NurseDAO {
-        public Nurse retrieve(String userid){
+        public static Nurse retrieve(String userid){
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
@@ -43,7 +43,7 @@ public class NurseDAO {
         return nurse;
     }
     
-    public List<Nurse> retrieveAll() {
+    public static List<Nurse> retrieveAll() {
         List<Nurse> list = new ArrayList<Nurse>();
         Connection conn = null;
         PreparedStatement stmt = null;
@@ -65,5 +65,59 @@ public class NurseDAO {
         }
         return list;
     }
+    public static void update(String userID, String password) {
+        Connection conn = null;
+        PreparedStatement preparedStatement = null;
+        String query= "UPDATE NURSE SET nursePassword =? WHERE nurseID =?";  
+        
+        try {
+            conn = ConnectionManager.getConnection();
 
+            preparedStatement = conn.prepareStatement(query);
+            preparedStatement.setString(1,password);
+            preparedStatement.setString(2,userID);
+            preparedStatement.executeUpdate();
+            
+        } catch(SQLException e) {
+            e.printStackTrace();
+        }finally {
+            ConnectionManager.close(conn,preparedStatement,null);
+        }        
+    }
+    
+    public static void delete(String userID) {
+         Connection conn = null;
+        PreparedStatement preparedStatement = null;
+        String query= "DELETE FROM nurse WHERE nurseID =?";  
+        
+        try {
+            conn = ConnectionManager.getConnection();
+
+            preparedStatement = conn.prepareStatement(query);
+            preparedStatement.setString(1,userID);
+            preparedStatement.executeUpdate();
+            
+        } catch(SQLException e) {
+            e.printStackTrace();
+        }finally {
+            ConnectionManager.close(conn,preparedStatement,null);
+        }        
+    }
+   
+    public static void add(String userID, String password) {
+        Connection conn = null;
+        PreparedStatement preparedStatement = null;
+        String queryLine = "INSERT INTO nurse VALUES ('"
+                + userID + "','" + password + "')";
+
+        try {
+            conn = ConnectionManager.getConnection();
+            preparedStatement = conn.prepareStatement(queryLine);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionManager.close(conn, preparedStatement, null);
+        }
+    }
 }

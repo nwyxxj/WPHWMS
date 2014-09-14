@@ -14,7 +14,7 @@
         <nav class="top-bar" data-topbar>
             <ul class="title-area">
                 <li class="name">
-                    <h1><a href="#">HSEMR<img src="img/healthlablogo.jpg" height = "40"></a></h1>
+                    <h1><a href="./adminHomePage.jsp">HSEMR<img src="img/healthlablogo.jpg" height = "40"></a></h1>
 
                 </li>
                 <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
@@ -31,14 +31,14 @@
                     <a href="#">User Management</a>
                     <ul class="dropdown">
                         <li><a href="./adminAccountsView.jsp">Admin</a></li>
-                        <li><a href="#">Lecturer</a></li>
-                        <li><a href="#">Nurse</a></li>
+                        <li><a href="./lecturerAccountsView.jsp">Lecturer</a></li>
+                        <li><a href="./nurseAccountsView.jsp">Nurse</a></li>
                     </ul>   
                     </li>
                   </ul>
                 
                 <ul class="right"> 
-                        <li><a href="#">Welcome, Admin!</a></li>
+                        <li><a href="./adminHomePage.jsp">Welcome, Admin!</a></li>
                     <li><a href="ProcessLogout">Log Out</a></li>
                 </ul>
                 

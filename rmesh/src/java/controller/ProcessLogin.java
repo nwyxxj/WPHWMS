@@ -42,21 +42,89 @@ public class ProcessLogin extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
-        try {
-            /* TODO output your page here. You may use following sample code. */
-//            out.println("<!DOCTYPE html>");
-//            out.println("<html>");
-//            out.println("<head>");
-//            out.println("<title>Servlet LoginServlet</title>");            
-//            out.println("</head>");
-//            out.println("<body>");
-//            out.println("<h1>Servlet LoginServlet at " + request.getContextPath() + "</h1>");
-//            out.println("</body>");
-//            out.println("</html>");
-        } finally {
-            out.close();
+                
+        HttpSession session = request.getSession();
+        
+        String userid = null;
+        String userType = request.getParameter("userType");
+        userid = request.getParameter("userid");
+        String password = request.getParameter("password");
+        
+        // If userid and password is blank
+        if (userid == null || password == null) {
+            request.setAttribute("error", "Invalid userid/password");
+            RequestDispatcher rd = request.getRequestDispatcher("mainLogin.jsp");
+            rd.forward(request, response);
         }
+        
+        if (userType.equals("admin")) {
+            
+            Admin admin = AdminDAO.retrieve(userid);
+            
+            // If such userid does not exist in DB
+            if (admin == null) {
+                request.setAttribute("error", "Invalid userid/password");
+                RequestDispatcher rd = request.getRequestDispatcher("mainLogin.jsp");
+                rd.forward(request, response);
+            } else {
+                String correctPassword = admin.getAdminPassword();
+                
+                // If password matches the one in DB
+                if (correctPassword.equals(password)) {
+                    session.setAttribute("user", userid);
+                    response.sendRedirect("adminHomePage.jsp");
+                } else {
+                    request.setAttribute("error", "Invalid userid/password");
+                    RequestDispatcher rd = request.getRequestDispatcher("mainLogin.jsp");
+                    rd.forward(request, response);
+                }
+            }
+        } else if (userType.equals("lecturer")) {
+           
+            Lecturer lecturer = LecturerDAO.retrieve(userid);
+            
+            if (lecturer == null) {
+                request.setAttribute("error", "Invalid userid/password");
+                RequestDispatcher rd = request.getRequestDispatcher("mainLogin.jsp");
+                rd.forward(request, response);
+            } else {
+                String correctPassword = lecturer.getLecturerPassword();
+                
+                // If password matches the one in DB
+                if (correctPassword.equals(password)) {
+                    session.setAttribute("user", userid);
+                    response.sendRedirect("lecturerHomePage.jsp");
+                } else {
+                    request.setAttribute("error", "Invalid userid/password");
+                    RequestDispatcher rd = request.getRequestDispatcher("mainLogin.jsp");
+                    rd.forward(request, response);
+                }
+            }
+            
+        } else { 
+            
+            Nurse nurse = NurseDAO.retrieve(userid);
+            
+            // If no such student exist in DB
+            if (nurse == null) {
+                request.setAttribute("error", "Invalid userid/password");
+                RequestDispatcher rd = request.getRequestDispatcher("mainLogin.jsp");
+                rd.forward(request, response);
+            } else { 
+                String correctPassword = nurse.getNursePassword();
+
+                if (correctPassword.equals(password)) {
+                    session.setAttribute("user", userid);
+//                    response.sendRedirect("nurseHomePage.jsp");
+                    response.sendRedirect("patientInformation.jsp");
+                } else {
+                    request.setAttribute("error", "Invalid userid/password");
+                    RequestDispatcher rd = request.getRequestDispatcher("mainLogin.jsp");
+                    rd.forward(request, response);
+                }
+            }
+        }
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -85,88 +153,7 @@ public class ProcessLogin extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        HttpSession session = request.getSession();
-        
-        String userid = null;
-        String userType = request.getParameter("userType");
-        userid = request.getParameter("userid");
-        String password = request.getParameter("password");
-        
-        // If userid and password is blank
-        if (userid == null || password == null) {
-            request.setAttribute("error", "Invalid userid/password");
-            RequestDispatcher rd = request.getRequestDispatcher("mainLogin.jsp");
-            rd.forward(request, response);
-        }
-        
-        if (userType.equals("admin")) {
-            AdminDAO adminDAO = new AdminDAO();
-            Admin admin = adminDAO.retrieve(userid);
-            
-            // If such userid does not exist in DB
-            if (admin == null) {
-                request.setAttribute("error", "Invalid userid/password");
-                RequestDispatcher rd = request.getRequestDispatcher("mainLogin.jsp");
-                rd.forward(request, response);
-            } else {
-                String correctPassword = admin.getAdminPassword();
-                
-                // If password matches the one in DB
-                if (correctPassword.equals(password)) {
-                    session.setAttribute("User", userid);
-                    response.sendRedirect("adminHomePage.jsp");
-                } else {
-                    request.setAttribute("error", "Invalid userid/password");
-                    RequestDispatcher rd = request.getRequestDispatcher("mainLogin.jsp");
-                    rd.forward(request, response);
-                }
-            }
-        } else if (userType.equals("lecturer")) {
-            LecturerDAO lecturerDAO = new LecturerDAO();
-            Lecturer lecturer = lecturerDAO.retrieve(userid);
-            
-            if (lecturer == null) {
-                request.setAttribute("error", "Invalid userid/password");
-                RequestDispatcher rd = request.getRequestDispatcher("mainLogin.jsp");
-                rd.forward(request, response);
-            } else {
-                String correctPassword = lecturer.getLecturerPassword();
-                
-                // If password matches the one in DB
-                if (correctPassword.equals(password)) {
-                    session.setAttribute("User", userid);
-                    response.sendRedirect("lecturerHomePage.jsp");
-                } else {
-                    request.setAttribute("error", "Invalid userid/password");
-                    RequestDispatcher rd = request.getRequestDispatcher("mainLogin.jsp");
-                    rd.forward(request, response);
-                }
-            }
-            
-        } else { 
-            NurseDAO nurseDAO = new NurseDAO();
-            Nurse nurse = nurseDAO.retrieve(userid);
-            
-            // If no such student exist in DB
-            if (nurse == null) {
-                request.setAttribute("error", "Invalid userid/password");
-                RequestDispatcher rd = request.getRequestDispatcher("mainLogin.jsp");
-                rd.forward(request, response);
-            } else { 
-                String correctPassword = nurse.getNursePassword();
-
-                if (correctPassword.equals(password)) {
-                    session.setAttribute("User", userid);
-//                    response.sendRedirect("nurseHomePage.jsp");
-                    response.sendRedirect("patientInformation.jsp");
-                } else {
-                    request.setAttribute("error", "Invalid userid/password");
-                    RequestDispatcher rd = request.getRequestDispatcher("mainLogin.jsp");
-                    rd.forward(request, response);
-                }
-            }
-        }
+         processRequest(request, response);
     }
 
     /**
