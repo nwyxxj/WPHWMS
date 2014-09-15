@@ -44,7 +44,7 @@ public class ActivateCase extends HttpServlet {
             //call caseDAO to update the status of the case
             CaseDAO.caseStatusUpdate(caseID, status);
 
-            if (status.equals("activated")) {
+            if (status.equals("deactivated")) {
                 request.setAttribute("successMsg", "You have successfully activated the case!");
             } else {
                 request.setAttribute("successMsg", "You have successfully deactivated the case!");
@@ -52,7 +52,7 @@ public class ActivateCase extends HttpServlet {
             RequestDispatcher dis = getServletContext().getRequestDispatcher("/viewCase.jsp");
             dis.forward(request, response);
         
-            out.println("<h1>Servlet ActivateCase at " + request.getContextPath() + "</h1>");
+           // out.println("<h1>Servlet ActivateCase at " + request.getContextPath() + "</h1>");
          
 
         } finally {
