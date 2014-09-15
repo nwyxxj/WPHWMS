@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package controller;
 
 import dao.CaseDAO;
@@ -38,17 +37,24 @@ public class ActivateCase extends HttpServlet {
         PrintWriter out = response.getWriter();
         try {
             /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet ActivateCase</title>");            
-            out.println("</head>");
-            out.println("<body>");
+
+            String caseID = (String) request.getAttribute("caseID");
+            String status = (String) request.getParameter("status");
+
+            //call caseDAO to update the status of the case
+            CaseDAO.caseStatusUpdate(caseID, status);
+
+            if (status.equals("activated")) {
+                request.setAttribute("successMsg", "You have successfully activated the case!");
+            } else {
+                request.setAttribute("successMsg", "You have successfully deactivated the case!");
+            }
+            RequestDispatcher dis = getServletContext().getRequestDispatcher("/viewCase.jsp");
+            dis.forward(request, response);
+        
             out.println("<h1>Servlet ActivateCase at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-            
-            
+         
+
         } finally {
             out.close();
         }
@@ -81,20 +87,7 @@ public class ActivateCase extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-        
-        String caseID= (String) request.getAttribute("caseID");
-        String status= (String) request.getParameter("status");
-        
-        //call caseDAO to update the status of the case
-        CaseDAO.caseStatusUpdate(caseID, status);
-        
-        if(status.equals("activated")){
-            request.setAttribute("successMsg", "You have successfully activated the case!");
-        }else {
-            request.setAttribute("successMsg", "You have successfully deactivated the case!");
-        }
-       RequestDispatcher dis=getServletContext().getRequestDispatcher("/viewCase.jsp");
-       dis.forward(request, response);
+
     }
 
     /**
