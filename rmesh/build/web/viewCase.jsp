@@ -26,7 +26,7 @@
     <body>
         <%
             List<Case> caseList = CaseDAO.retrieveAll();
-
+            out.println(caseList.get(0).getStatus());
             String imgName = "";
             String caseID = "";
 
@@ -35,7 +35,8 @@
 
         <div class="large-centered large-6 columns">
             <ul id="featured1" data-orbit>
-                <%                    int sizeOfList = caseList.size();
+                <%                    
+                    int sizeOfList = caseList.size();
                     int numOfPage = sizeOfList / 3;
                     if (sizeOfList % 3 != 0) {
                         numOfPage = numOfPage + 1;
@@ -67,15 +68,13 @@
         </div>
 
         <%            
-                    
             String successMsg = (String) request.getAttribute("successMsg");      
                 
             for (int i = 0; i < caseList.size(); i++) {
                 Case c = caseList.get(i);
                 String status = c.getStatus();
         %>
-
-
+        
         <div id="<%=c.getCaseID()%>" class="reveal-modal" data-reveal>
             
             <%  
@@ -84,23 +83,21 @@
             } 
             %>
             
-            <form action = "ActivateCase" method = "post">   
+            <form action = "ActivateCase" method = "POST">   
 
                 <%    
-                    request.setAttribute("caseID", caseID); 
+                    request.setAttribute("caseID", "C1"); 
                 %>
                 <h2>Case Information</h2> 
                 <% 
                     if (status.equals("activated")) { 
                 %>
                         Case is currently activated. 
-
                         <input type ="hidden" id= "status" name = "status" value = "deactivated">
                         <input type ="submit" class="button tiny" value = "Deactivate Case">
                 <% } else { %>
                         
                         Case is deactivated. 
-
                         <input type ="hidden" id= "status" name = "status" value = "activated">
                         <input type ="submit" class="button tiny" value = "Activate Case">
                 <%  } %>
@@ -109,7 +106,8 @@
                 <p class="lead"><b>Case Name:</b> <%=c.getCaseName()%> </p>
                 <p class="lead"><b>Case Description:</b> <%=c.getCaseDescription()%> </p>
                 <p class="lead"><b>Admission Info:</b> <%=c.getAdmissionInfo()%> </p>
-
+                
+                <input type ="hidden" id= "caseID" name = "caseID" value = "<%=c.getCaseID()%>">
             </form>
             <a class="close-reveal-modal">&#215;</a>
         </div>

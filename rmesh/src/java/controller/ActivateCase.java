@@ -38,9 +38,13 @@ public class ActivateCase extends HttpServlet {
         try {
             /* TODO output your page here. You may use following sample code. */
 
-            String caseID = (String) request.getAttribute("caseID");
+            //String caseID = (String) request.getAttribute("caseID");
             String status = (String) request.getParameter("status");
-
+            String caseID = (String) request.getParameter("caseID");
+            
+            out.println(caseID);
+            out.println(status);
+            
             //call caseDAO to update the status of the case
             CaseDAO.caseStatusUpdate(caseID, status);
 

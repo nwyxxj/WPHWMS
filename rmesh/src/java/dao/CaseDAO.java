@@ -78,8 +78,6 @@ public class  CaseDAO{
         try {
             conn = ConnectionManager.getConnection();
             stmt = conn.prepareStatement("UPDATE `case` SET `status` = ? WHERE  `caseID` = ?");
-           
-           
             stmt.setString(1, status);
             stmt.setString(2, caseID);
             
