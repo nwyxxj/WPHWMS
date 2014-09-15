@@ -29,7 +29,7 @@ public class  CaseDAO{
         
         try {
             conn = ConnectionManager.getConnection();
-            stmt = conn.prepareStatement("select * from case where caseID = ?");
+            stmt = conn.prepareStatement("select * from `case` where caseID = ?");
             stmt.setString(1, caseid);
             
             rs = stmt.executeQuery();

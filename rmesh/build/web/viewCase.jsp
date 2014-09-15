@@ -84,7 +84,7 @@
             } 
             %>
             
-            <form action= "ActivateCase" method = "post">   
+            <form action = "ActivateCase" method = "post">   
 
                 <%    
                     request.setAttribute("caseID", caseID); 

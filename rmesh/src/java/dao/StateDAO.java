@@ -18,7 +18,7 @@ import java.sql.SQLException;
  * @author Administrator
  */
 public class StateDAO {
-        public static State retrieve(String stateID, int caseID){
+        public static State retrieve(String stateID, String caseID){
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
@@ -28,12 +28,12 @@ public class StateDAO {
             conn = ConnectionManager.getConnection();
             stmt = conn.prepareStatement("select * from state where stateID = ? and caseID =?");
             stmt.setString(1, stateID);
-            stmt.setInt(2, caseID);
+            stmt.setString(2, caseID);
             
             
             rs = stmt.executeQuery();
             while (rs.next()) {
-                state = new State(rs.getString(1),rs.getInt(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getString(7),rs.getString(8),rs.getDouble(9),rs.getString(10),rs.getString(11));
+                state = new State(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getString(7),rs.getString(8),rs.getDouble(9),rs.getString(10),rs.getString(11));
             }
 
         } catch (SQLException e) {

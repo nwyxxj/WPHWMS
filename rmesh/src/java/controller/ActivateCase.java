@@ -53,7 +53,6 @@ public class ActivateCase extends HttpServlet {
             dis.forward(request, response);
         
            // out.println("<h1>Servlet ActivateCase at " + request.getContextPath() + "</h1>");
-         
 
         } finally {
             out.close();

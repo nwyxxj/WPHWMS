@@ -19,8 +19,16 @@
     </head>
     <body>
 
-        <%            Patient patient = PatientDAO.retrieve("S7843522B");
-            State state = StateDAO.retrieve("S1", 1);
+        <%            
+            
+            Patient patient = PatientDAO.retrieve("S7843522B");
+            State state = StateDAO.retrieve("S1", "C1");
+            Case caseRetrieved = CaseDAO.retrieve("C1");
+            
+
+            //retrieve case's information
+            
+            String admissionNotes = caseRetrieved.getAdmissionInfo();
 
             //retrieve patient's information
             String firstName = patient.getFirstName();
@@ -62,7 +70,8 @@
                     </dl>
 
                     <div class="content active" id="panel1">
-                        <p>This is the first panel of the basic tab example. This is the first panel of the basic tab example.</p>
+                       
+                        <p><%=admissionNotes%></p>
                     </div>
                     <div class="content" id="panel2">
                         <p>This is the second panel of the basic tab example. This is the second panel of the basic tab example.</p>
