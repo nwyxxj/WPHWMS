@@ -14,6 +14,7 @@
 <%@page import="dao.AdminDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@include file="protect.jsp" %>
+
 <!DOCTYPE html>
 <html>
     <head>

@@ -4,17 +4,17 @@
     Author     : Jocelyn
 --%>
 
+<%@page import="entity.Scenario"%>
+<%@page import="dao.ScenarioDAO"%>
 <%@page import="java.util.List"%>
-<%@page import="dao.CaseDAO"%>
-<%@page import="entity.Case"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>View Scenario</title>
         <link rel="stylesheet" href="css/foundation.css" />
-
         <script src="js/vendor/modernizr.js"></script>
         <script>
             $(document).ready(function() {
@@ -22,21 +22,51 @@
             });
 
         </script>
+        <style>
+            #color {
+                background-color: grey;
+                float: left;
+            }#opacity    {
+                opacity : 0.4;
+                filter: alpha(opacity=40); 
+            }
+        </style>
+
     </head>
     <body>
+
         <%
-            List<Case> caseList = CaseDAO.retrieveAll();
-            out.println(caseList.get(0).getStatus());
-            String imgName = "";
-            String caseID = "";
+            String successMsg = (String) request.getAttribute("successMsg");
 
-        %>
+            if (successMsg != null) {
+                out.println("<center>" + successMsg + "</center>");
+                out.println("<br><br>");
+            } %>
+        <div align ="center">
+            <%
 
+                String imgName = "";
+                String scenarioID = "";
+
+                List<Scenario> scenarioList = ScenarioDAO.retrieveAll();
+
+                for (int i = 0; i < scenarioList.size(); i++) {
+                    Scenario scenario = scenarioList.get(i);
+            %>
+
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <span class="label"><%= scenario.getStatus()%></span>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <%
+                }
+            %>
+        </div>
 
         <div class="large-centered large-6 columns">
             <ul id="featured1" data-orbit>
-                <%                    
-                    int sizeOfList = caseList.size();
+
+                <%
+                    int sizeOfList = scenarioList.size();
                     int numOfPage = sizeOfList / 3;
                     if (sizeOfList % 3 != 0) {
                         numOfPage = numOfPage + 1;
@@ -45,19 +75,30 @@
                 %>
                 <li>
                     <%
-                        for (int j = 0; j < caseList.size(); j++) {
-                            Case c = caseList.get(j);
-                            caseID = c.getCaseID();
+                        Scenario scenario = null;
+                        for (int j = 0; j < scenarioList.size(); j++) {
+                            scenario = scenarioList.get(j);
+                            scenarioID = scenario.getScenarioID();
                             int counter = j + 1;
                             imgName = "img/0" + counter + ".jpg";
                     %>
-                    <a href="#" data-reveal-id="<%=caseID%>">
+                    <a href="#" data-reveal-id="<%=scenarioID%>">
+                        
+                        <% if( scenario.getStatus().equals("activated")) { %>
+                            <img class="opaque" src="<%=imgName%>" style="float:left; padding-right:5px;" /></a>
+                        <% } else { %>
+                        <div id="color">
+                            <div id="opacity">
+                                <img class="opaque" src="<%=imgName%>" style="float:left; padding-right:5px;" /></a>
+                            </div>
+                        </div>
 
-                        <img src="<%=imgName%>" style="float:left; padding-right:5px;" /></a>
+                        <%
 
-                    <%
+                            }
                         }
-                    %>
+                        %>
+
                 </li>
                 <%
                     }
@@ -65,59 +106,53 @@
                 %>
 
             </ul>
+
         </div>
 
-        <%            
-            String successMsg = (String) request.getAttribute("successMsg");      
-                
-            for (int i = 0; i < caseList.size(); i++) {
-                Case c = caseList.get(i);
-                String status = c.getStatus();
+        <%            for (int i = 0; i < scenarioList.size(); i++) {
+                Scenario scenario = scenarioList.get(i);
+                String status = scenario.getStatus();
         %>
-        
-        <div id="<%=c.getCaseID()%>" class="reveal-modal" data-reveal>
-            
-            <%  
-            if (successMsg != null) {
-               out.println(successMsg);
-            } 
-            %>
-            
-            <form action = "ActivateCase" method = "POST">   
 
-                <%    
-                    request.setAttribute("caseID", "C1"); 
-                %>
+        <div id="<%=scenario.getScenarioID()%>" class="reveal-modal" data-reveal>
+
+
+            <form action = "ProcessActivateScenario" method = "POST">   
+
                 <h2>Case Information</h2> 
-                <% 
-                    if (status.equals("activated")) { 
+                <%
+                    if (status.equals("activated")) {
                 %>
-                        Case is currently activated. 
-                        <input type ="hidden" id= "status" name = "status" value = "deactivated">
-                        <input type ="submit" class="button tiny" value = "Deactivate Case">
+                Case is currently activated. 
+                <input type ="hidden" id= "status" name = "status" value = "deactivated">
+                <input type ="submit" class="button tiny" value = "Deactivate Case">
                 <% } else { %>
-                        
-                        Case is deactivated. 
-                        <input type ="hidden" id= "status" name = "status" value = "activated">
-                        <input type ="submit" class="button tiny" value = "Activate Case">
-                <%  } %>
-                    
-                <p class="lead"><b>Case Number:</b> <%=c.getCaseID()%> </p>
-                <p class="lead"><b>Case Name:</b> <%=c.getCaseName()%> </p>
-                <p class="lead"><b>Case Description:</b> <%=c.getCaseDescription()%> </p>
-                <p class="lead"><b>Admission Info:</b> <%=c.getAdmissionInfo()%> </p>
-                
-                <input type ="hidden" id= "caseID" name = "caseID" value = "<%=c.getCaseID()%>">
+
+                Case is deactivated. 
+                <input type ="hidden" id= "status" name = "status" value = "activated">
+                <input type ="submit" class="button tiny" value = "Activate Case">
+                <%  }%>
+
+                <p class="lead"><b>Case Number:</b> <%=scenario.getScenarioID()%> </p>
+                <p class="lead"><b>Case Name:</b> <%=scenario.getScenarioName()%> </p>
+                <p class="lead"><b>Case Description:</b> <%=scenario.getScenarioDescription()%> </p>
+                <p class="lead"><b>Admission Info:</b> <%=scenario.getAdmissionInfo()%> </p>
+
+                <input type ="hidden" id= "scenarioID" name = "scenarioID" value = "<%=scenario.getScenarioID()%>">
             </form>
             <a class="close-reveal-modal">&#215;</a>
         </div>
 
         <% }%>
+
         <script src="js/vendor/jquery.js"></script>
         <script src="js/foundation.min.js"></script>
         <script>
             $(document).foundation();
         </script> 
+
+
+
 
     </body>
 </html>

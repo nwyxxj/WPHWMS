@@ -18,7 +18,7 @@ import java.sql.SQLException;
  * @author Administrator
  */
 public class StateDAO {
-        public static State retrieve(String stateID, String caseID){
+        public static State retrieve(String stateID, String scenarioID){
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
@@ -26,9 +26,9 @@ public class StateDAO {
         
         try {
             conn = ConnectionManager.getConnection();
-            stmt = conn.prepareStatement("select * from state where stateID = ? and caseID =?");
+            stmt = conn.prepareStatement("select * from state where stateID = ? and scenarioID =?");
             stmt.setString(1, stateID);
-            stmt.setString(2, caseID);
+            stmt.setString(2, scenarioID);
             
             
             rs = stmt.executeQuery();

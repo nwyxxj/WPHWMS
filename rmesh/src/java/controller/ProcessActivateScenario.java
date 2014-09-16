@@ -3,9 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package controller;
 
-import dao.CaseDAO;
+import dao.ScenarioDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
@@ -19,8 +20,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author hpkhoo.2012
  */
-@WebServlet(name = "ActivateCase", urlPatterns = {"/ActivateCase"})
-public class ActivateCase extends HttpServlet {
+@WebServlet(name = "ProcessActivateScenario", urlPatterns = {"/ProcessActivateScenario"})
+public class ProcessActivateScenario extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,28 +36,25 @@ public class ActivateCase extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        try {
+           try {
             /* TODO output your page here. You may use following sample code. */
 
-            //String caseID = (String) request.getAttribute("caseID");
+           
             String status = (String) request.getParameter("status");
-            String caseID = (String) request.getParameter("caseID");
-            
-            out.println(caseID);
-            out.println(status);
-            
-            //call caseDAO to update the status of the case
-            CaseDAO.caseStatusUpdate(caseID, status);
+            String scenarioID = (String) request.getParameter("scenarioID");
+        
+            //call scenarioDAO to update the status of the scenario
+            ScenarioDAO.updateScenarioStatus(scenarioID, status);
 
             if (status.equals("deactivated")) {
-                request.setAttribute("successMsg", "You have successfully activated the case!");
-            } else {
                 request.setAttribute("successMsg", "You have successfully deactivated the case!");
+            } else {
+                request.setAttribute("successMsg", "You have successfully activated the case!");
             }
-            RequestDispatcher dis = getServletContext().getRequestDispatcher("/viewCase.jsp");
-            dis.forward(request, response);
+            RequestDispatcher dispatch = getServletContext().getRequestDispatcher("/lecturerHomePage.jsp");
+            dispatch.forward(request, response);
         
-           // out.println("<h1>Servlet ActivateCase at " + request.getContextPath() + "</h1>");
+           // out.println("<h1>Servlet ProcessActivateScenario at " + request.getContextPath() + "</h1>");
 
         } finally {
             out.close();
@@ -90,7 +88,6 @@ public class ActivateCase extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-
     }
 
     /**

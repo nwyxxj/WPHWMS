@@ -22,13 +22,13 @@
         <%            
             
             Patient patient = PatientDAO.retrieve("S7843522B");
-            State state = StateDAO.retrieve("S1", "C1");
-            Case caseRetrieved = CaseDAO.retrieve("C1");
+            State stateRetrieved = StateDAO.retrieve("ST1", "SC1");
+            Scenario scenarioRetrieved = ScenarioDAO.retrieve("SC1");
             
 
             //retrieve case's information
             
-            String admissionNotes = caseRetrieved.getAdmissionInfo();
+            String admissionNotes = scenarioRetrieved.getAdmissionInfo();
 
             //retrieve patient's information
             String firstName = patient.getFirstName();
@@ -39,13 +39,13 @@
             String gender = patient.getGender();
 
             //retrieve state's information
-            String RR = state.getRR();
-            String BP = state.getBP();
-            String HR = state.getHR();
-            String SPO = state.getSPO();
-            String intake = state.getIntake();
-            String output = state.getOutput();
-            double temperature = state.getTemperature();
+            String RR = stateRetrieved.getRR();
+            String BP = stateRetrieved.getBP();
+            String HR = stateRetrieved.getHR();
+            String SPO = stateRetrieved.getSPO();
+            String intake = stateRetrieved.getIntake();
+            String output = stateRetrieved.getOutput();
+            double temperature = stateRetrieved.getTemperature();
         %>
         <br>
         <div align ="center">
@@ -74,7 +74,33 @@
                         <p><%=admissionNotes%></p>
                     </div>
                     <div class="content" id="panel2">
-                        <p>This is the second panel of the basic tab example. This is the second panel of the basic tab example.</p>
+                        <p>
+                            
+                            <form>
+                            <div class="row">
+                                <div class="small-8">
+                                    <div class="row">
+                                        <div class="small-3 columns">
+                                            <label for="right-label" class="right inline">Tutorial Group</label>
+                                            <label for="right-label" class="right inline">Group Member Names</label>
+                                            <label for="right-label" class="right inline">Multidisciplinary Note</label>
+>
+
+                                        </div>
+                                        <div class="small-9 columns">
+                                            <input type="text" id="right-label" placeholder="abc">
+                                            <input type="text" id="right-label" placeholder="fg">
+                                            <input type="text" id="right-label" placeholder="eg">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+
+                      <a href="#" class="button">Submit</a>
+                       
+                       
+                    </p>
                     </div>
                     <div class="content" id="panel3">
                         <p>This is the third panel of the basic tab example. This is the third panel of the basic tab example.</p>
