@@ -51,7 +51,7 @@
                             <td> <%= nurse.getNurseID()%> </td>
                             <td> <%= nurse.getNursePassword()%> </td>
                             <td> 
-                                <form action = "EditAccount.jsp" method = "post">
+                                <form action = "editAccount.jsp" method = "post">
                                     <input type="hidden" name="userID" value="<%= nurse.getNurseID()%>">
                                     <input type="hidden" name="password" value="<%= nurse.getNursePassword()%>">
                                     <input type="hidden" name="type" value="nurse">
@@ -87,7 +87,7 @@
                         </tr>
 
                     </table>
-                    <form action = "CreateAccount.jsp" method = "post">
+                    <form action = "createAccount.jsp" method = "post">
                         <input type="hidden" name="type" value="nurse">
                         <input type = "submit" class="button tiny" value="Create New Account">
                     </form>

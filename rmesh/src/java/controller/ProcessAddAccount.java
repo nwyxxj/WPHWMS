@@ -43,13 +43,13 @@ public class ProcessAddAccount extends HttpServlet {
         
         if (userType.equals("admin")) {
             AdminDAO.add(userID, password);
-            response.sendRedirect("./adminAccountsView.jsp");
+            response.sendRedirect("./viewAdminAccounts.jsp");
         } else if (userType.equals("lecturer")) {
             LecturerDAO.add(userID, password);
-            response.sendRedirect("./lecturerAccountsView.jsp");
+            response.sendRedirect("./viewLecturerAccounts.jsp");
         } else { 
             NurseDAO.add(userID, password);
-            response.sendRedirect("./nurseAccountsView.jsp");
+            response.sendRedirect("./viewNurseAccounts.jsp");
         }
     }
 

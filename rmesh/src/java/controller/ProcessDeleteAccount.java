@@ -40,15 +40,15 @@ public class ProcessDeleteAccount extends HttpServlet {
         String userType = request.getParameter("type");
         String userID = request.getParameter("userID");
         
-        if (userType.equals("admin")) {
+         if (userType.equals("admin")) {
             AdminDAO.delete(userID);
-            response.sendRedirect("./adminAccountsView.jsp");
+            response.sendRedirect("./viewAdminAccounts.jsp");
         } else if (userType.equals("lecturer")) {
             LecturerDAO.delete(userID);
-            response.sendRedirect("./lecturerAccountsView.jsp");
+            response.sendRedirect("./viewLecturerAccounts.jsp");
         } else { 
             NurseDAO.delete(userID);
-            response.sendRedirect("./nurseAccountsView.jsp");
+            response.sendRedirect("./viewNurseAccounts.jsp");
         }
     }
 
