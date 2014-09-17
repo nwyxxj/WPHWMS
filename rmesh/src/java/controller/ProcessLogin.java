@@ -53,7 +53,7 @@ public class ProcessLogin extends HttpServlet {
         // If userid and password is blank
         if (userid == null || password == null) {
             request.setAttribute("error", "Invalid userid/password");
-            RequestDispatcher rd = request.getRequestDispatcher("mainLogin.jsp");
+            RequestDispatcher rd = request.getRequestDispatcher("viewMainLogin.jsp");
             rd.forward(request, response);
         }
         
@@ -64,7 +64,7 @@ public class ProcessLogin extends HttpServlet {
             // If such userid does not exist in DB
             if (admin == null) {
                 request.setAttribute("error", "Invalid userid/password");
-                RequestDispatcher rd = request.getRequestDispatcher("mainLogin.jsp");
+                RequestDispatcher rd = request.getRequestDispatcher("viewMainLogin.jsp");
                 rd.forward(request, response);
             } else {
                 String correctPassword = admin.getAdminPassword();
@@ -72,10 +72,10 @@ public class ProcessLogin extends HttpServlet {
                 // If password matches the one in DB
                 if (correctPassword.equals(password)) {
                     session.setAttribute("user", userid);
-                    response.sendRedirect("adminHomePage.jsp");
+                    response.sendRedirect("viewAdminHomePage.jsp");
                 } else {
                     request.setAttribute("error", "Invalid userid/password");
-                    RequestDispatcher rd = request.getRequestDispatcher("mainLogin.jsp");
+                    RequestDispatcher rd = request.getRequestDispatcher("viewMainLogin.jsp");
                     rd.forward(request, response);
                 }
             }
@@ -85,7 +85,7 @@ public class ProcessLogin extends HttpServlet {
             
             if (lecturer == null) {
                 request.setAttribute("error", "Invalid userid/password");
-                RequestDispatcher rd = request.getRequestDispatcher("mainLogin.jsp");
+                RequestDispatcher rd = request.getRequestDispatcher("viewMainLogin.jsp");
                 rd.forward(request, response);
             } else {
                 String correctPassword = lecturer.getLecturerPassword();
@@ -93,10 +93,10 @@ public class ProcessLogin extends HttpServlet {
                 // If password matches the one in DB
                 if (correctPassword.equals(password)) {
                     session.setAttribute("user", userid);
-                    response.sendRedirect("lecturerHomePage.jsp");
+                    response.sendRedirect("viewLecturerHomePage.jsp");
                 } else {
                     request.setAttribute("error", "Invalid userid/password");
-                    RequestDispatcher rd = request.getRequestDispatcher("mainLogin.jsp");
+                    RequestDispatcher rd = request.getRequestDispatcher("viewMainLogin.jsp");
                     rd.forward(request, response);
                 }
             }
@@ -108,7 +108,7 @@ public class ProcessLogin extends HttpServlet {
             // If no such student exist in DB
             if (nurse == null) {
                 request.setAttribute("error", "Invalid userid/password");
-                RequestDispatcher rd = request.getRequestDispatcher("mainLogin.jsp");
+                RequestDispatcher rd = request.getRequestDispatcher("viewMainLogin.jsp");
                 rd.forward(request, response);
             } else { 
                 String correctPassword = nurse.getNursePassword();
@@ -116,10 +116,10 @@ public class ProcessLogin extends HttpServlet {
                 if (correctPassword.equals(password)) {
                     session.setAttribute("user", userid);
 //                    response.sendRedirect("nurseHomePage.jsp");
-                    response.sendRedirect("patientInformation.jsp");
+                    response.sendRedirect("viewPatientInformation.jsp");
                 } else {
                     request.setAttribute("error", "Invalid userid/password");
-                    RequestDispatcher rd = request.getRequestDispatcher("mainLogin.jsp");
+                    RequestDispatcher rd = request.getRequestDispatcher("viewMainLogin.jsp");
                     rd.forward(request, response);
                 }
             }

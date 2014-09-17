@@ -30,15 +30,15 @@
                     <li class="has-dropdown">
                     <a href="#">User Management</a>
                     <ul class="dropdown">
-                        <li><a href="./adminAccountsView.jsp">Admin</a></li>
-                        <li><a href="./lecturerAccountsView.jsp">Lecturer</a></li>
-                        <li><a href="./nurseAccountsView.jsp">Nurse</a></li>
+                        <li><a href="./viewAdminAccounts.jsp">Admin</a></li>
+                        <li><a href="./viewLecturerAccounts.jsp">Lecturer</a></li>
+                        <li><a href="./viewNurseAccounts.jsp">Nurse</a></li>
                     </ul>   
                     </li>
                   </ul>
                 
                 <ul class="right"> 
-                        <li><a href="./adminHomePage.jsp">Welcome, Admin!</a></li>
+                        <li><a href="./viewAdminHomePage.jsp">Welcome, Admin!</a></li>
                     <li><a href="ProcessLogout">Log Out</a></li>
                 </ul>
                 

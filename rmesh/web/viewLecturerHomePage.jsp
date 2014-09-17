@@ -17,7 +17,8 @@
     <body>
         <a href = "ProcessLogout"> Log Out </a>
         <h1>Welcome, lecturer</h1>
-        
+         <br><br>
+        <jsp:include page="viewCase.jsp" /> 
         
         
     </body>

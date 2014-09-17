@@ -1,5 +1,5 @@
 <%-- 
-    Document   : patientInformation
+    Document   : viewPatientInformation
     Created on : Sep 10, 2014, 2:37:16 PM
     Author     : Administrator
 --%>
@@ -74,7 +74,7 @@
                         <p><%=admissionNotes%></p>
                     </div>
                     <div class="content" id="panel2">
-                        <p>
+                       <p>
                             
                             <form>
                             <div class="row">
@@ -90,15 +90,15 @@
                                         <div class="small-9 columns">
                                             <input type="text" id="right-label" placeholder="abc">
                                             <input type="text" id="right-label" placeholder="fg">
-                                            <input type="text" id="right-label" placeholder="eg">
+                                            <input type="text" id="right-label>" placeholder="eg">
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </form>
 
-                      <a href="#" class="button">Submit</a>
-                       
+                      <input type="button" value="Submit" class="button tiny">
+                      <input type="button" value="Cancel" class="button tiny" onClick="window.location = 'viewPatientInformation.jsp'"/>
                        
                     </p>
                     </div>
