@@ -68,7 +68,7 @@ public class LecturerDAO {
     }
     
     public static void update(String userID, String password) {
-         Connection conn = null;
+        Connection conn = null;
         PreparedStatement preparedStatement = null;
         String query= "UPDATE lecturer SET lecturerPassword =? WHERE lecturerID =?";  
         
