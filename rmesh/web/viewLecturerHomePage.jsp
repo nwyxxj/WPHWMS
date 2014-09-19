@@ -6,7 +6,6 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@include file="protect.jsp" %>
-<%@include file="viewCaseLecturer.jsp" %>
 
 <!DOCTYPE html>
 <html>
@@ -18,7 +17,7 @@
         <a href = "ProcessLogout"> Log Out </a>
         <h1>Welcome, lecturer</h1>
          <br><br>
-        <jsp:include page="viewCaseLecturer.jsp" /> 
+        <jsp:include page="viewScenarioLecturer.jsp" /> 
         
         
     </body>

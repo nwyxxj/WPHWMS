@@ -74,8 +74,14 @@
                     </div>
                     <div class="content" id="panel2">
                        <p>
-                            
-                            <form>
+                            <% 
+                                String msg= (String) request.getAttribute("successMsg");
+                                
+                                if(!msg.equals(null)){
+                                     out.println(msg);
+                                }
+                            %>
+                            <form action="ProcessAddNote" method="POST">
                             <div class="row">
                                 <div class="small-8">
                                     <div class="row">
@@ -85,18 +91,18 @@
                                             <label for="right-label" class="right inline">Multidisciplinary Note</label>
                                         </div>
                                         <div class="small-9 columns">
-                                            <input type="text" id="right-label" placeholder="abc">
-                                            <input type="text" id="right-label" placeholder="fg">
-                                            <input type="text" id="right-label>" placeholder="eg">
+                                            <input type ="text" id= "tutorialGrp" name="tutorialGrp" >
+                                            <input type ="text" id= "grpNames" name="grpNames">
+                                            <input type ="text" id= "notes" name="notes">
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </form>
-
-                      <input type="button" value="Submit" class="button">
-                      <input type="button" value="Cancel" class="button" onClick="window.location = 'viewPatientInformation.jsp'"/>
+                      
                        
+                     <input type="Submit" value="Submit" class="button"> 
+                      <input type="button" value="Cancel" class="button" onClick="window.location = 'viewPatientInformation.jsp'"/>
+                       </form>
                     </p>
                     </div>
                     <div class="content" id="panel3">

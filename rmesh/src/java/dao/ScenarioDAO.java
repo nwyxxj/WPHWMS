@@ -43,7 +43,31 @@ public class ScenarioDAO {
         }
         return scenario;
     }
+    
+     public static List<Scenario> retrieveActivatedStatus() {
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+         List<Scenario> scenarioList = new ArrayList<Scenario>();
 
+        try {
+            conn = ConnectionManager.getConnection();
+            stmt = conn.prepareStatement("select * from scenario where status = ?");
+            stmt.setString(1, "activated");
+
+            rs = stmt.executeQuery();
+            while (rs.next()) {
+                scenarioList.add( new Scenario(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5)));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionManager.close(conn, stmt, rs);
+        }
+        return scenarioList;
+    }
+    
     public static List<Scenario> retrieveAll() {
         Connection conn = null;
         PreparedStatement stmt = null;
@@ -67,6 +91,7 @@ public class ScenarioDAO {
         }
         return scenarioList;
     }
+  
 
     public static void updateScenarioStatus(String scenarioID, String status) {
         Connection conn = null;

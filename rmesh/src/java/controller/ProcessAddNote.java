@@ -6,9 +6,11 @@
 
 package controller;
 
-import dao.ScenarioDAO;
+import dao.NoteDAO;
+import entity.Note;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -20,8 +22,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author hpkhoo.2012
  */
-@WebServlet(name = "ProcessActivateScenario", urlPatterns = {"/ProcessActivateScenario"})
-public class ProcessActivateScenario extends HttpServlet {
+@WebServlet(name = "ProcessAddNote", urlPatterns = {"/ProcessAddNote"})
+public class ProcessAddNote extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,26 +38,26 @@ public class ProcessActivateScenario extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-           try {
+        try {
             /* TODO output your page here. You may use following sample code. */
-               
-           //To retrieve the selected id to activate or deactive
-            String status = (String) request.getParameter("status");
-            String scenarioID = (String) request.getParameter("scenarioID");
+            
+            
+            String notes= (String) request.getParameter("notes");
+            String tutorialGrp= (String) request.getParameter("tutorialGrp");
+            String grpNames= (String) request.getParameter("grpNames");
+            
+            String userLoggedIn = (String) request.getSession().getAttribute("user");
         
-            //call scenarioDAO to update the status of the scenario
-            ScenarioDAO.updateScenarioStatus(scenarioID, status);
-
-            if (status.equals("deactivated")) {
-                request.setAttribute("successMsg", "You have successfully deactivated the case!");
-            } else {
-                request.setAttribute("successMsg", "You have successfully activated the case!");
-            }
-            RequestDispatcher dispatch = getServletContext().getRequestDispatcher("/viewLecturerHomePage.jsp");
+            
+     
+            NoteDAO.insertNote(notes, tutorialGrp, grpNames, userLoggedIn);
+            
+            
+            request.setAttribute("successMsg", "You have successfully submitted!");
+           
+            RequestDispatcher dispatch = getServletContext().getRequestDispatcher("/viewPatientInformation.jsp");
             dispatch.forward(request, response);
-        
-           // out.println("<h1>Servlet ProcessActivateScenario at " + request.getContextPath() + "</h1>");
-
+            
         } finally {
             out.close();
         }
