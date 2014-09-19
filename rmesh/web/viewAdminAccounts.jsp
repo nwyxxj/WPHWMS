@@ -51,7 +51,7 @@
                             <td> <%= admin.getAdminID()%> </td>
                             <td> <%= admin.getAdminPassword()%> </td>
                             <td> 
-                                <form action = "editAccount.jsp" method = "post">
+                                <form action = "EditAccount.jsp" method = "post">
                                     <input type="hidden" name="userID" value="<%= admin.getAdminID()%>">
                                     <input type="hidden" name="password" value="<%= admin.getAdminPassword()%>">
                                     <input type="hidden" name="type" value="admin">
@@ -87,7 +87,7 @@
                         </tr>
 
                     </table>
-                    <form action = "createAccount.jsp" method = "post">
+                    <form action = "CreateAccount.jsp" method = "post">
                         <input type="hidden" name="type" value="admin">
                         <input type = "submit" class="button tiny" value="Create New Account">
                     </form>

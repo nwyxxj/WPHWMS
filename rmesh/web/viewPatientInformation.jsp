@@ -24,7 +24,6 @@
             Patient patient = PatientDAO.retrieve("S7843522B");
             State stateRetrieved = StateDAO.retrieve("ST1", "SC1");
             Scenario scenarioRetrieved = ScenarioDAO.retrieve("SC1");
-            
 
             //retrieve case's information
             
@@ -84,8 +83,6 @@
                                             <label for="right-label" class="right inline">Tutorial Group</label>
                                             <label for="right-label" class="right inline">Group Member Names</label>
                                             <label for="right-label" class="right inline">Multidisciplinary Note</label>
->
-
                                         </div>
                                         <div class="small-9 columns">
                                             <input type="text" id="right-label" placeholder="abc">
@@ -97,8 +94,8 @@
                             </div>
                         </form>
 
-                      <input type="button" value="Submit" class="button tiny">
-                      <input type="button" value="Cancel" class="button tiny" onClick="window.location = 'viewPatientInformation.jsp'"/>
+                      <input type="button" value="Submit" class="button">
+                      <input type="button" value="Cancel" class="button" onClick="window.location = 'viewPatientInformation.jsp'"/>
                        
                     </p>
                     </div>
@@ -110,24 +107,35 @@
                     </div>
                     <div class="content" id="panel5">
                         <p>
-                            <!--                        <table border = "0">   
-                                                        <tr><td>Respiratory Rate</td>
-                                                            <td><input type="text" value ="<%=RR%>" style="width:250px"/></td></tr>
-                                                        <tr><td>Blood Pressure</td>
-                                                            <td><input type="text" value ="<%=BP%>" style="width:250px"/></td></tr>
-                                                        <tr><td>Heart Rate</td>
-                                                            <td><input type="text" value ="<%=HR%>" style="width:250px"/></td></tr>
-                                                        <tr><td>SPO</td>
-                                                            <td><input type="text" value ="<%=SPO%>" style="width:250px"/></td></tr>
-                                                        <tr><td>Intake</td>
-                                                            <td><input type="text" value ="<%=intake%>" style="width:250px"/></td></tr>
-                                                        <tr><td>Output</td>
-                                                            <td><input type="text" value ="<%=output%>" style="width:250px"/></td></tr>
-                                                        <tr><td>Temperature</td>
-                                                            <td><input type="text" value ="<%=temperature%>" style="width:250px"/></td></tr>
-                                                    </table>-->
+                            <table border = "0">   
+                                <tr><td>Vitals</td>
+                                <td>Last Updated</td>
+                                <td>Current</td>
+                                </tr>
+                                <tr><td>Respiratory Rate</td>
+                                    <td><%=RR%></td>
+                                    <td><input type="text" value ="" style="width:250px"/></td></tr>
+                                <tr><td>Blood Pressure</td>
+                                    <td><%=BP%></td>
+                                    <td><input type="text" value ="" style="width:250px"/></td></tr>
+                                <tr><td>Heart Rate</td>
+                                    <td><%=HR%></td>
+                                    <td><input type="text" value ="" style="width:250px"/></td></tr>
+                                <tr><td>SPO</td>
+                                    <td><%=SPO%></td>
+                                    <td><input type="text" value ="" style="width:250px"/></td></tr>
+                                <tr><td>Intake</td>
+                                    <td><%=intake%></td>
+                                    <td><input type="text" value ="" style="width:250px"/></td></tr>
+                                <tr><td>Output</td>
+                                    <td><%=output%></td>
+                                    <td><input type="text" value ="" style="width:250px"/></td></tr>
+                                <tr><td>Temperature</td>
+                                    <td><%=temperature%></td>
+                                    <td><input type="text" value ="" style="width:250px"/></td></tr>
+                            </table>
 
-                        <form>
+<!--                        <form>
                             <div class="row">
                                 <div class="small-8">
                                     <div class="row">
@@ -148,11 +156,11 @@
                                             <input type="text" id="right-label" placeholder="<%=intake%>">
                                             <input type="text" id="right-label" placeholder="<%=output%>">
                                             <input type="text" id="right-label" placeholder="<%=temperature%>">
-                                        </div>
+                                        </div>    
                                     </div>
                                 </div>
                             </div>
-                        </form>
+                        </form>-->
 
                         <a href="#" class="button">Update Vitals</a>
                         </p>
