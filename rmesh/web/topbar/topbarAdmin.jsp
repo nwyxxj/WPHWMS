@@ -25,7 +25,7 @@
 
                  <ul class="left">
                     <li class="divider"></li>
-                    <li><a href="#">Case Management</a></li>
+                    <li><a href="./viewScenarioAdmin.jsp">Case Management</a></li>
                     <li class="divider"></li>
                     <li class="has-dropdown">
                     <a href="#">User Management</a>

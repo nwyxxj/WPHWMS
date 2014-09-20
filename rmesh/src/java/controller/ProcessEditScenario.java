@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package controller;
 
 import dao.ScenarioDAO;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,10 +17,10 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author hpkhoo.2012
+ * @author Administrator
  */
-@WebServlet(name = "ProcessActivateScenario", urlPatterns = {"/ProcessActivateScenario"})
-public class ProcessActivateScenario extends HttpServlet {
+@WebServlet(name = "ProcessEditCase", urlPatterns = {"/ProcessEditCase"})
+public class ProcessEditScenario extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,30 +33,17 @@ public class ProcessActivateScenario extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
-        try {
-            /* TODO output your page here. You may use following sample code. */
 
-            //To retrieve the selected id to activate or deactive
-            String status = (String) request.getParameter("status");
-            String scenarioID = (String) request.getParameter("scenarioID");
-            //to know which page it comes from then redirect to the correct page
-
-            //call scenarioDAO to update the status of the scenario
-            ScenarioDAO.updateScenarioStatus(scenarioID, status);
-            
-            if (status.equals("deactivated")) {
-                request.setAttribute("successMsg", "You have successfully deactivated the case!");
-            } else {
-                request.setAttribute("successMsg", "You have successfully activated the case!");
-            }
-
-            RequestDispatcher dispatch = getServletContext().getRequestDispatcher("/viewLecturerHomePage.jsp");
-            dispatch.forward(request, response);
-        } finally {
-            out.close();
-        }
+        String scenarioID = request.getParameter("scenarioID");
+        String scenarioName = request.getParameter("scenarioName");
+        String status = request.getParameter("status");
+        String scenarioDescription = request.getParameter("scenarioDescription");
+        String admissionInfo = request.getParameter("admissionInfo");
+        
+        ScenarioDAO.update(scenarioID, scenarioName, status, scenarioDescription, admissionInfo);
+        
+        RequestDispatcher rd = request.getRequestDispatcher("viewScenarioAdmin.jsp");
+        rd.forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
