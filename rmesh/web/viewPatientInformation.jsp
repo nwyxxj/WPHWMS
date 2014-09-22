@@ -19,14 +19,11 @@
     </head>
     <body>
 
-        <%            
-            
-            Patient patient = PatientDAO.retrieve("S7843522B");
+        <%            Patient patient = PatientDAO.retrieve("S7843522B");
             State stateRetrieved = StateDAO.retrieve("ST1", "SC1");
             Scenario scenarioRetrieved = ScenarioDAO.retrieve("SC1");
 
             //retrieve case's information
-            
             String admissionNotes = scenarioRetrieved.getAdmissionInfo();
 
             //retrieve patient's information
@@ -45,6 +42,7 @@
             String intake = stateRetrieved.getIntake();
             String output = stateRetrieved.getOutput();
             double temperature = stateRetrieved.getTemperature();
+            String stateID = stateRetrieved.getStateID();
         %>
         <br>
         <div align ="center">
@@ -55,9 +53,9 @@
                     <span class="label">NRIC</span> <%=patientNRIC%>&nbsp;
                     <span class="label">DOB</span> <%=dob%>&nbsp;
                     <span class="label">Gender</span> <%=gender%>&nbsp;
-            </p>
+                    </p>
                 </div></div>
-            
+
             <div class="large-centered large-10 columns">
                 <div class="tabs-content">
                     <dl class="tabs" data-tab>
@@ -69,19 +67,19 @@
                     </dl>
 
                     <div class="content active" id="panel1">
-                       
+
                         <p><%=admissionNotes%></p>
                     </div>
                     <div class="content" id="panel2">
-                       <p>
-                            <% 
-                                String msg= (String) request.getAttribute("successMsg");
-                                
-                                if(!msg.equals(null)){
-                                     out.println(msg);
+                        <p>
+                            <%
+                                String msg = (String) request.getAttribute("successMsg");
+
+                                if (msg != null) {
+                                    out.println(msg);
                                 }
                             %>
-                            <form action="ProcessAddNote" method="POST">
+                        <form action="ProcessAddNote" method="POST">
                             <div class="row">
                                 <div class="small-8">
                                     <div class="row">
@@ -98,12 +96,12 @@
                                     </div>
                                 </div>
                             </div>
-                      
-                       
-                     <input type="Submit" value="Submit" class="button"> 
-                      <input type="button" value="Cancel" class="button" onClick="window.location = 'viewPatientInformation.jsp'"/>
-                       </form>
-                    </p>
+
+
+                            <input type="Submit" value="Submit" class="button"> 
+                            <input type="button" value="Cancel" class="button" onClick="window.location = 'viewPatientInformation.jsp'"/>
+                        </form>
+                        </p>
                     </div>
                     <div class="content" id="panel3">
                         <p>This is the third panel of the basic tab example. This is the third panel of the basic tab example.</p>
@@ -113,62 +111,68 @@
                     </div>
                     <div class="content" id="panel5">
                         <p>
-                            <table border = "0">   
-                                <tr><td>Vitals</td>
+                        <table border = "0">   
+                            <tr><td>Vitals</td>
                                 <td>Last Updated</td>
                                 <td>Current</td>
-                                </tr>
+                            </tr>
+                            <form action ="ProcessUpdateState" method ="POST">
                                 <tr><td>Respiratory Rate</td>
                                     <td><%=RR%></td>
-                                    <td><input type="text" value ="" style="width:250px"/></td></tr>
+                                    <td><input type="text" name = "RR" style="width:250px"/></td></tr>
                                 <tr><td>Blood Pressure</td>
                                     <td><%=BP%></td>
-                                    <td><input type="text" value ="" style="width:250px"/></td></tr>
+                                    <td><input type="text" name ="BP" style="width:250px"/></td></tr>
                                 <tr><td>Heart Rate</td>
                                     <td><%=HR%></td>
-                                    <td><input type="text" value ="" style="width:250px"/></td></tr>
+                                    <td><input type="text" name ="HR" style="width:250px"/></td></tr>
                                 <tr><td>SPO</td>
                                     <td><%=SPO%></td>
-                                    <td><input type="text" value ="" style="width:250px"/></td></tr>
+                                    <td><input type="text" name ="SPO" style="width:250px"/></td></tr>
                                 <tr><td>Intake</td>
                                     <td><%=intake%></td>
-                                    <td><input type="text" value ="" style="width:250px"/></td></tr>
+                                    <td><input type="text" name ="intake" style="width:250px"/></td></tr>
                                 <tr><td>Output</td>
                                     <td><%=output%></td>
-                                    <td><input type="text" value ="" style="width:250px"/></td></tr>
+                                    <td><input type="text" name ="output" style="width:250px"/></td></tr>
                                 <tr><td>Temperature</td>
                                     <td><%=temperature%></td>
-                                    <td><input type="text" value ="" style="width:250px"/></td></tr>
-                            </table>
+                                    <td><input type="text" name ="temperature" style="width:250px"/></td></tr>
+                                <td><input type="hidden" name ="stateID" value = "<%=stateID%>"/></td></tr>
 
-<!--                        <form>
-                            <div class="row">
-                                <div class="small-8">
-                                    <div class="row">
-                                        <div class="small-3 columns">
-                                            <label for="right-label" class="right inline">Respiratory Rate</label>
-                                            <label for="right-label" class="right inline">Blood Pressure</label>
-                                            <label for="right-label" class="right inline">Heart Rate</label>
-                                            <label for="right-label" class="right inline">SPO</label>
-                                            <label for="right-label" class="right inline">Intake</label>
-                                            <label for="right-label" class="right inline">Output</label>
-                                            <label for="right-label" class="right inline">Temperature</label>
-                                        </div>
-                                        <div class="small-9 columns">
-                                            <input type="text" id="right-label" placeholder="<%=RR%>">
-                                            <input type="text" id="right-label" placeholder="<%=BP%>">
-                                            <input type="text" id="right-label" placeholder="<%=HR%>">
-                                            <input type="text" id="right-label" placeholder="<%=SPO%>">
-                                            <input type="text" id="right-label" placeholder="<%=intake%>">
-                                            <input type="text" id="right-label" placeholder="<%=output%>">
-                                            <input type="text" id="right-label" placeholder="<%=temperature%>">
-                                        </div>    
-                                    </div>
-                                </div>
-                            </div>
-                        </form>-->
 
-                        <a href="#" class="button">Update Vitals</a>
+                        </table>
+                        <input type="Submit" value="Update Vitals" class="button"> 
+                        </form>
+
+                        <!--                        <form>
+                                                    <div class="row">
+                                                        <div class="small-8">
+                                                            <div class="row">
+                                                                <div class="small-3 columns">
+                                                                    <label for="right-label" class="right inline">Respiratory Rate</label>
+                                                                    <label for="right-label" class="right inline">Blood Pressure</label>
+                                                                    <label for="right-label" class="right inline">Heart Rate</label>
+                                                                    <label for="right-label" class="right inline">SPO</label>
+                                                                    <label for="right-label" class="right inline">Intake</label>
+                                                                    <label for="right-label" class="right inline">Output</label>
+                                                                    <label for="right-label" class="right inline">Temperature</label>
+                                                                </div>
+                                                                <div class="small-9 columns">
+                                                                    <input type="text" id="right-label" placeholder="<%=RR%>">
+                                                                    <input type="text" id="right-label" placeholder="<%=BP%>">
+                                                                    <input type="text" id="right-label" placeholder="<%=HR%>">
+                                                                    <input type="text" id="right-label" placeholder="<%=SPO%>">
+                                                                    <input type="text" id="right-label" placeholder="<%=intake%>">
+                                                                    <input type="text" id="right-label" placeholder="<%=output%>">
+                                                                    <input type="text" id="right-label" placeholder="<%=temperature%>">
+                                                                </div>    
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </form>-->
+
+
                         </p>
                     </div>
                 </div>
@@ -182,7 +186,7 @@
         <script src="js/vendor/jquery.js"></script>
         <script src="js/foundation.min.js"></script>
         <script>
-            $(document).foundation();
+                                $(document).foundation();
         </script>
     </body>
 </html>

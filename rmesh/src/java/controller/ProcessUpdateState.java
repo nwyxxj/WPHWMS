@@ -3,10 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package controller;
 
-import dao.ScenarioDAO;
+import dao.StateDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
@@ -20,8 +19,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Administrator
  */
-@WebServlet(name = "ProcessEditCase", urlPatterns = {"/ProcessEditCase"})
-public class ProcessEditCase extends HttpServlet {
+@WebServlet(name = "ProcessUpdateState", urlPatterns = {"/ProcessUpdateState"})
+public class ProcessUpdateState extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,33 +33,23 @@ public class ProcessEditCase extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-//        response.setContentType("text/html;charset=UTF-8");
-//        PrintWriter out = response.getWriter();
-//        try {
-//            /* TODO output your page here. You may use following sample code. */
-//            out.println("<!DOCTYPE html>");
-//            out.println("<html>");
-//            out.println("<head>");
-//            out.println("<title>Servlet ProcessEditCase2</title>");            
-//            out.println("</head>");
-//            out.println("<body>");
-//            out.println("<h1>Servlet ProcessEditCase2 at " + request.getContextPath() + "</h1>");
-//            out.println("</body>");
-//            out.println("</html>");
-//        } finally {
-//            out.close();
-//        }
-        
-        String scenarioID = request.getParameter("scenarioID");
-        String scenarioName = request.getParameter("scenarioName");
-        String status = request.getParameter("status");
-        String scenarioDescription = request.getParameter("scenarioDescription");
-        String admissionInfo = request.getParameter("admissionInfo");
-        
-        ScenarioDAO.update(scenarioID, scenarioName, status, scenarioDescription, admissionInfo);
-        
-        RequestDispatcher rd = request.getRequestDispatcher("viewCaseAdmin.jsp");
-        rd.forward(request, response);
+
+        String RR = (String) request.getParameter("RR");
+        String BP = (String) request.getParameter("BP");
+        String HR = (String) request.getParameter("HR");
+        String SPO = (String) request.getParameter("SPO");
+        String intake = (String) request.getParameter("intake");
+        String output = (String) request.getParameter("output");
+        String stateID = (String) request.getParameter("stateID");
+
+        String temperatureString = (String) request.getParameter("temperature");
+
+        double temperature = Double.parseDouble(temperatureString);
+
+        StateDAO.updateState(stateID, RR, BP, HR, SPO, intake, output, temperature);
+
+        RequestDispatcher dispatch = getServletContext().getRequestDispatcher("/viewPatientInformation.jsp");
+        dispatch.forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -47,12 +47,9 @@ public class ProcessAddNote extends HttpServlet {
             String grpNames= (String) request.getParameter("grpNames");
             
             String userLoggedIn = (String) request.getSession().getAttribute("user");
-        
-            
-     
+
             NoteDAO.insertNote(notes, tutorialGrp, grpNames, userLoggedIn);
-            
-            
+                        
             request.setAttribute("successMsg", "You have successfully submitted!");
            
             RequestDispatcher dispatch = getServletContext().getRequestDispatcher("/viewPatientInformation.jsp");
