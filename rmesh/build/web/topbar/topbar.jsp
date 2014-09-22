@@ -22,7 +22,7 @@
             </ul>
                 
             <% 
-                String nurseId = (String)session.getAttribute("User");
+                String nurseId = (String)session.getAttribute("user");
             %>
             <secion class="top-bar-section">
                 <!-- Right Nav Section -->

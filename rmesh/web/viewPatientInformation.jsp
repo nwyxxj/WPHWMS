@@ -4,6 +4,10 @@
     Author     : Administrator
 --%>
 
+<%@page import="javax.imageio.ImageIO"%>
+<%@page import="javax.swing.JLabel"%>
+<%@page import="javax.swing.ImageIcon"%>
+<%@page import="java.awt.Image"%>
 <%@page import="java.util.List"%>
 <%@page import="entity.*"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -104,7 +108,21 @@
                         </p>
                     </div>
                     <div class="content" id="panel3">
-                        <p>This is the third panel of the basic tab example. This is the third panel of the basic tab example.</p>
+                       <% 
+                       String location = "reports/heartReport.png";
+
+                       
+                 //      Image image = ImageIO.read(getClass().getResource(path));
+                       
+                       
+                       %>
+                       <a href="#" >
+                        <img class="opaque" src="<%=location%>" style="float:left; padding-right:5px;" /></a>
+                       <form action="ProcessReport" method="POST">
+                            <input type="checkbox" name="report" value="Heart Report"/>Heart Report<br>
+                            <input type="checkbox" name="report" value="ECG Report"/>ECG Report<br>
+                            <input type="submit" value="Despatch Report"/>
+                        </form>
                     </div>
                     <div class="content" id="panel4">
                         <p>This is the fourth panel of the basic tab example. This is the fourth panel of the basic tab example.</p>
@@ -116,7 +134,7 @@
                                 <td>Last Updated</td>
                                 <td>Current</td>
                             </tr>
-                            <form action ="ProcessUpdateState" method ="POST">
+                            <form action="ProcessUpdateState" method="POST">
                                 <tr><td>Respiratory Rate</td>
                                     <td><%=RR%></td>
                                     <td><input type="text" name = "RR" style="width:250px"/></td></tr>

@@ -31,7 +31,7 @@
             <div class="large-centered large-12 columns">
                 <center>
                     <h1>Edit <%=request.getParameter("userID")%>'s details</h1>
-<%=request.getParameter("type")%>
+
                     <form action = "ProcessEditAccount" method = "post">
                         <div class="row">
                             <div class="large-8 columns">
