@@ -9,6 +9,7 @@ import dao.ReportDAO;
 import entity.Report;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -41,17 +42,17 @@ public class ProcessReport extends HttpServlet {
         String[] reportNames = request.getParameterValues("report");
         String currentScenario = (String) request.getSession().getAttribute("currentScenario");
 
-        List<Report> reportsToRetrieve = null;
+        List<Report> reportsToRetrieve = new ArrayList<Report>();
 
         if (reportNames != null && reportNames.length > 0) {
             for (String reportName : reportNames) {
-                Report report = ReportDAO.retrieve(currentScenario, "ST1", reportName);
+                Report report = ReportDAO.retrieve(reportName);
+                request.setAttribute("reportName", report.getReportName());
                 reportsToRetrieve.add(report);
             }
 
             HttpSession session = request.getSession();
             session.setAttribute("reports", reportsToRetrieve);
-
             RequestDispatcher rd = request.getRequestDispatcher("viewPatientInformation.jsp");
             rd.forward(request, response);
         } else { 

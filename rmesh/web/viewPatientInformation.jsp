@@ -112,37 +112,48 @@
                         </p>
                     </div>
                     <div class="content" id="panel3">
+                        
                         <%
-                            String location = "reports/heartReport.png";
-
-                            //      Image image = ImageIO.read(getClass().getResource(path));
                             List<Report> reports = ReportDAO.retrieveAll();
 
+                            if (reports == null || reports.size() <= 0) {
+                                out.println("");
+                            } else {
+                                int reportsToDisplay = 0;
                         %>
-                        <a href="#" >
-                            <img class="opaque" src="<%=location%>" style="float:left; padding-right:5px;" /></a>
-                        <form action="ProcessReport" method="POST">
+                        <form  action = "ProcessReport" method = "POST"> 
                             <%
                                 String currentScenarioID = (String) session.getAttribute("currentScenarioID");
 
                                 for (Report report : reports) {
+                               
                                     if (report.getScenarioID().equals(currentScenarioID) && report.getStateID().equals("ST1")) {
+                                        reportsToDisplay++;
                             %>
-                            <input type="checkbox" name="report" value="<%=report.getReportName()%>" /><%=report.getReportName()%><br>
+
+                            <input  type = "checkbox" name = "report" value ="<%=report.getReportName()%>" /><%=report.getReportName()%><br>
                             <input type="hidden" name="location" value="<%=report.getReportFile()%>"/><br>
                             <%
-                                    } else {
-                                        out.println("No available report");
                                     }
+
                                 }
+                                if (reportsToDisplay != 0) {
                             %>
-                            <input type="submit" value="Retrieve Report"/>
+
+                            <input type="submit" value="Retrieve Report"/>   
+
+                            <%
+                                } else {
+                                    
+                                    out.println("");
+                                }
+                            }
+                            %>                            
                         </form>
 
                         <%
-                            List<Report> reportsRetrieved = (List) session.getAttribute("reports");
-
-                        if (reportsRetrieved != null && reportsRetrieved.size() > 0) {
+                            List<Report> reportsRetrieved = (List<Report>) session.getAttribute("reports");
+                              if (reportsRetrieved != null && reportsRetrieved.size () > 0) {
                         %>
                         <h1>Existing Report</h1>
                         <table>
@@ -154,15 +165,16 @@
                                 for (Report reportRetrieved : reportsRetrieved) {
                                     DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
                                     Date date = new Date();
+                                    String path = "reports/" + reportRetrieved.getReportFile();
                             %>
                             <tr>
-                                <td><%=reportRetrieved.getReportName()%></td>
+                                <td><a href="<%=path%>"><%=reportRetrieved.getReportName()%></a></td>
                                 <td><%=dateFormat.format(date)%></td>
                             </tr>
                             <%
-                                }
+                                    }
 
-                                } else {
+                                }else {
                                     out.println("No existing reports yet.");
                                 }
                             %>

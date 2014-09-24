@@ -19,7 +19,7 @@ import java.util.List;
  * @author weiyi.ngow.2012
  */
 public class ReportDAO {
-    public static Report retrieve(String scenarioID, String stateID, String name){
+    public static Report retrieve(String name){
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
@@ -27,10 +27,8 @@ public class ReportDAO {
         
         try {
             conn = ConnectionManager.getConnection();
-            stmt = conn.prepareStatement("select * from report where reportName = ?, scenarioID = ?, stateID = ?");
+            stmt = conn.prepareStatement("select * from REPORT where reportName = ?");
             stmt.setString(1, name);
-            stmt.setString(2, scenarioID);
-            stmt.setString(3, stateID);
             
             rs = stmt.executeQuery();
             while (rs.next()) {

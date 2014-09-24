@@ -38,6 +38,7 @@ public class ProcessLogout extends HttpServlet {
         try {
             HttpSession session = request.getSession();
             session.removeAttribute("user");
+            session.invalidate();
             response.sendRedirect("viewMainLogin.jsp");
             /* TODO output your page here. You may use following sample code. */
 //            out.println("<!DOCTYPE html>");
