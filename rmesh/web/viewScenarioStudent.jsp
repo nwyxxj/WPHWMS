@@ -8,6 +8,7 @@
 <%@page import="java.util.*"%>
 <%@page import="dao.ScenarioDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@include file="protect.jsp" %>
 <!DOCTYPE html>
 <html>
     <head>
