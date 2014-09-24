@@ -115,7 +115,6 @@
         <div id="<%=scenario.getScenarioID()%>" class="reveal-modal" data-reveal>
 
             <form action = "ProcessActivateScenario" method = "POST">   
-                <input type ="text" id= "fromPage" name = "fromPage" value = "lecturer">
                 <h2>Case Information</h2> 
                 <%
                     if (status.equals("activated")) {
