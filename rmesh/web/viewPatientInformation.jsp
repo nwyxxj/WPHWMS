@@ -4,6 +4,9 @@
     Author     : Administrator
 --%>
 
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.util.Date"%>
+<%@page import="java.text.DateFormat"%>
 <%@page import="javax.imageio.ImageIO"%>
 <%@page import="javax.swing.JLabel"%>
 <%@page import="javax.swing.ImageIcon"%>
@@ -108,31 +111,66 @@
                         </p>
                     </div>
                     <div class="content" id="panel3">
-                       <% 
-                       String location = "reports/heartReport.png";
+                        <%
+                            String location = "reports/heartReport.png";
 
-                       
-                 //      Image image = ImageIO.read(getClass().getResource(path));
-                       
-                       List<Report> reports = ReportDAO.retrieveAll();
-                       
-                       %>
-                       <a href="#" >
-                        <img class="opaque" src="<%=location%>" style="float:left; padding-right:5px;" /></a>
-                       <form action="ProcessReport" method="POST">
-                           <% 
-                                for(Report report: reports) { 
+                            //      Image image = ImageIO.read(getClass().getResource(path));
+                            List<Report> reports = ReportDAO.retrieveAll();
+
+                        %>
+                        <a href="#" >
+                            <img class="opaque" src="<%=location%>" style="float:left; padding-right:5px;" /></a>
+                        <form action="ProcessReport" method="POST">
+                            <%
+                                String currentScenarioID = (String) session.getAttribute("currentScenarioID");
+
+                                for (Report report : reports) {
+                                    if (report.getScenarioID().equals(currentScenarioID) && report.getStateID().equals("ST1")) {
                             %>
-                           
                             <input type="checkbox" name="report" value="<%=report.getReportName()%>"/><%=report.getReportName()%><br>
                             <input type="hidden" name="location" value="<%=report.getReportFile()%>"/><br>
-                            
                             <%
+                                    } else {
+                                        out.println("No available report");
+                                    }
                                 }
                             %>
-                            <input type="submit" value="Despatch Report"/>
+                            <input type="submit" value="Retrieve Report"/>
                         </form>
+
+                        <%
+                            List<Report> reportsRetrieved = (List) session.getAttribute("reports");
+
+                        if (reportsRetrieved != null && reportsRetrieved.size() > 0) {
+                        %>
+                        <h1>Existing Report</h1>
+                        <table>
+                            <tr>
+                                <td>Report Name</td>
+                                <td>Report Retrieved On</td>
+                            </tr>
+                            <%
+                                for (Report reportRetrieved : reportsRetrieved) {
+                                    DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+                                    Date date = new Date();
+                            %>
+                            <tr>
+                                <td><%=reportRetrieved.getReportName()%></td>
+                                <td><%=dateFormat.format(date)%></td>
+                            </tr>
+                            <%
+                                }
+
+                                } else {
+                                    out.println("No existing reports yet.");
+                                }
+                            %>
+                        </table>
+
                     </div>
+
+
+
                     <div class="content" id="panel4">
                         <p>This is the fourth panel of the basic tab example. This is the fourth panel of the basic tab example.</p>
                     </div>

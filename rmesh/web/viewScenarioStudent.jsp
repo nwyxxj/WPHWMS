@@ -31,7 +31,7 @@
          if(scenarioActivatedList.size()!= 0) {
                 //get the most recently activated scenario
                 Scenario retrieveLastScenario= scenarioActivatedList.get(scenarioActivatedList.size()-1);
-                
+                session.setAttribute("currentScenarioID", retrieveLastScenario.getScenarioID());
                 %>
                 <h3><b>Case Number:</b> <%=retrieveLastScenario.getScenarioID()%></h3><br>
                 <h3><b>Case Name: </b><%=retrieveLastScenario.getScenarioName()%></h3><br>

@@ -27,7 +27,7 @@ public class ReportDAO {
         
         try {
             conn = ConnectionManager.getConnection();
-            stmt = conn.prepareStatement("select * from REPORT where reportName = ?, scenarioID = ?, stateID = ? ");
+            stmt = conn.prepareStatement("select * from report where reportName = ?, scenarioID = ?, stateID = ?");
             stmt.setString(1, name);
             stmt.setString(2, scenarioID);
             stmt.setString(3, stateID);

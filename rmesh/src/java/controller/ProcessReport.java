@@ -3,18 +3,20 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package controller;
 
+import dao.ReportDAO;
 import entity.Report;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -35,15 +37,30 @@ public class ProcessReport extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
-       String[] reports = request.getParameterValues("report");
-       String fileLocation = request.getParameter("location");
-       
-       
-       
+
+        String[] reportNames = request.getParameterValues("report");
+        String currentScenario = (String) request.getSession().getAttribute("currentScenario");
+
+        List<Report> reportsToRetrieve = null;
+
+        if (reportNames != null && reportNames.length > 0) {
+            for (String reportName : reportNames) {
+                Report report = ReportDAO.retrieve(currentScenario, "ST1", reportName);
+                reportsToRetrieve.add(report);
+            }
+
+            HttpSession session = request.getSession();
+            session.setAttribute("reports", reportsToRetrieve);
+
+            RequestDispatcher rd = request.getRequestDispatcher("viewPatientInformation.jsp");
+            rd.forward(request, response);
+        } else { 
+            response.sendRedirect("viewPatientInformation.jsp");
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+
     /**
      * Handles the HTTP <code>GET</code> method.
      *
@@ -81,5 +98,4 @@ public class ProcessReport extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
 }
