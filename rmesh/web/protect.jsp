@@ -1,6 +1,6 @@
 <%
-   if(session.getAttribute("user")==null){
-       response.sendRedirect("mainLogin.jsp");
+   if(session.getAttribute("user") == null){
+       response.sendRedirect("viewMainLogin.jsp");
    }
     
 %>

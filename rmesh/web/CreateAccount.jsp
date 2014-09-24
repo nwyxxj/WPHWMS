@@ -20,7 +20,6 @@
             <div class="large-centered large-12 columns">
                 <center>
                     <h1>Create Account</h1>
-
                     <h4>Account Type: <%= request.getParameter("type") %><br></h4>
                     <form action = "ProcessAddAccount" method = "post">
                         <div class="row">
@@ -53,7 +52,7 @@
                             </div>
                         </div>
                     </form>
-                </center>
+                </center>   
             </div>
         </div>
     </body>
