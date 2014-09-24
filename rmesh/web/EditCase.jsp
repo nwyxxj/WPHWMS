@@ -23,7 +23,6 @@
             String scenarioID = request.getParameter("scenarioID");
             Scenario retrievedScenario = ScenarioDAO.retrieve(scenarioID);
             out.println(retrievedScenario);
-
         %>
 
 

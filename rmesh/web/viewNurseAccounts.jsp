@@ -60,7 +60,6 @@
                             </td>
                             <%
                                 String userLoggedIn = (String) session.getAttribute("user");
-
                             %>
                             <td>
                                 <form action = "ProcessDeleteAccount" method = "post">

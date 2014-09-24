@@ -40,11 +40,11 @@
                                     <%
                                         String location = "";
                                         if (request.getParameter("type").equals("admin")) {
-                                            location = "adminAccountsView.jsp";
+                                            location = "viewAdminAccounts.jsp";
                                         } else if (request.getParameter("type").equals("lecturer")) {
-                                            location = "lecturerAccountsView.jsp";
+                                            location = "viewLecturerAccounts.jsp";
                                         } else {
-                                            location = "nurseAccountsView.jsp";
+                                            location = "viewNurseAccounts.jsp";
                                         }
                                     %>
                                     <input type="button" value="Cancel" class="button tiny" onClick="window.location = '<%=location%>'"/>
