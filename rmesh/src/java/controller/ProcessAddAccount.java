@@ -3,14 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package controller;
 
+import dao.InputValidation;
 import dao.AdminDAO;
 import dao.LecturerDAO;
 import dao.NurseDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -36,21 +37,43 @@ public class ProcessAddAccount extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-       
+
         String userType = request.getParameter("type");
         String userID = request.getParameter("userID");
         String password = request.getParameter("password");
-        
+
         if (userType.equals("admin")) {
-            AdminDAO.add(userID, password);
-            response.sendRedirect("./viewAdminAccounts.jsp");
+            if (InputValidation.validateUser(userType, userID) == false) {
+                request.setAttribute("error", "user already exist");
+                RequestDispatcher rd = request.getRequestDispatcher("createAccount.jsp");
+                rd.forward(request, response);
+            } else {
+                AdminDAO.add(userID, password);
+                response.sendRedirect("./viewAdminAccounts.jsp");
+            }
+            
         } else if (userType.equals("lecturer")) {
-            LecturerDAO.add(userID, password);
-            response.sendRedirect("./viewLecturerAccounts.jsp");
-        } else { 
-            NurseDAO.add(userID, password);
-            response.sendRedirect("./viewNurseAccounts.jsp");
+            if (InputValidation.validateUser(userType, userID) == false) {
+                request.setAttribute("error", "user already exist");
+                RequestDispatcher rd = request.getRequestDispatcher("createAccount.jsp");
+                rd.forward(request, response);
+            } else {
+                LecturerDAO.add(userID, password);
+                response.sendRedirect("./viewLecturerAccounts.jsp");
+            }
+            
+        } else {
+            if (InputValidation.validateUser(userType, userID) == false) {
+                request.setAttribute("error", "user already exist");
+                RequestDispatcher rd = request.getRequestDispatcher("createAccount.jsp");
+                rd.forward(request, response);
+            } else {
+                NurseDAO.add(userID, password);
+                response.sendRedirect("./viewNurseAccounts.jsp");
+            }
+            
         }
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

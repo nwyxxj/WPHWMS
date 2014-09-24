@@ -43,7 +43,7 @@
                                     
                                     <div class="small-5 columns">
                                         <input type="text" id="right-label" name="userID" value="<%=request.getParameter("userID")%>" readonly>
-                                        <input type="text" id="right-label" name="password" value="<%=request.getParameter("password")%>">
+                                        <input type="text" id="right-label" name="password" value="<%=request.getParameter("password")%>" required>
                                         <input type="hidden" id="right-label" name="type" value="<%=request.getParameter("type")%>">
                                     </div>
                                     <input type = "submit" class="button tiny" value="Save"> 

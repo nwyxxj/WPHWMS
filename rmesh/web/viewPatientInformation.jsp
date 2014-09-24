@@ -15,6 +15,7 @@
 <%@page import="entity.*"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="dao.*"%>
+<%@include file="protect.jsp" %>
 <!DOCTYPE html>
 
 <html>
@@ -96,9 +97,9 @@
                                             <label for="right-label" class="right inline">Multidisciplinary Note</label>
                                         </div>
                                         <div class="small-9 columns">
-                                            <input type ="text" id= "tutorialGrp" name="tutorialGrp" >
-                                            <input type ="text" id= "grpNames" name="grpNames">
-                                            <input type ="text" id= "notes" name="notes">
+                                            <input type ="text" id= "tutorialGrp" name="tutorialGrp" required>
+                                            <input type ="text" id= "grpNames" name="grpNames" required>
+                                            <input type ="text" id= "notes" name="notes" required>
                                         </div>
                                     </div>
                                 </div>
@@ -127,7 +128,7 @@
                                 for (Report report : reports) {
                                     if (report.getScenarioID().equals(currentScenarioID) && report.getStateID().equals("ST1")) {
                             %>
-                            <input type="checkbox" name="report" value="<%=report.getReportName()%>"/><%=report.getReportName()%><br>
+                            <input type="checkbox" name="report" value="<%=report.getReportName()%>" /><%=report.getReportName()%><br>
                             <input type="hidden" name="location" value="<%=report.getReportFile()%>"/><br>
                             <%
                                     } else {
@@ -184,25 +185,25 @@
                             <form action="ProcessUpdateState" method="POST">
                                 <tr><td>Respiratory Rate</td>
                                     <td><%=RR%></td>
-                                    <td><input type="text" name = "RR" style="width:250px"/></td></tr>
+                                    <td><input type="text" name = "RR" style="width:250px" required/></td></tr>
                                 <tr><td>Blood Pressure</td>
                                     <td><%=BP%></td>
-                                    <td><input type="text" name ="BP" style="width:250px"/></td></tr>
+                                    <td><input type="text" name ="BP" style="width:250px" required/></td></tr>
                                 <tr><td>Heart Rate</td>
                                     <td><%=HR%></td>
-                                    <td><input type="text" name ="HR" style="width:250px"/></td></tr>
+                                    <td><input type="text" name ="HR" style="width:250px" required/></td></tr>
                                 <tr><td>SPO</td>
                                     <td><%=SPO%></td>
-                                    <td><input type="text" name ="SPO" style="width:250px"/></td></tr>
+                                    <td><input type="text" name ="SPO" style="width:250px" required/></td></tr>
                                 <tr><td>Intake</td>
                                     <td><%=intake%></td>
-                                    <td><input type="text" name ="intake" style="width:250px"/></td></tr>
+                                    <td><input type="text" name ="intake" style="width:250px" required/></td></tr>
                                 <tr><td>Output</td>
                                     <td><%=output%></td>
-                                    <td><input type="text" name ="output" style="width:250px"/></td></tr>
+                                    <td><input type="text" name ="output" style="width:250px" required/></td></tr>
                                 <tr><td>Temperature</td>
                                     <td><%=temperature%></td>
-                                    <td><input type="text" name ="temperature" style="width:250px"/></td></tr>
+                                    <td><input type="text" name ="temperature" style="width:250px" required/></td></tr>
                                 <td><input type="hidden" name ="stateID" value = "<%=stateID%>"/></td></tr>
 
 
