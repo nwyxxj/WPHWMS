@@ -42,16 +42,19 @@ public class ProcessReport extends HttpServlet {
         String[] reportNames = request.getParameterValues("report");
         String currentScenario = (String) request.getSession().getAttribute("currentScenario");
 
+        HttpSession session = request.getSession();
         List<Report> reportsToRetrieve = new ArrayList<Report>();
-
+        List<Report> reportsRetrieved = (List<Report>)session.getAttribute("reports");
+        if ( reportsRetrieved != null && reportsRetrieved.size() > 0 ) {
+            reportsToRetrieve = reportsRetrieved;
+        }
+       
         if (reportNames != null && reportNames.length > 0) {
             for (String reportName : reportNames) {
                 Report report = ReportDAO.retrieve(reportName);
                 request.setAttribute("reportName", report.getReportName());
                 reportsToRetrieve.add(report);
             }
-
-            HttpSession session = request.getSession();
             session.setAttribute("reports", reportsToRetrieve);
             RequestDispatcher rd = request.getRequestDispatcher("viewPatientInformation.jsp");
             rd.forward(request, response);
