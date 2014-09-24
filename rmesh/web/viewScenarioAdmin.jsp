@@ -49,7 +49,7 @@
                     </td>
                     <td><%=scenarioDescription%></td>
                     <td><%=admissionInfo%></td>
-                    <td> <form action ="EditCase.jsp" method ="POST">
+                    <td> <form action ="editScenario.jsp" method ="POST">
                             <input type="hidden" name="scenarioID" value="<%=scenarioID%>">
                             <input type = "submit" class="button tinytable" value="edit">
                         </form></td>
