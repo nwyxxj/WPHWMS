@@ -114,13 +114,22 @@
                        
                  //      Image image = ImageIO.read(getClass().getResource(path));
                        
+                       List<Report> reports = ReportDAO.retrieveAll();
                        
                        %>
                        <a href="#" >
                         <img class="opaque" src="<%=location%>" style="float:left; padding-right:5px;" /></a>
                        <form action="ProcessReport" method="POST">
-                            <input type="checkbox" name="report" value="Heart Report"/>Heart Report<br>
-                            <input type="checkbox" name="report" value="ECG Report"/>ECG Report<br>
+                           <% 
+                                for(Report report: reports) { 
+                            %>
+                           
+                            <input type="checkbox" name="report" value="<%=report.getReportName()%>"/><%=report.getReportName()%><br>
+                            <input type="hidden" name="location" value="<%=report.getReportFile()%>"/><br>
+                            
+                            <%
+                                }
+                            %>
                             <input type="submit" value="Despatch Report"/>
                         </form>
                     </div>
