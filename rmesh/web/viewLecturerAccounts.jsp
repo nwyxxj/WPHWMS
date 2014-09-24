@@ -22,13 +22,28 @@
         <link rel="stylesheet" href="responsive-tables.css">
         <script src="responsive-tables.js"></script>
         <%@include file="/topbar/topbarAdmin.jsp" %>
+        <script type="text/javascript">
 
+            function confirmation() {
+                var deleteButton = confirm("Are you sure you want to delete? ")
+                if (deleteButton) {
+                    //window.location = "viewAdminAccounts.jsp";
+                }
+                else {
+                   return false;
+                   return;
+                   
+//                    window.close();
+//                    break;
+                }
+            }
+
+        </script>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Accounts Management</title>
     </head>
     <body>
-        <%
-            List<Lecturer> lecturerList = LecturerDAO.retrieveAll();
+        <%            List<Lecturer> lecturerList = LecturerDAO.retrieveAll();
         %>
 
         <div class="row" style="padding-top: 30px;">
@@ -76,7 +91,7 @@
                                     <%
                                     } else {
                                     %>
-                                    <input type = "submit" class="button tinytable" value="delete" >
+                                    <input type = "submit" class="button tinytable" onclick="confirmation()" value="delete" >
                                     <%
                                         }
                                     %>
