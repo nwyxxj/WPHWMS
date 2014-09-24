@@ -12,6 +12,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
          <title>Hospital Ward Management System for NP Health Sciences</title>
+         <%@include file="/topbar/topbar.jsp" %>
     </head>
     <body>
         <a href = "ProcessLogout"> Log Out </a>
