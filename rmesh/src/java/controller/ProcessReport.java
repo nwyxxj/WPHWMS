@@ -6,8 +6,10 @@
 
 package controller;
 
+import entity.Report;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -34,8 +36,9 @@ public class ProcessReport extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         
-       String fileName = request.getParameter("report");
+       String[] reports = request.getParameterValues("report");
        String fileLocation = request.getParameter("location");
+       
        
        
     }
