@@ -1,7 +1,7 @@
 <%-- 
-    Document   : patientInfo
-    Created on : Sep 10, 2014, 3:27:36 PM
-    Author     : Jocelyn
+    Document   : viewScenarioLecturer
+    Created on : Sep 19, 2014, 8:41:03 PM
+    Author     : hpkhoo.2012
 --%>
 
 <%@page import="entity.Scenario"%>
@@ -20,7 +20,6 @@
             $(document).ready(function() {
                 $(document).foundation();
             });
-
         </script>
         <style>
             #color {
@@ -34,7 +33,6 @@
 
     </head>
     <body>
-
         <%
             String successMsg = (String) request.getAttribute("successMsg");
 
@@ -83,21 +81,21 @@
                             imgName = "img/0" + counter + ".jpg";
                     %>
                     <a href="#" data-reveal-id="<%=scenarioID%>">
-                        
-                        <% if( scenario.getStatus().equals("activated")) { %>
-                            <img class="opaque" src="<%=imgName%>" style="float:left; padding-right:5px;" /></a>
-                        <% } else { %>
-                        <div id="color">
-                            <div id="opacity">
-                                <img class="opaque" src="<%=imgName%>" style="float:left; padding-right:5px;" /></a>
-                            </div>
-                        </div>
 
-                        <%
+                        <% if (scenario.getStatus().equals("activated")) {%>
+                        <img class="opaque" src="<%=imgName%>" style="float:left; padding-right:5px;" /></a>
+                        <% } else {%>
+                    <div id="color">
+                        <div id="opacity">
+                            <img class="opaque" src="<%=imgName%>" style="float:left; padding-right:5px;" /></a>
+                        </div>
+                    </div>
+
+                    <%
 
                             }
                         }
-                        %>
+                    %>
 
                 </li>
                 <%
@@ -116,9 +114,8 @@
 
         <div id="<%=scenario.getScenarioID()%>" class="reveal-modal" data-reveal>
 
-
             <form action = "ProcessActivateScenario" method = "POST">   
-
+                <input type ="text" id= "fromPage" name = "fromPage" value = "lecturer">
                 <h2>Case Information</h2> 
                 <%
                     if (status.equals("activated")) {
@@ -126,10 +123,11 @@
                 Case is currently activated. 
                 <input type ="hidden" id= "status" name = "status" value = "deactivated">
                 <input type ="submit" class="button tiny" value = "Deactivate Case">
+
                 <% } else { %>
 
                 Case is deactivated. 
-                <input type ="hidden" id= "status" name = "status" value = "activated">
+                <input type ="hidden" id= "status" name = "status" value = "activated">               
                 <input type ="submit" class="button tiny" value = "Activate Case">
                 <%  }%>
 
@@ -137,8 +135,10 @@
                 <p class="lead"><b>Case Name:</b> <%=scenario.getScenarioName()%> </p>
                 <p class="lead"><b>Case Description:</b> <%=scenario.getScenarioDescription()%> </p>
                 <p class="lead"><b>Admission Info:</b> <%=scenario.getAdmissionInfo()%> </p>
-
+                 
                 <input type ="hidden" id= "scenarioID" name = "scenarioID" value = "<%=scenario.getScenarioID()%>">
+             
+               
             </form>
             <a class="close-reveal-modal">&#215;</a>
         </div>
@@ -150,9 +150,5 @@
         <script>
             $(document).foundation();
         </script> 
-
-
-
-
     </body>
 </html>
