@@ -27,14 +27,10 @@
             function confirmation() {
                 var deleteButton = confirm("Are you sure you want to delete? ")
                 if (deleteButton) {
-                    //window.location = "viewAdminAccounts.jsp";
+                    return true;
                 }
                 else {
                    return false;
-                   return;
-                   
-//                    window.close();
-//                    break;
                 }
             }
 
@@ -91,7 +87,8 @@
                                     <%
                                     } else {
                                     %>
-                                    <input type = "submit" class="button tinytable" onclick="confirmation()" value="delete" >
+                                    <input type = "submit" class="button tinytable" onclick="if (!confirmation())
+                                                return false" value="delete" >
                                     <%
                                         }
                                     %>
