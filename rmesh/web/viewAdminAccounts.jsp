@@ -22,12 +22,24 @@
         <script src="responsive-tables.js"></script>
         <%@include file="/topbar/topbarAdmin.jsp" %>
 
+        <script type="text/javascript">
+
+            function deleteConfirmation() {
+                var deleteButton = confirm("Are you sure you want to delete? ")
+                if (deleteButton) {
+                    return true;
+                }
+                else {
+                    return false;
+                }
+            }
+
+        </script>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Accounts Management</title>
     </head>
     <body>
-        <%            
-            List<Admin> adminList = AdminDAO.retrieveAll();
+        <%            List<Admin> adminList = AdminDAO.retrieveAll();
         %>
 
         <div class="row" style="padding-top: 30px;">
@@ -75,7 +87,8 @@
                                     <%
                                     } else {
                                     %>
-                                    <input type = "submit" class="button tinytable" value="delete" >
+                                    <input type = "submit" class="button tinytable" onclick="if (!deleteConfirmation())
+                                                  return false" value="delete" >
                                     <%
                                         }
                                     %>

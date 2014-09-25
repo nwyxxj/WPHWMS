@@ -24,7 +24,7 @@
         <%@include file="/topbar/topbarAdmin.jsp" %>
         <script type="text/javascript">
 
-            function confirmation() {
+            function deleteConfirmation() {
                 var deleteButton = confirm("Are you sure you want to delete? ")
                 if (deleteButton) {
                     return true;
@@ -87,7 +87,7 @@
                                     <%
                                     } else {
                                     %>
-                                    <input type = "submit" class="button tinytable" onclick="if (!confirmation())
+                                    <input type = "submit" class="button tinytable" onclick="if (!deleteConfirmation())
                                                 return false" value="delete" >
                                     <%
                                         }
