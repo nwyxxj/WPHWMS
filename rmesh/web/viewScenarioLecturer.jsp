@@ -34,8 +34,7 @@
 
     </head>
     <body>
-        <%
-            String successMsg = (String) request.getAttribute("successMsg");
+        <%            String successMsg = (String) request.getAttribute("successMsg");
 
             if (successMsg != null) {
                 out.println("<center>" + successMsg + "</center>");
@@ -66,15 +65,17 @@
 
                 <%
                     int sizeOfList = scenarioList.size();
-                    int numOfPage = sizeOfList / 3;
+                    int numOfPage = 1;
+
                     if (sizeOfList % 3 != 0) {
-                        numOfPage = numOfPage + 1;
+                        numOfPage++;
                     }
+                    String slide = "slide " + numOfPage;
                     for (int i = 0; i < numOfPage; i++) {
+
                 %>
                 <li>
-                    <%
-                        Scenario scenario = null;
+                    <%                        Scenario scenario = null;
                         for (int j = 0; j < scenarioList.size(); j++) {
                             scenario = scenarioList.get(j);
                             scenarioID = scenario.getScenarioID();
@@ -84,11 +85,12 @@
                     <a href="#" data-reveal-id="<%=scenarioID%>">
 
                         <% if (scenario.getStatus().equals("activated")) {%>
-                        <img class="opaque" src="<%=imgName%>" style="float:left; padding-right:5px;" /></a>
+                        <img class="opaque" src="<%=imgName%>" style="float:left; padding-right:5px;" alt = "<%=slide%>"/></a>
+                        
                         <% } else {%>
                     <div id="color">
                         <div id="opacity">
-                            <img class="opaque" src="<%=imgName%>" style="float:left; padding-right:5px;" /></a>
+                            <img class="opaque" src="<%=imgName%>" style="float:left; padding-right:5px;" alt = "<%=slide%>"/></a>
                         </div>
                     </div>
 
@@ -135,10 +137,10 @@
                 <p class="lead"><b>Case Name:</b> <%=scenario.getScenarioName()%> </p>
                 <p class="lead"><b>Case Description:</b> <%=scenario.getScenarioDescription()%> </p>
                 <p class="lead"><b>Admission Info:</b> <%=scenario.getAdmissionInfo()%> </p>
-                 
+
                 <input type ="hidden" id= "scenarioID" name = "scenarioID" value = "<%=scenario.getScenarioID()%>">
-             
-               
+
+
             </form>
             <a class="close-reveal-modal">&#215;</a>
         </div>
