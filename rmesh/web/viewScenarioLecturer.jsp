@@ -65,42 +65,42 @@
 
                 <%
                     int sizeOfList = scenarioList.size();
-                    int numOfPage = 1;
-
-                    if (sizeOfList % 3 != 0) {
-                        numOfPage++;
-                    }
-                    String slide = "slide " + numOfPage;
-                    for (int i = 0; i < numOfPage; i++) {
-
+                    int numOfPage = sizeOfList / 3;
+                    int counter = 0;   
+                    
+                    for (int i = 0; i <= numOfPage; i++) {
+                        
                 %>
-                <li>
-                    <%                        Scenario scenario = null;
-                        for (int j = 0; j < scenarioList.size(); j++) {
-                            scenario = scenarioList.get(j);
+                  <li>
+                     
+                    <%   
+                        Scenario scenario = null;
+                        for (int j = 0; j < 3; j++) {
+//                            out.println(counter + "counter");
+                            scenario = scenarioList.get(j); //supposed to get Counter, but somehow arrayindexoutofbounds when i put counter.
                             scenarioID = scenario.getScenarioID();
-                            int counter = j + 1;
+                            counter++;
                             imgName = "img/0" + counter + ".jpg";
                     %>
                     <a href="#" data-reveal-id="<%=scenarioID%>">
 
                         <% if (scenario.getStatus().equals("activated")) {%>
-                        <img class="opaque" src="<%=imgName%>" style="float:left; padding-right:5px;" alt = "<%=slide%>"/></a>
-                        
-                        <% } else {%>
+                        <img class="opaque" src="<%=imgName%>" style="float:left; padding-right:5px;"/></a>
+
+                    <% } else {%>
                     <div id="color">
                         <div id="opacity">
-                            <img class="opaque" src="<%=imgName%>" style="float:left; padding-right:5px;" alt = "<%=slide%>"/></a>
+                            <img class="opaque" src="<%=imgName%>" style="float:left; padding-right:5px;"/></a>
                         </div>
                     </div>
 
                     <%
-
                             }
                         }
                     %>
 
                 </li>
+
                 <%
                     }
 
@@ -146,7 +146,7 @@
         </div>
 
         <% }%>
-
+        
         <script src="js/vendor/jquery.js"></script>
         <script src="js/foundation.min.js"></script>
         <script>
