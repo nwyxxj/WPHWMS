@@ -63,8 +63,6 @@
                             <%}%></td>
                             <input type="hidden" name="status" value="activated">
                         </form>
-
-
                 </tr>
             </tbody>
             <%}%>

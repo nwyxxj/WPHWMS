@@ -13,31 +13,25 @@
         <link rel="stylesheet" href="responsive-tables.css">
         <script src="responsive-tables.js"></script>
         <%@include file="/topbar/topbarAdmin.jsp" %>
-
-        <link rel="stylesheet" href="//code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css">
-        <script src="//code.jquery.com/jquery-1.10.2.js"></script>
-        <script src="//code.jquery.com/ui/1.11.1/jquery-ui.js"></script>
-        <link rel="stylesheet" href="/resources/demos/style.css">
-
         <title>Create Scenario</title>
     </head>
     <body>
 
     <center><h1>Case Set Up</h1>
 
-        <form action ="ProcessAddScenario.jsp" method ="POST">
-            <div class="row">
-                <div class="small-8">
-                    <div class="row">
-                        <div class="small-3 columns">
-                            <label for="right-label" class="right inline">Scenario Name</label>
-                        </div>
-                        <div class="small-9 columns">
-                            <input type="text" id="password" name="scenarioName">
-                        </div>
+        <form action ="newjsp.jsp" method ="POST">
+        <div class="row">
+            <div class="small-8">
+                <div class="row">
+                    <div class="small-3 columns">
+                        <label for="right-label" class="right inline">Scenario Name</label>
+                    </div>
+                    <div class="small-9 columns">
+                        <input type="text" id="password" name="scenarioName">
                     </div>
                 </div>
             </div>
+        </div>
 
     </center>    
     <dl class="accordion" data-accordion>
@@ -113,11 +107,11 @@
                 <div class="row">
                     <div class="large-4 columns">
                         <label>Weight</label>
-                        <input type="text" name="weight" value = "1">
+                        <input type="text" name="weight">
                     </div>
                     <div class="large-4 columns">
                         <label>Height</label>
-                        <input type="text" name="height" value ="1">
+                        <input type="text" name="height">
                     </div>
                     <div class="large-4 columns">
                         <label>Occupation</label>
@@ -216,7 +210,7 @@
                 </div>
                 <!--Add more states-->
                 <div class="input_fields_wrap">
-                    <button class="add_field_button">Add More States</button>
+                    <button class="add_field_button">Add More Fields</button>
                     <!--<div><input type="text" name="mytext[]"></div>-->
                 </div>
                 <!--End of add more states-->
@@ -226,51 +220,44 @@
     </dl>
     <center><input type ="submit" class ="button" value ="Add New Scenario"></center>
 
-</form>
-
-
+    </form>
+        
     <script>
-        $(document).ready(function() {
-            var max_fields = 10; //maximum input boxes allowed
-            var wrapper = $(".input_fields_wrap"); //Fields wrapper
-            var add_button = $(".add_field_button"); //Add button ID
-
-            var x = 1; //initlal text box count
-            $(add_button).click(function(e) { //on add input button click
-                e.preventDefault();
-                if (x < max_fields) { //max input box allowed
-                    x++; //text box increment
-                    $(wrapper).append('<div><br>State X <center><div class = "large-9"><label>State Description</label><textarea name = "stateDescription" rows = "2" cols = "10"></textarea></div></center><div class = "row">\n\
-                               <div class ="large-4 columns"><label>Respiratory Rate</label><input type="text" name="RR"/></div>\n\
-                               <div class ="large-4 columns"><label>Blood Pressure</label><input type="text" name="BP"/></div>\n\
-                               <div class ="large-4 columns"><label>Heart Rate</label><input type="text" name="HR"/></div>\n\
-                               <div class ="large-4 columns"><label>SPO</label><input type="text" name="SPO"/></div>\n\
-                               <div class ="large-4 columns"><label>Intake</label><input type="text" name="intake"/></div>\n\
-                               <div class ="large-4 columns"><label>Output</label><input type="text" name="output"/></div>\n\
-                               <div class ="large-4 columns"><label>Temperature</label><input type="text" name="temperature"/></div>\n\
-                               </div>\n\
-                               <a href = "#" class = "remove_field">Remove State</a></div>'); //add input box
-                }
+            $(document).ready(function() {
+                var max_fields = 10; //maximum input boxes allowed
+                var wrapper = $(".input_fields_wrap"); //Fields wrapper
+                var add_button = $(".add_field_button"); //Add button ID
+        
+                var x = 1; //initlal text box count
+                $(add_button).click(function(e) { //on add input button click
+                    e.preventDefault();
+                    if (x < max_fields) { //max input box allowed
+                        x++; //text box increment
+                        $(wrapper).append('<div><br>State X <center><div class = "large-9"><label>State Description</label><textarea name = "stateDescription" rows = "2" cols = "10"></textarea></div></center><div class = "row">\n\
+                        <div class ="large-4 columns"><label>Respiratory Rate</label><input type="text" name="RR"/></div>\n\
+                        <div class ="large-4 columns"><label>Blood Pressure</label><input type="text" name="BP"/></div>\n\
+                        <div class ="large-4 columns"><label>Heart Rate</label><input type="text" name="HR"/></div>\n\
+                        <div class ="large-4 columns"><label>SPO</label><input type="text" name="SPO"/></div>\n\
+                        <div class ="large-4 columns"><label>Intake</label><input type="text" name="intake"/></div>\n\
+                        <div class ="large-4 columns"><label>Output</label><input type="text" name="output"/></div>\n\
+                        <div class ="large-4 columns"><label>Temperature</label><input type="text" name="temperature"/></div>\n\
+                        </div>\n\
+                        <a href = "#" class = "remove_field">Remove State</a></div>'); //add input box
+                    }
+                });
+        
+                $(wrapper).on("click", ".remove_field", function(e) { //user click on remove text
+                    e.preventDefault();
+                    $(this).parent('div').remove();
+                    x--;
+                })
             });
+    </script>
 
-            $(wrapper).on("click", ".remove_field", function(e) { //user click on remove text
-                e.preventDefault();
-                $(this).parent('div').remove();
-                x--;
-            })
-        });
-        </script>
-
-        <script src="js/vendor/jquery.js"></script>
-        <script src="js/foundation.min.js"></script>
-
-        <script>
-            $(document).foundation();
-        </script>
-        <script>
-            $(function() {
-                $("#datepicker").datepicker();
-            });
-        </script>
-    </body>
+    <script src="js/vendor/jquery.js"></script>
+    <script src="js/foundation.min.js"></script>
+    <script>
+        $(document).foundation();
+    </script>
+</body>
 </html>

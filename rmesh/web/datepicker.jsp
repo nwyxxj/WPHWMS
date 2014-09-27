@@ -1,11 +1,9 @@
 <%-- 
     Document   : datepicker
-    Created on : Sep 24, 2014, 12:04:44 AM
+    Created on : Sep 28, 2014, 2:23:34 AM
     Author     : Administrator
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
 <html>
     <head>
         <meta charset="utf-8">

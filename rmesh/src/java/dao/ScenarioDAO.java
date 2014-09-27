@@ -43,12 +43,12 @@ public class ScenarioDAO {
         }
         return scenario;
     }
-    
-     public static List<Scenario> retrieveActivatedStatus() {
+
+    public static List<Scenario> retrieveActivatedStatus() {
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
-         List<Scenario> scenarioList = new ArrayList<Scenario>();
+        List<Scenario> scenarioList = new ArrayList<Scenario>();
 
         try {
             conn = ConnectionManager.getConnection();
@@ -57,7 +57,7 @@ public class ScenarioDAO {
 
             rs = stmt.executeQuery();
             while (rs.next()) {
-                scenarioList.add( new Scenario(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5)));
+                scenarioList.add(new Scenario(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5)));
             }
 
         } catch (SQLException e) {
@@ -67,7 +67,7 @@ public class ScenarioDAO {
         }
         return scenarioList;
     }
-    
+
     public static List<Scenario> retrieveAll() {
         Connection conn = null;
         PreparedStatement stmt = null;
@@ -91,7 +91,6 @@ public class ScenarioDAO {
         }
         return scenarioList;
     }
-  
 
     public static void updateScenarioStatus(String scenarioID, String status) {
         Connection conn = null;
@@ -111,6 +110,23 @@ public class ScenarioDAO {
             ConnectionManager.close(conn, stmt);
         }
 
+    }
+
+    public static void add(String scenarioID, String scenarioName, String scenarioDescription, String status, String admissionInfo) {
+        Connection conn = null;
+        PreparedStatement preparedStatement = null;
+        String queryLine = "INSERT INTO scenario VALUES ('"
+                + scenarioID + "','" + scenarioName + "','" + scenarioDescription + "','" + status+ "','" + admissionInfo + "')";
+
+        try {
+            conn = ConnectionManager.getConnection();
+            preparedStatement = conn.prepareStatement(queryLine);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionManager.close(conn, preparedStatement, null);
+        }
     }
 
     public static void update(String scenarioID, String scenarioName, String status, String scenarioDescription, String admissionInfo) {
