@@ -28,54 +28,64 @@
                     <h1>Edit Case's details</h1>
                     <form action = "ProcessEditCase" method = "POST">
                         <div class="row">
-                            <center>
-                                <div class="large-8 columns">
 
-                                    <div class="small-7 columns">
-                                        <label for="right-label" class="right inline">Case ID</label>
-                                        <label for="right-label" class="right inline">Name</label>
-                                        <label for="right-label" class="right inline">Status</label>
-                                    </div>
+                            <div class="large-12 columns">
 
-                                    <div class="small-5 columns">
-                                        <input type="text" id="right-label" name="scenarioID" value="<%=retrievedScenario.getScenarioID()%>" readonly >
-                                        <input type="text" id="right-label" name="scenarioName" value="<%=retrievedScenario.getScenarioName()%>" required >
-                                        <br>
-                                        <%
+                                <div class="small-2 columns">
+                                    <label for="right-label" class="right inline">Case ID</label>
+                                    <label for="right-label" class="right inline">Name</label>
+                                    <label for="right-label" class="right inline">Status</label>
+                                </div>
+
+                                <div class="small-8 small-centered columns">
+                                    <input type="text" id="right-label" name="scenarioID" value="<%=retrievedScenario.getScenarioID()%>" readonly >
+                                    <input type="text" id="right-label" name="scenarioName" value="<%=retrievedScenario.getScenarioName()%>" required >
+                                    <br>
+                                    <%
                                         if (retrievedScenario.getStatus().equals("activated")) { %>
-                                        <input id="right-label" name="status" type="radio" value="activated" checked />activate
-                                        <input id="right-label" name="status" type="radio" value="deactivated" /> deactivate
-                                        <% } else { %>
+                                    <input id="right-label" name="status" type="radio" value="activated" checked />activate
+                                    <input id="right-label" name="status" type="radio" value="deactivated" /> deactivate
+                                    <% } else { %>
 
-                                        <input id="right-label" name="status" type="radio" value="activated" />activate
-                                        <input id="right-label" name="status" type="radio" value="deactivated" checked/> deactivate
-                                        <% }%>
-                                        <br><br>
-                                    </div>
-
-                                    <div class="small-1 columns">
+                                    <input id="right-label" name="status" type="radio" value="activated" />activate
+                                    <input id="right-label" name="status" type="radio" value="deactivated" checked/> deactivate
+                                    <% }%>
+                                    <br><br>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="large-12 columns">
+                                    <div class="small-2 columns">
 
                                         <label for="right-label" class="right inline">Description</label>
+                                        <!--                                        <label for="right-label" class="right inline">Admission Information</label>-->
+                                    </div>
+                                    <div class="large-10 columns">
+                                        <textarea style="overflow:auto;resize:none" rows = "10" required><%=retrievedScenario.getScenarioDescription()%>  </textarea>
+        <!--//                                 <textarea style="overflow:auto;resize:none" rows = "16" required><%=retrievedScenario.getAdmissionInfo()%> </textarea>-->
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="large-12 columns">
+                                    <div class="small-2 columns">
                                         <label for="right-label" class="right inline">Admission Information</label>
                                     </div>
-
-                                    <div class="small-10 columns">
-
-
-                                        <textarea style="overflow:auto;resize:none" rows = "10" required><%=retrievedScenario.getScenarioDescription()%>  </textarea>
-                                        <textarea style="overflow:auto;resize:none" rows = "16" required><%=retrievedScenario.getAdmissionInfo()%> </textarea>
-
-                                        <input type = "submit" class="button tiny" value="Save">  
+                                    <div class="large-10 columns">
+                                           <textarea style="overflow:auto;resize:none" rows = "16" required><%=retrievedScenario.getAdmissionInfo()%> </textarea>
                                     </div>
+                                </div>
+                            </div>
+
+
+                            <input type = "submit" class="button tiny" value="Save">  
+
+
+                            </form>
                             </center>
-
-
-
                         </div>
-                    </form>
-                </center>
-            </div>
-        </div>
+                        </div>
 
-    </body>
-</html>
+                        </body>
+                        </html>
