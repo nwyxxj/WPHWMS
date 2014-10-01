@@ -42,6 +42,23 @@ public class StateDAO {
         }
         return state;
     }
+    
+    public static void add(String stateID, String scenarioID, String RR, String BP, String HR, String SPO, String intake, String output, double temperature, String stateDescription, String patientNRIC) {
+        Connection conn = null;
+        PreparedStatement preparedStatement = null;
+        String queryLine = "INSERT INTO state VALUES ('"
+                + stateID + "','" + scenarioID + "','" + RR + "','" + BP+ "','" + HR+ "','" + SPO+ "','" + intake + "','" + output + "','" + temperature + "','" + stateDescription + "','" + patientNRIC +  "')";
+
+        try {
+            conn = ConnectionManager.getConnection();
+            preparedStatement = conn.prepareStatement(queryLine);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionManager.close(conn, preparedStatement, null);
+        }
+    }
 
     public static void updateState(String stateID, String RR, String BP, String HR, String SPO, String intake, String output, double temperature) {
         Connection conn = null;

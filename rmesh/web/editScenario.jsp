@@ -22,30 +22,27 @@
         <%            String scenarioID = request.getParameter("scenarioID");
             Scenario retrievedScenario = ScenarioDAO.retrieve(scenarioID);
         %>
-
-
         <div class="row" style="padding-top: 30px;">
             <div class="large-centered large-12 columns">
                 <center>
                     <h1>Edit Case's details</h1>
                     <form action = "ProcessEditCase" method = "POST">
                         <div class="row">
-                            <div class="large-8 columns">
+                            <center>
+                                <div class="large-8 columns">
 
-                                <div class="small-7 columns">
-                                    <label for="right-label" class="right inline">Case ID</label>
-                                    <label for="right-label" class="right inline">Name</label>
-                                    <label for="right-label" class="right inline">Status</label>
-                                    <label for="right-label" class="right inline">Description</label>
-                                    <label for="right-label" class="right inline">Admission Information</label>
-                                </div>
-                                
+                                    <div class="small-7 columns">
+                                        <label for="right-label" class="right inline">Case ID</label>
+                                        <label for="right-label" class="right inline">Name</label>
+                                        <label for="right-label" class="right inline">Status</label>
+                                    </div>
+
                                     <div class="small-5 columns">
                                         <input type="text" id="right-label" name="scenarioID" value="<%=retrievedScenario.getScenarioID()%>" readonly >
                                         <input type="text" id="right-label" name="scenarioName" value="<%=retrievedScenario.getScenarioName()%>" required >
                                         <br>
                                         <%
-                                            if (retrievedScenario.getStatus().equals("activated")) { %>
+                                        if (retrievedScenario.getStatus().equals("activated")) { %>
                                         <input id="right-label" name="status" type="radio" value="activated" checked />activate
                                         <input id="right-label" name="status" type="radio" value="deactivated" /> deactivate
                                         <% } else { %>
@@ -54,16 +51,25 @@
                                         <input id="right-label" name="status" type="radio" value="deactivated" checked/> deactivate
                                         <% }%>
                                         <br><br>
-                                  
-                                    
-                                      <textarea id="niceTextarea" required><%=retrievedScenario.getScenarioDescription()%>  </textarea>
-                                      <textarea id="niceTextarea" required><%=retrievedScenario.getAdmissionInfo()%> </textarea>
-                                      
-                                    <input type = "submit" class="button tiny" value="Save">  
                                     </div>
-                            </div>
-                                    
-                                  
+
+                                    <div class="small-1 columns">
+
+                                        <label for="right-label" class="right inline">Description</label>
+                                        <label for="right-label" class="right inline">Admission Information</label>
+                                    </div>
+
+                                    <div class="small-10 columns">
+
+
+                                        <textarea style="overflow:auto;resize:none" rows = "10" required><%=retrievedScenario.getScenarioDescription()%>  </textarea>
+                                        <textarea style="overflow:auto;resize:none" rows = "16" required><%=retrievedScenario.getAdmissionInfo()%> </textarea>
+
+                                        <input type = "submit" class="button tiny" value="Save">  
+                                    </div>
+                            </center>
+
+
 
                         </div>
                     </form>

@@ -12,7 +12,7 @@ package entity;
  */
 public class State {
     private String stateID; 
-    private String caseID; 
+    private String scenarioID; 
     private String RR; 
     private String BP; 
     private String HR; 
@@ -23,9 +23,9 @@ public class State {
     private String stateDescription;
     private String patientNRIC; 
 
-    public State(String stateID, String caseID, String RR, String BP, String HR, String SPO, String intake, String output, double temperature, String stateDescription, String patientNRIC) {
+    public State(String stateID, String scenarioID, String RR, String BP, String HR, String SPO, String intake, String output, double temperature, String stateDescription, String patientNRIC) {
         this.stateID = stateID;
-        this.caseID = caseID;
+        this.scenarioID = scenarioID;
         this.RR = RR;
         this.BP = BP;
         this.HR = HR;
@@ -41,8 +41,8 @@ public class State {
         return stateID;
     }
 
-    public String getCaseID() {
-        return caseID;
+    public String getScenarioID() {
+        return scenarioID;
     }
 
     public String getRR() {
@@ -61,8 +61,8 @@ public class State {
         this.stateID = stateID;
     }
 
-    public void setCaseID(String caseID) {
-        this.caseID = caseID;
+    public void setCaseID(String scenarioID) {
+        this.scenarioID = scenarioID;
     }
 
     public void setRR(String RR) {

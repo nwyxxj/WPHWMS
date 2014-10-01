@@ -4,6 +4,9 @@
     Author     : Administrator
 --%>
 
+<%@page import="dao.ScenarioDAO"%>
+<%@page import="entity.State"%>
+<%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -178,10 +181,13 @@
         <dd class="accordion-navigation">
             <a href="#panel4">Define State(s)</a>
             <div id="panel4" class="content">
-                State 1           
+                State 1
+                
+                <%ArrayList<State> stateList = new ArrayList<State>(); %>
+                
                 <center><div class="large-9">
                         <label>State Description</label>
-                        <textarea name="stateDescription" rows="2" cols="10"></textarea>
+                        <textarea style = "resize:vertical" name="stateDescription" rows="2" cols="10"></textarea>
                     </div></center>
 
                 <div class="row">
@@ -209,10 +215,27 @@
                         <label>Output</label>
                         <input type="text" name="output">
                     </div>
+                    
                     <div class="large-4 columns">
                         <label>Temperature</label>
-                        <input type="text" name="temperature">
+                        <input type="text" name="temperatureString">
                     </div>
+                    
+                    <%
+                    String stateID = "ST1";
+                    String RR = request.getParameter("RR");
+                    String BP = request.getParameter("BP");
+                    String HR = request.getParameter("HR");
+                    String SPO = request.getParameter("SPO");
+                    String intake = request.getParameter("intake");
+                    String output = request.getParameter("output");
+                    //String temperatureString = request.getParameter("temperatureString");
+                    //double temperature = Double.parseDouble(temperatureString);
+                    String stateDescription = request.getParameter("stateDescription");
+                    String patientNRIC = request.getParameter("patientNRIC");
+                    String scenarioID = "SC" + (ScenarioDAO.retrieveAll().size()+1);
+
+//                    State newState = new State(stateID, scenarioID, RR, BP, HR, SPO, intake, output, temperature, stateDescription,patientNRIC); %>
                 </div>
                 <!--Add more states-->
                 <div class="input_fields_wrap">
