@@ -34,6 +34,7 @@
 
     </head>
     <body>
+       
         <%            String successMsg = (String) request.getAttribute("successMsg");
 
             if (successMsg != null) {
@@ -66,15 +67,14 @@
                 <%
                     int sizeOfList = scenarioList.size();
                     int numOfPage = sizeOfList / 3;
-                    int counter = 0;   
-                    
+                    int counter = 0;
+
                     for (int i = 0; i <= numOfPage; i++) {
-                        
+
                 %>
-                  <li>
-                     
-                    <%   
-                        Scenario scenario = null;
+                <li>
+
+                    <%                        Scenario scenario = null;
                         for (int j = 0; j < 3; j++) {
 //                            out.println(counter + "counter");
                             scenario = scenarioList.get(j); //supposed to get Counter, but somehow arrayindexoutofbounds when i put counter.
@@ -146,7 +146,7 @@
         </div>
 
         <% }%>
-        
+
         <script src="js/vendor/jquery.js"></script>
         <script src="js/foundation.min.js"></script>
         <script>

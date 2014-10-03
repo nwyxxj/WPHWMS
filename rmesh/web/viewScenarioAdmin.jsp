@@ -12,8 +12,11 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Foundation | Welcome</title>
         <link rel="stylesheet" href="css/foundation.css" />
+        <script src="js/vendor/modernizr.js"></script>
         <%@include file="/topbar/topbarAdmin.jsp" %>
         <title>JSP Page</title>
     </head>
@@ -21,6 +24,17 @@
 
     <center>
         <h1>Case Management</h1>
+        <div class ="large-11">
+            <%if (session.getAttribute("successMessageCreateScenario") != null) {%>
+            <div data-alert class="alert-box success radius">
+                The case has been created successfully! 
+                <a href="#" class="close">&times;</a>
+            </div>
+            <%}%>
+
+
+
+        </div>
 
         <%List<Scenario> scenarioList = ScenarioDAO.retrieveAll();%>
         <table>
@@ -69,6 +83,12 @@
         </table>
 
     </center>
+
+    <script src="js/vendor/jquery.js"></script>
+    <script src="js/foundation.min.js"></script>
+    <script>
+        $(document).foundation();
+    </script>
 
 
 </body>

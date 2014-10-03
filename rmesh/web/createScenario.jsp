@@ -8,6 +8,7 @@
 <%@page import="entity.State"%>
 <%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@include file="protect.jsp" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -21,6 +22,11 @@
         <script src="//code.jquery.com/jquery-1.10.2.js"></script>
         <script src="//code.jquery.com/ui/1.11.1/jquery-ui.js"></script>
         <link rel="stylesheet" href="/resources/demos/style.css">
+        <script>
+            $(function() {
+                $("#datepicker").datepicker();
+            });
+        </script>
 
         <title>Create Scenario</title>
     </head>
@@ -28,7 +34,7 @@
 
     <center><h1>Case Set Up</h1>
 
-        <form action ="ProcessAddScenario.jsp" method ="POST">
+        <form action ="ProcessAddScenario" method ="POST">
             <div class="row">
                 <div class="small-8">
                     <div class="row">
@@ -36,7 +42,7 @@
                             <label for="right-label" class="right inline">Scenario Name</label>
                         </div>
                         <div class="small-9 columns">
-                            <input type="text" id="password" name="scenarioName">
+                            <input type="text" id="password" name="scenarioName" value = "For E.g: ECS Analphylactic Reaction">
                         </div>
                     </div>
                 </div>
@@ -51,10 +57,10 @@
                 <center>
                     <div class="large-9">
                         <label>Case Description</label>
-                        <textarea name="scenarioDescription" rows="2" cols="10"></textarea>
+                        <textarea style = "resize:vertical"  name="scenarioDescription" rows="2" cols="10" value = "A woman is being admitted..."></textarea>
 
                         <label>Admission Information</label>
-                        <textarea name="admissionInfo" rows="2" cols="10"></textarea>
+                        <textarea style = "resize:vertical"  name="admissionInfo" rows="2" cols="10" value = "Her last vitals are..."></textarea>
                     </div>
 
                     <div class="row">
@@ -75,17 +81,17 @@
                 <div class="row">
                     <div class="large-4 columns">
                         <label>Patient's NRIC
-                            <input type="text" name ="patientNRIC" />
+                            <input type="text" name ="patientNRIC" value = "S7843522A"/>
                         </label>
                     </div>
                     <div class="large-4 columns">
                         <label>First Name
-                            <input type="text" name ="firstName" />
+                            <input type="text" name ="firstName" value = "Bella"/>
                         </label>
                     </div>
                     <div class="large-4 columns">
                         <label>Last Name
-                            <input type="text" name ="lastName" />
+                            <input type="text" name ="lastName" value = "Cullen" />
                         </label>
                     </div>
                 </div>
@@ -98,7 +104,7 @@
                     </div>
                     <div class="large-4 columns">
                         <label>Date of Birth</label>
-                        <input type="text" id="datepicker" name = "DOB">
+                        <input type="text" id="datepicker" name = "DOB" value = "19/11/1992">
                     </div>
                     <div class="large-4 columns">
                         <label>Marital Status</label>
@@ -124,56 +130,56 @@
                     </div>
                     <div class="large-4 columns">
                         <label>Occupation</label>
-                        <input type="text" name="occupation">
+                        <input type="text" name="occupation" value = "vampire">
                     </div>
                     <div class="large-4 columns">
                         <label>Race</label>
-                        <input type="text" name="race">
+                        <input type="text" name="race" value = "vampire">
                     </div>
                     <div class="large-4 columns">
                         <label>Religion</label>
-                        <input type="text" name="religion">
+                        <input type="text" name="religion" value = "vampire">
                     </div>
                     <div class="large-4 columns">
                         <label>Nationality</label>
-                        <input type="text" name="nationality">
+                        <input type="text" name="nationality" value = "vampire">
                     </div>
                 </div>
             </div>
         </dd>
         <dd class="accordion-navigation">
             <a href="#panel3">Default Vital Signs</a>
+            <!--State 0-->
             <div id="panel3" class="content">
                 Leave empty if not applicable.
                 <div class="row">
                     <div class="large-4 columns">
                         <label>Respiratory Rate</label>
-                        <input type="text" name="RR">
+                        <input type="text" name="RR0" value = "11">
                     </div>
                     <div class="large-4 columns">
                         <label>Blood Pressure</label>
-                        <input type="text" name="BP">
+                        <input type="text" name="BP0" value = "12">
                     </div>
                     <div class="large-4 columns">
                         <label>Heart Rate</label>
-                        <input type="text" name="HR">
+                        <input type="text" name="HR0" value = "13">
                     </div>
                     <div class="large-4 columns">
                         <label>SPO</label>
-                        <input type="text" name="SPO">
+                        <input type="text" name="SPO0" value = "14">
                     </div>
                     <div class="large-4 columns">
                         <label>Intake</label>
-                        <input type="text" name="intake">
+                        <input type="text" name="intake0" value = "15">
                     </div>
                     <div class="large-4 columns">
                         <label>Output</label>
-                        <input type="text" name="output">
+                        <input type="text" name="output0" value = "16">
                     </div>
-
                     <div class="large-4 columns">
                         <label>Temperature</label>
-                        <input type="text" name="temperature">
+                        <input type="text" name="temperature0" value = "17">
                     </div>
                 </div>
             </div>
@@ -181,119 +187,104 @@
         <dd class="accordion-navigation">
             <a href="#panel4">Define State(s)</a>
             <div id="panel4" class="content">
-                State 1
-                
-                <%ArrayList<State> stateList = new ArrayList<State>(); %>
-                
-                <center><div class="large-9">
-                        <label>State Description</label>
-                        <textarea style = "resize:vertical" name="stateDescription" rows="2" cols="10"></textarea>
-                    </div></center>
+                <center>
 
-                <div class="row">
-                    <div class="large-4 columns">
-                        <label>Respiratory Rate</label>
-                        <input type="text" name="RR">
+                    <div class ="rows">
+                        <div class ="large-9">
+                            <label>Enter Total Number of States (E.g: 3 or 9)</label>
+                            <input type="text" name="totalNumberOfStates" value = "2">
+                        </div>
                     </div>
-                    <div class="large-4 columns">
-                        <label>Blood Pressure</label>
-                        <input type="text" name="BP">
-                    </div>
-                    <div class="large-4 columns">
-                        <label>Heart Rate</label>
-                        <input type="text" name="HR">
-                    </div>
-                    <div class="large-4 columns">
-                        <label>SPO</label>
-                        <input type="text" name="SPO">
-                    </div>
-                    <div class="large-4 columns">
-                        <label>Intake</label>
-                        <input type="text" name="intake">
-                    </div>
-                    <div class="large-4 columns">
-                        <label>Output</label>
-                        <input type="text" name="output">
-                    </div>
-                    
-                    <div class="large-4 columns">
-                        <label>Temperature</label>
-                        <input type="text" name="temperatureString">
-                    </div>
-                    
-                    <%
-                    String stateID = "ST1";
-                    String RR = request.getParameter("RR");
-                    String BP = request.getParameter("BP");
-                    String HR = request.getParameter("HR");
-                    String SPO = request.getParameter("SPO");
-                    String intake = request.getParameter("intake");
-                    String output = request.getParameter("output");
-                    //String temperatureString = request.getParameter("temperatureString");
-                    //double temperature = Double.parseDouble(temperatureString);
-                    String stateDescription = request.getParameter("stateDescription");
-                    String patientNRIC = request.getParameter("patientNRIC");
-                    String scenarioID = "SC" + (ScenarioDAO.retrieveAll().size()+1);
+                </center>
 
-//                    State newState = new State(stateID, scenarioID, RR, BP, HR, SPO, intake, output, temperature, stateDescription,patientNRIC); %>
-                </div>
-                <!--Add more states-->
-                <div class="input_fields_wrap">
-                    <button class="add_field_button">Add More States</button>
-                    <!--<div><input type="text" name="mytext[]"></div>-->
-                </div>
-                <!--End of add more states-->
+
+                <!--                State 1
+                                <center><div class="large-9">
+                                        <label>State Description</label>
+                                        <textarea style = "resize:vertical" name="stateDescription1" rows="2" cols="10"></textarea>
+                                    </div></center>
+                                <div class="row">
+                                    <div class="large-4 columns">
+                                        <label>Respiratory Rate</label>
+                                        <input type="text" name="RR1">
+                                    </div>
+                                    <div class="large-4 columns">
+                                        <label>Blood Pressure</label>
+                                        <input type="text" name="BP1">
+                                    </div>
+                                    <div class="large-4 columns">
+                                        <label>Heart Rate</label>
+                                        <input type="text" name="HR1">
+                                    </div>
+                                    <div class="large-4 columns">
+                                        <label>SPO</label>
+                                        <input type="text" name="SPO1">
+                                    </div>
+                                    <div class="large-4 columns">
+                                        <label>Intake</label>
+                                        <input type="text" name="intake1">
+                                    </div>
+                                    <div class="large-4 columns">
+                                        <label>Output</label>
+                                        <input type="text" name="output1">
+                                    </div>
+                
+                                    <div class="large-4 columns">
+                                        <label>Temperature</label>
+                                        <input type="text" name="temperature1">
+                                    </div>-->
+
+            </div>
+            <!--Add more states button-->
+            <!--            <div class="input_fields_wrap">
+                            <button class="add_field_button">Add More States</button>
+                        </div>-->
+            <!--End of add more states-->
             </div>
             </div
         </dd>
     </dl>
-    <center><input type ="submit" class ="button" value ="Add New Scenario"></center>
-
+    <center><input type ="submit" class ="button" value ="Continue"></center>
 </form>
 
 
-    <script>
-        $(document).ready(function() {
-            var max_fields = 10; //maximum input boxes allowed
-            var wrapper = $(".input_fields_wrap"); //Fields wrapper
-            var add_button = $(".add_field_button"); //Add button ID
+<!--<script>
+    $(document).ready(function() {
+        var max_fields = 15; //maximum input boxes allowed
+        var wrapper = $(".input_fields_wrap"); //Fields wrapper
+        var add_button = $(".add_field_button"); //Add button ID
 
-            var x = 1; //initlal text box count
-            $(add_button).click(function(e) { //on add input button click
-                e.preventDefault();
-                if (x < max_fields) { //max input box allowed
-                    x++; //text box increment
-                    $(wrapper).append('<div><br>State X <center><div class = "large-9"><label>State Description</label><textarea name = "stateDescription" rows = "2" cols = "10"></textarea></div></center><div class = "row">\n\
-                               <div class ="large-4 columns"><label>Respiratory Rate</label><input type="text" name="RR"/></div>\n\
-                               <div class ="large-4 columns"><label>Blood Pressure</label><input type="text" name="BP"/></div>\n\
-                               <div class ="large-4 columns"><label>Heart Rate</label><input type="text" name="HR"/></div>\n\
-                               <div class ="large-4 columns"><label>SPO</label><input type="text" name="SPO"/></div>\n\
-                               <div class ="large-4 columns"><label>Intake</label><input type="text" name="intake"/></div>\n\
-                               <div class ="large-4 columns"><label>Output</label><input type="text" name="output"/></div>\n\
-                               <div class ="large-4 columns"><label>Temperature</label><input type="text" name="temperature"/></div>\n\
-                               </div>\n\
-                               <a href = "#" class = "remove_field">Remove State</a></div>'); //add input box
-                }
-            });
-
-            $(wrapper).on("click", ".remove_field", function(e) { //user click on remove text
-                e.preventDefault();
-                $(this).parent('div').remove();
-                x--;
-            })
+        var x = 2; //initlal text box count, first box already added above
+        $(add_button).click(function(e) { //on add input button click
+            e.preventDefault();
+            if (x < max_fields) { //max input box allowed
+                x++; //text box increment
+                $(wrapper).append('<div><br>State X <center><div class = "large-9"><label>State Description</label><textarea name = "stateDescription" rows = "2" cols = "10"></textarea></div></center><div class = "row">\n\
+                           <div class ="large-4 columns"><label>Respiratory Rate</label><input type="text" name="RR2"/></div>\n\
+                           <div class ="large-4 columns"><label>Blood Pressure</label><input type="text" name="BP"/></div>\n\
+                           <div class ="large-4 columns"><label>Heart Rate</label><input type="text" name="HR"/></div>\n\
+                           <div class ="large-4 columns"><label>SPO</label><input type="text" name="SPO"/></div>\n\
+                           <div class ="large-4 columns"><label>Intake</label><input type="text" name="intake"/></div>\n\
+                           <div class ="large-4 columns"><label>Output</label><input type="text" name="output"/></div>\n\
+                           <div class ="large-4 columns"><label>Temperature</label><input type="text" name="temperature"/></div>\n\
+                           </div>\n\
+                           <a href = "#" class = "remove_field">Remove State</a></div>'); //add input box
+            }
         });
-        </script>
 
-        <script src="js/vendor/jquery.js"></script>
-        <script src="js/foundation.min.js"></script>
+        $(wrapper).on("click", ".remove_field", function(e) { //user click on remove text
+            e.preventDefault();
+            $(this).parent('div').remove();
+            x--;
+        })
+    });
+</script>-->
 
-        <script>
+<script src="js/vendor/jquery.js"></script>
+<script src="js/foundation.min.js"></script>
+
+<script>
             $(document).foundation();
-        </script>
-        <script>
-            $(function() {
-                $("#datepicker").datepicker();
-            });
-        </script>
-    </body>
+</script>
+</body>
 </html>
