@@ -3083,23 +3083,30 @@ ul.pagination {
     display: block;
     margin-bottom: 0 !important; }
     .accordion .accordion-navigation.active > a, .accordion dd.active > a {
-      background: #e8e8e8; }
+       background: #1C1C1C; 
+      color: #fff;}
     .accordion .accordion-navigation > a, .accordion dd > a {
       background: #efefef;
       color: #222222;
       padding: 1rem;
       display: block;
       font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
-      font-size: 1rem; }
+      font-size: 1rem; 
+    margin-left: 100px;
+    margin-right: 100px;}
       .accordion .accordion-navigation > a:hover, .accordion dd > a:hover {
-        background: #e3e3e3; }
+        background: #1C1C1C; 
+      color: #fff;}
     .accordion .accordion-navigation > .content, .accordion dd > .content {
       display: none;
       padding: 0.9375rem; }
       .accordion .accordion-navigation > .content.active, .accordion dd > .content.active {
         display: block;
-        background: white; }
+        background: white;   }
+      
 
+      
+     
 .split.button {
   position: relative;
   padding-right: 5.0625rem; }
@@ -4331,6 +4338,7 @@ label {
   font-weight: normal;
   line-height: 1.5;
   margin-bottom: 0;
+  font-weight: bold;
   /* Styles for required inputs */ }
   label.right {
     float: none !important;

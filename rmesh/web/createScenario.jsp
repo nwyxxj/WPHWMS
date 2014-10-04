@@ -23,7 +23,7 @@
         <script src="//code.jquery.com/ui/1.11.1/jquery-ui.js"></script>
         <link rel="stylesheet" href="/resources/demos/style.css">
         <script>
-            $(function() {
+            $(function () {
                 $("#datepicker").datepicker();
             });
         </script>
@@ -62,16 +62,16 @@
                         <label>Admission Information</label>
                         <textarea style = "resize:vertical"  name="admissionInfo" rows="2" cols="10" value = "Her last vitals are..."></textarea>
                     </div>
-
-                    <div class="row">
-                        <div class="large-4 columns">
-                            <label>Status</label>
-                            <label><input type="radio" value="activated" name = "status">Activated</label>
-                            <label><input type="radio" value="deactivated" name = "status">Deactivated</label>
-                        </div>
+                </center>
+                <div class="row">
+                    <div class="large-4 columns">
+                        <label>Status</label>
+                        <input type="radio" value="activated" name = "status"> Activated <br/>
+                        <input type="radio" value="deactivated" name = "status"> Deactivated
                     </div>
-                </center>   
-            </div>
+                </div>
+
+
 
         </dd>
         <dd class="accordion-navigation">
@@ -99,8 +99,8 @@
                 <div class="row">
                     <div class="large-4 columns">
                         <label>Gender</label>
-                        <label><input type="radio" value="Male" name = "gender">Male</label>
-                        <label><input type="radio" value="Female" name = "gender">Female</label>
+                        <input type="radio" value="Male" name = "gender"> Male <br/>
+                        <input type="radio" value="Female" name = "gender"> Female
                     </div>
                     <div class="large-4 columns">
                         <label>Date of Birth</label>
@@ -151,7 +151,7 @@
             <a href="#panel3">Default Vital Signs</a>
             <!--State 0-->
             <div id="panel3" class="content">
-                Leave empty if not applicable.
+                <div style="margin-left:100px;"> Leave empty if not applicable.</div><br/>
                 <div class="row">
                     <div class="large-4 columns">
                         <label>Respiratory Rate</label>
@@ -181,6 +181,8 @@
                         <label>Temperature</label>
                         <input type="text" name="temperature0" value = "17">
                     </div>
+                    <div class="large-4 columns"></div>
+                    <div class="large-4 columns"></div>
                 </div>
             </div>
         </dd>
@@ -241,9 +243,10 @@
                         </div>-->
             <!--End of add more states-->
             </div>
-            </div
+            </div>
         </dd>
     </dl>
+    <br/>
     <center><input type ="submit" class ="button" value ="Continue"></center>
 </form>
 
