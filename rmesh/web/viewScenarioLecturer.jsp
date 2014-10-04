@@ -18,7 +18,7 @@
         <link rel="stylesheet" href="css/foundation.css" />
         <script src="js/vendor/modernizr.js"></script>
         <script>
-            $(document).ready(function() {
+            $(document).ready(function () {
                 $(document).foundation();
             });
         </script>
@@ -34,7 +34,7 @@
 
     </head>
     <body>
-       
+
         <%            String successMsg = (String) request.getAttribute("successMsg");
 
             if (successMsg != null) {
@@ -42,6 +42,8 @@
                 out.println("<br><br>");
             } %>
         <div align ="center">
+
+
             <%
 
                 String imgName = "";
@@ -54,7 +56,7 @@
             %>
 
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <span class="label"><%= scenario.getStatus()%></span>
+            <!-- <span class="label"><%= scenario.getStatus()%></span> -->
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <%
                 }
@@ -62,53 +64,66 @@
         </div>
 
         <div class="large-centered large-6 columns">
-            <ul id="featured1" data-orbit>
+            <table>
+
 
                 <%
                     int sizeOfList = scenarioList.size();
-                    int numOfPage = sizeOfList / 3;
+                    int numPerRow = 5;
+                    int numOfRows = sizeOfList / numPerRow;
                     int counter = 0;
 
-                    for (int i = 0; i <= numOfPage; i++) {
+                    for (int i = 0; i <= numOfRows; i++) {
+                        // out.println(numOfRows);
 
                 %>
-                <li>
+                <tr>
 
-                    <%                        Scenario scenario = null;
-                        for (int j = 0; j < 3; j++) {
-//                            out.println(counter + "counter");
-                            scenario = scenarioList.get(j); //supposed to get Counter, but somehow arrayindexoutofbounds when i put counter.
-                            scenarioID = scenario.getScenarioID();
-                            counter++;
-                            imgName = "img/0" + counter + ".jpg";
+
+                    <%                            Scenario scenario = null;
+                        //out.println(counter + "counter");
+                        for (int j = 0; j < numPerRow; j++) {
+
                     %>
-                    <a href="#" data-reveal-id="<%=scenarioID%>">
+                    <td>                    
+                        <%        if (sizeOfList > counter) {
+                                scenario = scenarioList.get(counter); //supposed to get Counter, but somehow arrayindexoutofbounds when i put counter.
 
-                        <% if (scenario.getStatus().equals("activated")) {%>
-                        <img class="opaque" src="<%=imgName%>" style="float:left; padding-right:5px;"/></a>
+                                scenarioID = scenario.getScenarioID();
+                                counter++;
+                                imgName = "img/0" + counter + ".jpg";
 
-                    <% } else {%>
-                    <div id="color">
-                        <div id="opacity">
-                            <img class="opaque" src="<%=imgName%>" style="float:left; padding-right:5px;"/></a>
+                        %>
+                        <a href="#" data-reveal-id="<%=scenarioID%>">
+
+                            <% if (scenario.getStatus().equals("activated")) {%>
+                            <img class="opaque" src="<%=imgName%>" style="float:left; padding-right:5px;"/></a>           
+
+                        <% } else {%>
+
+                        <div id="color">
+                            <div id="opacity">
+                                <img class="opaque" src="<%=imgName%>" style="float:left; padding-right:5px;"/><a>
+                            </div>
                         </div>
-                    </div>
 
-                    <%
+                        <%
+                                }
                             }
+                        %>
+                    </td>
+                    <%
                         }
                     %>
 
-                </li>
-
-                <%
-                    }
-
-                %>
-
-            </ul>
-
-        </div>
+            
+            <%
+                }
+            %>
+      
+                </tr>
+            </table>
+            </div>
 
         <%            for (int i = 0; i < scenarioList.size(); i++) {
                 Scenario scenario = scenarioList.get(i);
