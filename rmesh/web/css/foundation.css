@@ -2908,7 +2908,7 @@ blockquote p {
 .tabs {
   margin-bottom: 0 !important;
   margin-left: 0; 
-  border-bottom: solid #cccccc 1px;
+  background: #EFEFEF;
 }
   .tabs:before, .tabs:after {
     content: " ";
@@ -2921,7 +2921,6 @@ blockquote p {
     margin-bottom: 0 !important;
     list-style: none;
     float: left; 
-    border: #cccccc solid 1px;
     border-bottom: none;}
     .tabs dd > a, .tabs .tab-title > a {
       display: block;
@@ -2952,9 +2951,10 @@ blockquote p {
 .tabs-content {
   margin-bottom: 0rem;
   width: 100%; 
-  border-left: solid #cccccc 1px; 
-  border-right: solid #cccccc 1px;
-  border-bottom: solid #cccccc 1px;
+  border: solid #CCC 1px;
+//  border-left: solid #cccccc 1px; 
+//  border-right: solid #cccccc 1px;
+//  border-bottom: solid #cccccc 1px;
 }
 
   .tabs-content:before, .tabs-content:after {
