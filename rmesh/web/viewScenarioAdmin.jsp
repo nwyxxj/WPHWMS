@@ -14,11 +14,23 @@
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Foundation | Welcome</title>
         <link rel="stylesheet" href="css/foundation.css" />
         <script src="js/vendor/modernizr.js"></script>
         <%@include file="/topbar/topbarAdmin.jsp" %>
-        <title>JSP Page</title>
+        <script type="text/javascript">
+
+            function deleteConfirmation() {
+                var deleteButton = confirm("Are you sure you want to delete? ")
+                if (deleteButton) {
+                    return true;
+                }
+                else {
+                    return false;
+                }
+            }
+
+        </script>
+        <title>Case Management</title>
     </head>
     <body>
 
@@ -31,9 +43,6 @@
                 <a href="#" class="close">&times;</a>
             </div>
             <%}%>
-
-
-
         </div>
 
         <%List<Scenario> scenarioList = ScenarioDAO.retrieveAll();%>
@@ -46,7 +55,9 @@
                     <th>Description</th>
                     <th>Admission Information</th>
                     <th>Edit</th>
+                    <th>Delete</th>
                     <th>Activate/Deactivate</th>
+
                 </tr>
             </thead>
             <tbody>
@@ -59,24 +70,43 @@
                 <tr>
                     <td><%=scenarioID%></td>
                     <td><%=scenarioName%></td>
-                    <td><%=status%>
-                    </td>
+                    <td><% if (status.equals("activated")) {%>
+                        <font color= limegreen><%=status%></font>
+                        <%} else {%>
+                        <font color= red><%=status%></font>
+                        <%}%></td>
                     <td><%=scenarioDescription%></td>
                     <td><%=admissionInfo%></td>
-                    <td> <form action ="editScenario.jsp" method ="POST">
+                    <td>
+                        <form action ="editScenario.jsp" method ="POST">
                             <input type="hidden" name="scenarioID" value="<%=scenarioID%>">
-                            <input type = "submit" class="button tinytable" value="edit">
-                        </form></td>
-                    <td><form action ="ProcessActivateScenarioAdmin" method ="POST">
+                            <input type = "submit" class="button tiny" value="edit">
+                        </form>
+                    </td>
+
+                    <td>                          
+                        <form action ="ProcessDeleteScenario" method ="POST">
+                            <input type="hidden" name="scenarioID" value="<%=scenarioID%>">
+                            <input type = "submit" class="button tiny" onclick="if (!deleteConfirmation())
+                                                return false" value="delete" >
+                        </form>
+                    </td>  
+
+                    <td>
+                        <form action ="ProcessActivateScenarioAdmin" method ="POST">
                             <input type="hidden" name="scenarioID" value="<%=scenarioID%>">
                             <% if (status.equals("activated")) {%>
-                            <input type ="submit" class="button tiny" value = "Deactivate">
+                            <input type ="submit" class="button tiny" value = "deactivate">
                             <input type="hidden" name="status" value="deactivated">
                             <%} else {%>
-                            <input type ="submit" class="button tiny" value = "Activate">
-                            <%}%></td>
+                            <input type ="submit" class="button tiny" value = "activate">
+                            <%}%>
                             <input type="hidden" name="status" value="activated">
                         </form>
+                    </td>
+
+
+
                 </tr>
             </tbody>
             <%}%>
@@ -87,7 +117,7 @@
     <script src="js/vendor/jquery.js"></script>
     <script src="js/foundation.min.js"></script>
     <script>
-        $(document).foundation();
+              $(document).foundation();
     </script>
 
 
