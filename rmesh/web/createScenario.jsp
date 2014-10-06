@@ -193,7 +193,7 @@
 
                     <div class ="rows">
                         <div class ="large-9">
-                            <label>Enter Total Number of States (E.g: 3 or 9)</label>
+                            <label>Enter Total Number of States (E.g: 3)</label>
                             <input type="text" name="totalNumberOfStates" value = "2">
                         </div>
                     </div>

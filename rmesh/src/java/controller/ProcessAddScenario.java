@@ -14,6 +14,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -80,9 +81,14 @@ public class ProcessAddScenario extends HttpServlet {
             StateDAO.add(stateID0, scenarioID, RR0, BP0, HR0, SPO0, intake0, output0, temperature0, stateDescription0, patientNRIC);
             
             
-            request.setAttribute("totalNumberOfStates", totalNumberOfStatesString);
-            request.setAttribute("scenarioID", scenarioID);
-            request.setAttribute("patientNRIC", patientNRIC);
+            HttpSession session = request.getSession(false);
+            session.setAttribute("totalNumberOfStates", totalNumberOfStatesString);
+            session.setAttribute("scenarioID", scenarioID);
+            session.setAttribute("patientNRIC", patientNRIC);
+            //request.setAttribute("totalNumberOfStates", totalNumberOfStatesString);
+            //request.setAttribute("scenarioID", scenarioID);
+
+            //request.setAttribute("patientNRIC", patientNRIC);
             RequestDispatcher rd = request.getRequestDispatcher("createState.jsp");
             rd.forward(request, response);
         

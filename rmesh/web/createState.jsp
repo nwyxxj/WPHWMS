@@ -16,8 +16,10 @@
         <link rel="stylesheet" href="/resources/demos/style.css">
     </head>
     <body>
-        <%
-//            //Retrieve case information
+
+        <script src="js/vendor/jquery.js"></script>
+        <script src="js/foundation.min.js"></script>
+        <%//            //Retrieve case information
 //            String scenarioName = request.getParameter("scenarioName");
 //            String scenarioDescription = request.getParameter("scenarioDescription");
 //            String status = request.getParameter("status");
@@ -63,15 +65,20 @@
 //            ScenarioDAO.add(scenarioID, scenarioName, scenarioDescription, status, admissionInfo);
 //            //PatientDAO.add(patientNRIC, firstName, lastName, gender, dob, maritalStatus, weight, height, occupation, race, religion, nationality, 1);
 //            StateDAO.add(stateID0, scenarioID, RR0, BP0, HR0, SPO0, intake0, output0, temperature0, stateDescription0, patientNRIC);
-
             //loop to show the number of states 
-            
-            String totalNumberOfStatesString = (String) request.getAttribute("totalNumberOfStates");
+        
+            String totalNumberOfStatesString = (String) session.getAttribute("totalNumberOfStates");
             int totalNumberOfStates = Integer.parseInt(totalNumberOfStatesString);
-            
-            String scenarioID = (String) request.getAttribute("scenarioID");
-            String patientNRIC = (String) request.getAttribute("patientNRIC");
-            
+
+            String scenarioID = (String) session.getAttribute("scenarioID");
+            String patientNRIC = (String) session.getAttribute("patientNRIC");
+        
+//            String totalNumberOfStatesString = (String) request.getAttribute("totalNumberOfStates");
+//            int totalNumberOfStates = Integer.parseInt(totalNumberOfStatesString);
+//
+//            String scenarioID = (String) request.getAttribute("scenarioID");
+//            String patientNRIC = (String) request.getAttribute("patientNRIC");
+
             for (int i = 0; i < totalNumberOfStates; i++) {
                 String RR = "RR" + (i + 1);
                 String BP = "BP" + (i + 1);
@@ -90,7 +97,7 @@
                     <textarea style = "resize:vertical" name = "<%=stateDescription%>" rows = "2" cols = "10"></textarea>
                 </div>
             </div>
-            
+
             <div class="row">
                 <div class="large-4 columns">
                     <label>Respiratory Rate</label>
@@ -120,22 +127,69 @@
                     <label>Temperature</label>
                     <input type="text" name="<%=temperature%>" value = "17">
                 </div>
+                <div class="large-4 columns">
+                    <!--                    <label>Is report applicable for this state? </label> 
+                                        <input type="radio" id="report1" name="report" value="yes">Yes<br>
+                                        <input type="radio" id="report2" name="report" value="no" checked>No<br>
+                                        <select name="reportNumber" id="reportNumber">
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                        </select>-->
+                   <div class="input_fields_wrap"> 
+                        <button class="add_field_button">Add more</button>
+                    <!--                    <input type ="file" name ="" value ="" multiple>-->
+                </div>
             </div> 
-        <%   }
-        %>
-        
-        <input type ="hidden" name ="totalNumberOfStates" value ="<%=totalNumberOfStates%>"/>
-        <input type ="hidden" name ="scenarioID" value ="<%=scenarioID%>"/>
-        <input type ="hidden" name ="patientNRIC" value ="<%=patientNRIC%>"/>
-        <center><input type ="submit" class ="button" value ="Add New Case"></center>
-        
+
+            <%   }
+            %>
+
+            <input type ="hidden" name ="totalNumberOfStates" value ="<%=totalNumberOfStates%>"/>
+            <input type ="hidden" name ="scenarioID" value ="<%=scenarioID%>"/>
+            <input type ="hidden" name ="patientNRIC" value ="<%=patientNRIC%>"/>
+            <center><input type ="submit" class ="button" value ="Add New Case"></center>
+
         </form>
-       
-        <script src="js/vendor/jquery.js"></script>
-        <script src="js/foundation.min.js"></script>
+
 
         <script>
             $(document).foundation();
+//            $('#reportNumber').hide();
+//            $('#report2').change(function() {
+//                if (this.checked) {
+//                    $('#reportNumber').hide();
+//                }
+//            });
+//            $('#report1').change(function() {
+//                if (this.checked) {
+//                    $('#reportNumber').show();
+//                }
+//            });
+            $(document).ready(function() {
+                var max_fields = 10; //maximum input boxes allowed
+                var wrapper = $(".input_fields_wrap"); //Fields wrapper
+                var add_button = $(".add_field_button"); //Add button ID
+
+                var x = 1; //initlal text box count
+                $(add_button).click(function(e) { //on add input button click
+                    e.preventDefault();
+                    if (x < max_fields) { //max input box allowed
+                        x++; //text box increment
+//                        $(wrapper).append('<div><input type="text" name="filename" placeholder="Report name"><a href="#" class="remove_field">Remove</a></div>'); //add input box
+                        $(wrapper).append('<form action = "ProcessReportUpload" method = "POST" enctype = "multipart/form-data"> <input type ="file" name = "file" size = "50"/> <br> <input type ="submit" value = "Upload Report" /></form><br>'); //add input box
+                    }
+                });
+
+                $(wrapper).on("click", ".remove_field", function(e) { //user click on remove text
+                    e.preventDefault();
+                    $(this).parent('div').remove();
+                    x--;
+                })
+            });
         </script>
+
     </body>
 </html>
