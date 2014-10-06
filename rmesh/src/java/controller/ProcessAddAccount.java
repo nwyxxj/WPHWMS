@@ -5,8 +5,8 @@
  */
 package controller;
 
-import dao.InputValidation;
 import dao.AdminDAO;
+import dao.InputValidation;
 import dao.LecturerDAO;
 import dao.NurseDAO;
 import java.io.IOException;
@@ -17,6 +17,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -48,8 +49,12 @@ public class ProcessAddAccount extends HttpServlet {
                 RequestDispatcher rd = request.getRequestDispatcher("createAccount.jsp");
                 rd.forward(request, response);
             } else {
+                
+                HttpSession session = request.getSession(false);
+                session.setAttribute("successMessageCreateAccount","New account has been created successfully!");          
                 AdminDAO.add(userID, password);
                 response.sendRedirect("./viewAdminAccounts.jsp");
+                return;
             }
             
         } else if (userType.equals("lecturer")) {
@@ -58,8 +63,11 @@ public class ProcessAddAccount extends HttpServlet {
                 RequestDispatcher rd = request.getRequestDispatcher("createAccount.jsp");
                 rd.forward(request, response);
             } else {
+                HttpSession session = request.getSession(false);
+                session.setAttribute("successMessageCreateAccount","New account has been created successfully!"); 
                 LecturerDAO.add(userID, password);
                 response.sendRedirect("./viewLecturerAccounts.jsp");
+                return;
             }
             
         } else {
@@ -68,8 +76,11 @@ public class ProcessAddAccount extends HttpServlet {
                 RequestDispatcher rd = request.getRequestDispatcher("createAccount.jsp");
                 rd.forward(request, response);
             } else {
+                HttpSession session = request.getSession(false);
+                session.setAttribute("successMessageCreateAccount","New account has been created successfully!"); 
                 NurseDAO.add(userID, password);
                 response.sendRedirect("./viewNurseAccounts.jsp");
+                return;
             }
             
         }

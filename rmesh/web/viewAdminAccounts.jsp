@@ -39,13 +39,25 @@
         <title>Accounts Management</title>
     </head>
     <body>
+
+
         <%            List<Admin> adminList = AdminDAO.retrieveAll();
         %>
 
         <div class="row" style="padding-top: 30px;">
             <div class="large-centered large-12 columns">
                 <center>
+
                     <h1>Administrator Accounts Management</h1>
+                    <div class ="large-11">
+                        <%if (session.getAttribute("successMessageCreateAccount") != null) {%>
+                        <div data-alert class="alert-box success radius">
+                            The account has been created successfully! 
+                            <a href="#" class="close">&times;</a>
+                        </div>
+                        <%}
+                            session.removeAttribute("successMessageCreateAccount"); %>
+                    </div>
 
                     <table class="responsive" id="cssTable">
                         <col width="40%">
@@ -88,7 +100,7 @@
                                     } else {
                                     %>
                                     <input type = "submit" class="button tinytable" onclick="if (!deleteConfirmation())
-                                                  return false" value="delete" >
+                                                return false" value="delete" >
                                     <%
                                         }
                                     %>

@@ -42,7 +42,7 @@
                 The case has been created successfully! 
                 <a href="#" class="close">&times;</a>
             </div>
-            <%}%>
+            <%} session.removeAttribute("successMessageCreateScenario"); %>
         </div>
 
         <%List<Scenario> scenarioList = ScenarioDAO.retrieveAll();%>

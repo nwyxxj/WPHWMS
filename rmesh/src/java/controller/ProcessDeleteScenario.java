@@ -7,6 +7,7 @@
 package controller;
 
 import dao.*;
+import entity.Scenario;
 import java.io.*;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -35,7 +36,10 @@ public class ProcessDeleteScenario extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         
         String scenarioID = request.getParameter("scenarioID");
+        String scenarioIDTrimmed = scenarioID.trim();
+        ReportDAO.delete(scenarioID);
         StateDAO.delete(scenarioID);
+        //Scenario retrievedScenario = ScenarioDAO.retrieve(scenarioID);
         ScenarioDAO.delete(scenarioID);
         
         response.sendRedirect("./viewScenarioAdmin.jsp");

@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package dao;
 
 import entity.Report;
@@ -19,20 +18,21 @@ import java.util.List;
  * @author weiyi.ngow.2012
  */
 public class ReportDAO {
-    public static Report retrieve(String name){
+
+    public static Report retrieve(String name) {
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
-        Report report = null; 
-        
+        Report report = null;
+
         try {
             conn = ConnectionManager.getConnection();
             stmt = conn.prepareStatement("select * from REPORT where reportName = ?");
             stmt.setString(1, name);
-            
+
             rs = stmt.executeQuery();
             while (rs.next()) {
-               report = new Report(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4));
+                report = new Report(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4));
             }
 
         } catch (SQLException e) {
@@ -65,5 +65,24 @@ public class ReportDAO {
             ConnectionManager.close(conn, stmt, rs);
         }
         return reportList;
+    }
+
+    public static void delete(String scenarioID) {
+        Connection conn = null;
+        PreparedStatement preparedStatement = null;
+        String query = "DELETE FROM report WHERE scenarioID =?";
+
+        try {
+            conn = ConnectionManager.getConnection();
+
+            preparedStatement = conn.prepareStatement(query);
+            preparedStatement.setString(1, scenarioID);
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionManager.close(conn, preparedStatement, null);
+        }
     }
 }
