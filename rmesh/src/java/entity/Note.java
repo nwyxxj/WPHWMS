@@ -26,6 +26,14 @@ public class Note {
         this.noteDate = noteDate;
     }
 
+    public String getMultidisciplinaryNote() {
+        return multidisciplinaryNote;
+    }
+
+    public void setMultidisciplinaryNote(String multidisciplinaryNote) {
+        this.multidisciplinaryNote = multidisciplinaryNote;
+    }
+
     public int getNoteID() {
         return noteID;
     }
