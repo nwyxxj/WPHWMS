@@ -60,10 +60,10 @@ public class StateDAO {
         }
     }
 
-    public static void updateState(String stateID, String RR, String BP, String HR, String SPO, String intake, String output, double temperature) {
+    public static void updateState(String stateID, String scenarioID, String RR, String BP, String HR, String SPO, String intake, String output, double temperature) {
         Connection conn = null;
         PreparedStatement preparedStatement = null;
-        String query = "UPDATE state SET RR = ?, BP = ?, HR = ?, SPO = ?, intake = ?, output = ?, temperature =? WHERE stateID =?";
+        String query = "UPDATE state SET RR = ?, BP = ?, HR = ?, SPO = ?, intake = ?, output = ?, temperature =? WHERE stateID =? and scenarioID = ?";
 
         try {
             conn = ConnectionManager.getConnection();
@@ -77,6 +77,7 @@ public class StateDAO {
             preparedStatement.setString(6, output);
             preparedStatement.setDouble(7, temperature);
             preparedStatement.setString(8, stateID);
+            preparedStatement.setString(9, scenarioID);
             preparedStatement.executeUpdate();
 
         } catch (SQLException e) {

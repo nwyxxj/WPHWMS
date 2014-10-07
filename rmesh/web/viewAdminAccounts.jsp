@@ -17,9 +17,10 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" href="css/foundation.css" />
-        <link rel="stylesheet" href="responsive-tables.css">
-        <script src="responsive-tables.js"></script>
+        <script src="js/vendor/modernizr.js"></script>
         <%@include file="/topbar/topbarAdmin.jsp" %>
 
         <script type="text/javascript">
@@ -121,5 +122,11 @@
 
             </div>
         </div>
+
+        <script src="js/vendor/jquery.js"></script>
+        <script src="js/foundation.min.js"></script>
+        <script>
+            $(document).foundation();
+        </script>
     </body>
 </html>

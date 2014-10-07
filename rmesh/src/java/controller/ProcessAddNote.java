@@ -3,20 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package controller;
 
 import dao.NoteDAO;
-import entity.Note;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.SQLException;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -38,40 +35,40 @@ public class ProcessAddNote extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        
+
         try {
             /* TODO output your page here. You may use following sample code. */
-            
-            String resultOfButton= request.getParameter("buttonChoosen");
-            
-            if(resultOfButton.equals("Submit")){
-                String notes= (String) request.getParameter("notes");
-                String tutorialGrp= (String) request.getParameter("tutorialGrp");
-                String grpNames= (String) request.getParameter("grpNames");
+
+            String resultOfButton = request.getParameter("buttonChoosen");
+
+            if (resultOfButton.equals("Submit")) {
+                String notes = (String) request.getParameter("notes");
+                String tutorialGrp = (String) request.getParameter("tutorialGrp");
+                String grpNames = (String) request.getParameter("grpNames");
 
                 String userLoggedIn = (String) request.getSession().getAttribute("user");
 
                 NoteDAO.insertNote(notes, tutorialGrp, grpNames, userLoggedIn);
 
-                request.setAttribute("successMsg", "You have successfully submitted!");
+                HttpSession session = request.getSession(false);
+                session.setAttribute("successMessageSavedNotes", "You have successfully submitted the multidisciplinary notes!");
+                response.sendRedirect("./viewPatientInformation.jsp");
+            } else {
 
-                RequestDispatcher dispatch = getServletContext().getRequestDispatcher("/viewPatientInformation.jsp");
-                dispatch.forward(request, response);
-            }else {
-                
-                String notes= (String) request.getParameter("notes");
-                String tutorialGrp= (String) request.getParameter("tutorialGrp");
-                String grpNames= (String) request.getParameter("grpNames");
-                
+                String notes = (String) request.getParameter("notes");
+                String tutorialGrp = (String) request.getParameter("tutorialGrp");
+                String grpNames = (String) request.getParameter("grpNames");
+
                 request.setAttribute("notes", notes);
                 request.setAttribute("tutorialGrp", tutorialGrp);
                 request.setAttribute("grpNames", grpNames);
-                request.setAttribute("successMsg", "You have successfully saved!");
-
-                RequestDispatcher dispatch = getServletContext().getRequestDispatcher("/viewPatientInformation.jsp");
-                dispatch.forward(request, response);
+                
+                HttpSession session = request.getSession(false);
+                session.setAttribute("successMessageSavedNotes", "You have successfully saved the multidisciplinary notes!");
+                response.sendRedirect("./viewPatientInformation.jsp");
+               
             }
-            
+
         } finally {
             out.close();
         }

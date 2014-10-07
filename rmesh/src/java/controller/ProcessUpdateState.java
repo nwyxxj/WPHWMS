@@ -5,15 +5,16 @@
  */
 package controller;
 
+import dao.NurseDAO;
 import dao.StateDAO;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -21,16 +22,6 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "ProcessUpdateState", urlPatterns = {"/ProcessUpdateState"})
 public class ProcessUpdateState extends HttpServlet {
-
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
@@ -41,15 +32,18 @@ public class ProcessUpdateState extends HttpServlet {
         String intake = (String) request.getParameter("intake");
         String output = (String) request.getParameter("output");
         String stateID = (String) request.getParameter("stateID");
+        String scenarioID = (String) request.getParameter("scenarioID");
 
         String temperatureString = (String) request.getParameter("temperature");
 
         double temperature = Double.parseDouble(temperatureString);
 
-        StateDAO.updateState(stateID, RR, BP, HR, SPO, intake, output, temperature);
-
-        RequestDispatcher dispatch = getServletContext().getRequestDispatcher("/viewPatientInformation.jsp");
-        dispatch.forward(request, response);
+        StateDAO.updateState(stateID, scenarioID, RR, BP, HR, SPO, intake, output, temperature);
+        
+        HttpSession session = request.getSession(false);
+        session.setAttribute("successMessageUpdateVitals","Vital signs have been updated!"); 
+        response.sendRedirect("./viewPatientInformation.jsp");
+      
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
