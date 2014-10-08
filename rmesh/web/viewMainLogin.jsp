@@ -15,8 +15,10 @@
     <body>
         <div class="row" style="padding-top: 30px;">
     <center>
-        <h1>HSEMR</h1>
-        <h2>Enriching Lives, Enriching You</h2> 
+        
+        <body style="background-image:url(img/loginBackground-small.jpg)"></body>
+<!--        <h1>HSEMR</h1>
+        <h2>Passion to Touch Lives</h2> -->
         <div class="large-centered large-4 columns" style = "padding-top:30px;">
 
             <%
