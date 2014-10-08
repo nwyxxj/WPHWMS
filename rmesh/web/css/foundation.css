@@ -1111,6 +1111,16 @@ button, .button {
     background-color: #007095; }
   button:hover, button:focus, .button:hover, .button:focus {
     color: white; }
+
+button.hms, .button.hms {
+    background-color: green;
+    border-color: green;
+    color: white; }
+    button.hms:hover, button.hms:focus, .button.hms:hover, .button.hms:focus {
+      background-color: #2DD22D; }
+    button.hms:hover, button.hms:focus, .button.hms:hover, .button.hms:focus {
+      color: white; }
+
   button.secondary, .button.secondary {
     background-color: #e7e7e7;
     border-color: #007095;
@@ -1141,6 +1151,14 @@ button, .button {
     padding-bottom: 1.1875rem;
     padding-left: 2.25rem;
     font-size: 1.25rem; }
+
+  button.normal, .button.normal {
+    padding-top: 0.900rem;
+    padding-right: 1.75rem;
+    padding-bottom: 0.900rem;
+    padding-left: 1.75rem;
+    font-size: 1.0000rem; }
+
   button.small, .button.small {
     padding-top: 0.875rem;
     padding-right: 1.75rem;
