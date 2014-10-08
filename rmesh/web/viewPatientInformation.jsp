@@ -232,9 +232,9 @@
                                     <a href="#pastNotes">View Past groups notes</a>
                                     <div id="pastNotes" class="content">
                                         <div class="row">
-                                            <div class="small-8">
+                                            <div class="large-12">
                                                 <div class="row">
-                                                    <div class="small-3 columns">
+                                                    <div class="large-10 columns">
                                                         <%
                                                             if (notesListRetrieved == null || notesListRetrieved.size() == 0) {%>
                                                         <label for="right-label" class="right inline">No groups have enter their notes yet.</label>
@@ -242,9 +242,11 @@
                                                                 Note notes = null;
                                                                 for (int i = 0; i < notesListRetrieved.size(); i++) {
                                                                     notes = notesListRetrieved.get(i);
-                                                                    out.print("<label for='right-label' class='right inline'>Tutorial Group: </label>" + notes.getTutorialGroup());
-                                                                    out.print("<label for='right-label' class='right inline'>Group Member Names: </label>" + notes.getGrpMemberName());
-                                                                    out.print("<label for='right-label' class='right inline'>Multidisciplinary Note</label>" + notes.getMultidisciplinaryNote());
+                                                                    out.print("<b>Tutorial Group: </b>" + notes.getTutorialGroup() + "<br>");
+                                                                    out.print("<b>Group Member Names: </b>" + notes.getGrpMemberName() + "<br>");
+                                                                    out.print("<b>Multidisciplinary Note: </b>" + notes.getMultidisciplinaryNote()+ "<br>");
+                                                                    
+                                                                    out.println("<br>");
                                                                 }
 
                                                             }//end of else
