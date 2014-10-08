@@ -12,7 +12,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
          <title>HS EMR - Lecturer's Portal</title>
-         <%@include file="/topbar/topbar.jsp" %>
+         <%@include file="/topbar/topbarLecturer.jsp" %>
     </head>
     <body>
         <h1>Welcome, lecturer</h1>

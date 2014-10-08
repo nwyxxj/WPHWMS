@@ -400,7 +400,7 @@
                                     <div class="row">
                                         <div class="large-12">
                                             <div class="row">
-                                                <div class="large-10 columns">
+                                                <div class="large-12 columns">
                                                     <%
                                                             if (notesListRetrieved == null || notesListRetrieved.size() == 0) {%>
                                                     <label for="right-label" class="right inline">No groups have enter their notes yet.</label>
@@ -436,14 +436,14 @@
                                 <a href="#newNotes">Enter new notes</a>
                                 <div id="newNotes" class="content">
                                     <div class="row">
-                                        <div class="tiny-8">
+                                        <div class="small-8">
                                             <div class="row">
-                                                <div class="tiny-3 columns">
+                                                <div class="small-3 columns">
                                                     <label for="right-label" class="right inline">Tutorial Group</label>
                                                     <label for="right-label" class="right inline">Group Member Names</label>
                                                     <label for="right-label" class="right inline">Multidisciplinary Note</label>
                                                 </div>
-                                                <div class="tiny-9 columns">
+                                                <div class="small-9 columns">
                                                     <input type ="text" id= "tutorialGrp" name="tutorialGrp" value="<% if (tutorialGrp == null) {
                                                             out.print("");
                                                         } else {
@@ -466,8 +466,6 @@
                                     </div>
                                     <div>
                                         </dd>
-
-
                                         <input type="submit" name="buttonChoosen" value="Save" class="button tiny"> 
                                         <input type="submit" name="buttonChoosen" value="Submit" class="button tiny"> 
                                         <input type="button" value="Cancel" class="button tiny" onClick="window.location = 'viewPatientInformation.jsp'"/>

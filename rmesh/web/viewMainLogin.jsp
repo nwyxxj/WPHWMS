@@ -34,7 +34,7 @@
                 <div class="panel" style="background-color: white">
                     <form action = "ProcessLogin" method = "post">
                         <label>User ID:
-                            <input type = "text" id = "userid" placeholder = "User ID" name = "userid" value = <%= userid%> > </label>
+                            <input type = "text" id = "userid" placeholder = "User ID" name = "userid" value = <%= userid%>></label>
                         <label>Password:   
                             <input type = "password" class = "password" placeholder = "Password" name = "password"></label> 
                         <label>Role: 
@@ -51,8 +51,8 @@
                             </div>
                         </div>
 
-                        </body>
-                </div>
-            </div>
+        </body>
+        </div>
+    </div>
 </html>
 

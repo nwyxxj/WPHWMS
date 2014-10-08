@@ -28,7 +28,8 @@
                     <%           //retrieve the list of scenario that has all activated status
                         List<Scenario> scenarioActivatedList = ScenarioDAO.retrieveActivatedStatus();
                     %>
-                    <form action = "viewPatientInformation.jsp" method = "GET">
+                    <!--<form action = "viewPatientInformation.jsp" method = "GET">-->
+                    <form action = "HARDCODEviewAllWardInformation.jsp" method = "GET">
 
                         <%
                             if (scenarioActivatedList.size() != 0) {
