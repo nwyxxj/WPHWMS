@@ -43,6 +43,30 @@ public class StateDAO {
         return state;
     }
     
+    public static State retrieveActivateScenarioPatient(String scenarioID) {
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        State state = null;
+
+        try {
+            conn = ConnectionManager.getConnection();
+            stmt = conn.prepareStatement("select * from state where scenarioID =?");
+            stmt.setString(1, scenarioID);
+
+            rs = stmt.executeQuery();
+            while (rs.next()) {
+                state = new State(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getDouble(9), rs.getString(10), rs.getString(11));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionManager.close(conn, stmt, rs);
+        }
+        return state;
+    }
+    
     public static void add(String stateID, String scenarioID, String RR, String BP, String HR, String SPO, String intake, String output, double temperature, String stateDescription, String patientNRIC) {
         Connection conn = null;
         PreparedStatement preparedStatement = null;

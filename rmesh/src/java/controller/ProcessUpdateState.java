@@ -5,10 +5,8 @@
  */
 package controller;
 
-import dao.NurseDAO;
 import dao.StateDAO;
 import java.io.IOException;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -41,6 +39,7 @@ public class ProcessUpdateState extends HttpServlet {
         StateDAO.updateState(stateID, scenarioID, RR, BP, HR, SPO, intake, output, temperature);
         
         HttpSession session = request.getSession(false);
+        session.setAttribute("active", "vitals");
         session.setAttribute("successMessageUpdateVitals","Vital signs have been updated!"); 
         response.sendRedirect("./viewPatientInformation.jsp");
       

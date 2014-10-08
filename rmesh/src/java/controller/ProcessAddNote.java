@@ -51,6 +51,7 @@ public class ProcessAddNote extends HttpServlet {
                 NoteDAO.insertNote(notes, tutorialGrp, grpNames, userLoggedIn);
 
                 HttpSession session = request.getSession(false);
+                session.setAttribute("active", "multidisciplinary");
                 session.setAttribute("successMessageSavedNotes", "You have successfully submitted the multidisciplinary notes!");
                 response.sendRedirect("./viewPatientInformation.jsp");
             } else {
@@ -64,9 +65,9 @@ public class ProcessAddNote extends HttpServlet {
                 request.setAttribute("grpNames", grpNames);
                 
                 HttpSession session = request.getSession(false);
+                session.setAttribute("active", "multidisciplinary");
                 session.setAttribute("successMessageSavedNotes", "You have successfully saved the multidisciplinary notes!");
                 response.sendRedirect("./viewPatientInformation.jsp");
-               
             }
 
         } finally {

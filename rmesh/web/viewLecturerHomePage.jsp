@@ -11,15 +11,12 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-         <title>Hospital Ward Management System for NP Health Sciences</title>
+         <title>HS EMR - Lecturer's Portal</title>
          <%@include file="/topbar/topbar.jsp" %>
     </head>
     <body>
-        <a href = "ProcessLogout"> Log Out </a>
         <h1>Welcome, lecturer</h1>
          <br><br>
-        <jsp:include page="viewScenarioLecturer.jsp" /> 
-        
-        
+        <center><jsp:include page="viewScenarioLecturer.jsp" /></center>
     </body>
 </html>

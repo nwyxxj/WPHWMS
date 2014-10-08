@@ -61,7 +61,7 @@
                                         <!--                                        <label for="right-label" class="right inline">Admission Information</label>-->
                                     </div>
                                     <div class="large-10 columns">
-                                        <textarea style="overflow:auto;resize:none" rows = "10" required><%=retrievedScenario.getScenarioDescription()%>  </textarea>
+                                        <textarea style="overflow:auto;resize:none" name = "scenarioDescription" rows = "10" required><%=retrievedScenario.getScenarioDescription()%>  </textarea>
         <!--//                                 <textarea style="overflow:auto;resize:none" rows = "16" required><%=retrievedScenario.getAdmissionInfo()%> </textarea>-->
                                     </div>
                                 </div>
@@ -73,7 +73,7 @@
                                         <label for="right-label" class="right inline">Admission Information</label>
                                     </div>
                                     <div class="large-10 columns">
-                                           <textarea style="overflow:auto;resize:none" rows = "16" required><%=retrievedScenario.getAdmissionInfo()%> </textarea>
+                                           <textarea style="overflow:auto;resize:none" name ="admissionInfo" rows = "16" required><%=retrievedScenario.getAdmissionInfo()%> </textarea>
                                     </div>
                                 </div>
                             </div>

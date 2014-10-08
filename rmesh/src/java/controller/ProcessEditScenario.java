@@ -6,6 +6,7 @@
 
 package controller;
 
+import dao.NurseDAO;
 import dao.ScenarioDAO;
 import java.io.IOException;
 import javax.servlet.RequestDispatcher;
@@ -14,6 +15,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -42,8 +44,10 @@ public class ProcessEditScenario extends HttpServlet {
         
         ScenarioDAO.update(scenarioID, scenarioName, status, scenarioDescription, admissionInfo);
         
-        RequestDispatcher rd = request.getRequestDispatcher("viewScenarioAdmin.jsp");
-        rd.forward(request, response);
+        HttpSession session = request.getSession(false);
+        session.setAttribute("successMessageCreateScenario","New case has been editted successfully!"); 
+        response.sendRedirect("./viewScenarioAdmin.jsp");
+        return; 
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

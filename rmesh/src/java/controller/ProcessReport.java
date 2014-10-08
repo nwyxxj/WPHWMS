@@ -8,7 +8,6 @@ package controller;
 import dao.ReportDAO;
 import entity.Report;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
@@ -42,7 +41,7 @@ public class ProcessReport extends HttpServlet {
         String[] reportNames = request.getParameterValues("report");
         String currentScenario = (String) request.getSession().getAttribute("currentScenario");
 
-        HttpSession session = request.getSession();
+        HttpSession session = request.getSession(false);
         List<Report> reportsToRetrieve = new ArrayList<Report>();
         List<Report> reportsRetrieved = (List<Report>)session.getAttribute("reports");
         if ( reportsRetrieved != null && reportsRetrieved.size() > 0 ) {
@@ -56,9 +55,11 @@ public class ProcessReport extends HttpServlet {
                 reportsToRetrieve.add(report);
             }
             session.setAttribute("reports", reportsToRetrieve);
+            session.setAttribute("active", "reports");
             RequestDispatcher rd = request.getRequestDispatcher("viewPatientInformation.jsp");
             rd.forward(request, response);
         } else { 
+            session.setAttribute("active", "reports");
             response.sendRedirect("viewPatientInformation.jsp");
         }
     }

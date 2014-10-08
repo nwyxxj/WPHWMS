@@ -37,7 +37,7 @@
                             <input type = "text" id = "userid" placeholder = "User ID" name = "userid" value = <%= userid%> > </label>
                         <label>Password:   
                             <input type = "password" class = "password" placeholder = "Password" name = "password"></label> 
-                        <label>Domain: 
+                        <label>Role: 
                             <select name = "userType">
                                 <option value="student">NPSTUDENT</option>
                                 <option value="lecturer">NPSTAFF</option>
