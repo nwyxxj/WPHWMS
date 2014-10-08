@@ -14,7 +14,7 @@
         <nav class="top-bar" data-topbar>
             <ul class="title-area">
                 <li class="name">
-                    <h1><a href="#"><img src="img/Logo.png" height="22" width="22">  HS EMR</a></h1>
+                    <h1><a href="#"><img src="img/Logo.png" height="15" width="20">  HS EMR</a></h1>
 
                 </li>
                 <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
