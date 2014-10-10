@@ -32,29 +32,30 @@
         </script>
         <title>Case Management</title>
     </head>
-    <body>
-
+    <body style="font-size:14px; line-height:30px;">
+        <br/>
+    <center><h3>Case Management</h3></center>
     <center>
-        <h1>Case Management</h1>
         <div class ="large-11">
             <%if (session.getAttribute("successMessageCreateScenario") != null) {%>
             <div data-alert class="alert-box success radius">
                 The case has been created successfully! 
                 <a href="#" class="close">&times;</a>
             </div>
-            <%} session.removeAttribute("successMessageCreateScenario"); %>
-            
+            <%}
+                session.removeAttribute("successMessageCreateScenario"); %>
+
             <%if (session.getAttribute("successMessageEditScenario") != null) {%>
             <div data-alert class="alert-box success radius">
                 The case has been created successfully! 
                 <a href="#" class="close">&times;</a>
             </div>
-            <%} session.removeAttribute("successMessageEditScenario"); %>
-            
-        </div>
+            <%}
+                session.removeAttribute("successMessageEditScenario"); %>
 
+        </div>
         <%List<Scenario> scenarioList = ScenarioDAO.retrieveAll();%>
-        <table>
+        <table border="1" style="border-collapse: collapse; border-color: green;">
             <thead>
                 <tr>
                     <th>ID</th>
@@ -69,6 +70,7 @@
                 </tr>
             </thead>
             <tbody>
+
                 <% for (Scenario scenario : scenarioList) {
                         String scenarioID = scenario.getScenarioID();
                         String scenarioName = scenario.getScenarioName();
@@ -88,46 +90,44 @@
                     <td>
                         <form action ="editScenario.jsp" method ="POST">
                             <input type="hidden" name="scenarioID" value="<%=scenarioID%>">
-                            <input type = "submit" class="button tiny" value="edit">
+                            <input type = "submit" class="button hms tiny" value="edit">
                         </form>
                     </td>
 
                     <td>                          
                         <form action ="ProcessDeleteScenario" method ="POST">
                             <input type="hidden" name="scenarioID" value="<%=scenarioID%>">
-                            <input type = "submit" class="button tiny" onclick="if (!deleteConfirmation())
-                                                return false" value="delete" >
+                            <input type = "submit" class="button hms tiny" onclick="if (!deleteConfirmation())
+                                        return false" value="delete" >
                         </form>
                     </td>  
 
                     <td>
-                        <form action ="ProcessActivateScenarioAdmin" method ="POST">
-                            <input type="hidden" name="scenarioID" value="<%=scenarioID%>">
-                            <% if (status.equals("activated")) {%>
-                            <input type ="submit" class="button tiny" value = "deactivate">
-                            <input type="hidden" name="status" value="deactivated">
-                            <%} else {%>
-                            <input type ="submit" class="button tiny" value = "activate">
-                            <%}%>
-                            <input type="hidden" name="status" value="activated">
+                        <form action ="ProcessActivateScenarioAdmin" method ="POST">    <center>
+                                <input type="hidden" name="scenarioID" value="<%=scenarioID%>">
+                                <% if (status.equals("activated")) {%>
+                                <input type ="submit" class="button hms tiny" value = "deactivate">
+                                <input type="hidden" name="status" value="deactivated">
+                                <%} else {%>
+                                <input type ="submit" class="button hms tiny" value = "activate">
+                                <%}%>
+                                <input type="hidden" name="status" value="activated">        </center>
                         </form>
-                    </td>
 
+                    </td>
 
 
                 </tr>
             </tbody>
             <%}%>
         </table>
-
     </center>
-
     <script src="js/vendor/jquery.js"></script>
     <script src="js/foundation.min.js"></script>
     <script>
-              $(document).foundation();
+                                $(document).foundation();
     </script>
-
+</div>  
 
 </body>
 </html>

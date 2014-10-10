@@ -17,14 +17,13 @@
         <link rel="stylesheet" href="css/foundation.css" />
         <%@include file="/topbar/topbar.jsp" %>
     </head>
-    <body>
-        <div class="row" style="padding-top: 20px;">
-            <div class="large-centered large-12 columns" style = "padding-top:30px;">
-                <h3><b>Case Information</b></h3>
-                <br>
-                <div class="panel" style="background-color: white">
 
-
+    <body style="font-size:14px; line-height:30px;">
+        <div class="row" style="padding-top: 15px;">
+            <div class="large-centered large-12 columns">
+                <center><h3>Case Information</h3></center>
+                <div class="panel" style="background-color: white; border:1px solid black">
+                    <br/>
                     <%           //retrieve the list of scenario that has all activated status
                         List<Scenario> scenarioActivatedList = ScenarioDAO.retrieveActivatedStatus();
                     %>
@@ -37,23 +36,20 @@
                                 Scenario retrieveLastScenario = scenarioActivatedList.get(scenarioActivatedList.size() - 1);
                                 session.setAttribute("currentScenarioID", retrieveLastScenario.getScenarioID());
                         %>
-                        <b>Case Number:</b>
-                        <div class="large-centered large-8 columns">
-                            <%=retrieveLastScenario.getScenarioID()%><br/><br/>  
-                        </div>
-                        
-                        <b>Case Name: </b>
-                        <div class="large-centered large-8 columns">
-                            <%=retrieveLastScenario.getScenarioName()%><br/><br/>
+
+                        <div class="large-centered large-12 columns">
+                            <b>Case Number: </b><%=retrieveLastScenario.getScenarioID()%><br/><br/> 
                         </div>
 
-                        <b>Case Description: </b>
-                        <div class="large-centered large-8 columns">
-                            <%=retrieveLastScenario.getScenarioDescription()%><br/><br/>
+                        <div class="large-centered large-12 columns">
+                            <b>Case Name: </b><%=retrieveLastScenario.getScenarioName()%><br/><br/>
                         </div>
 
-                        <br/>
-                        <center><input type = "submit" class="button hms normal" value = "Proceed"></center>
+                        <div class="large-centered large-12 columns"> 
+                            <b>Case Description: </b> <%=retrieveLastScenario.getScenarioDescription()%><br/><br/> 
+                        </div>
+
+                        <center><input type = "submit" class="button hms small" value = "Proceed"></center>
                             <%
                                 } else {
                                     out.println("No case has been activated by your lecturer yet.");

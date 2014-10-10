@@ -12,7 +12,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Hospital Ward Management System for NP Health Sciences</title>
     </head>
-    <body style="background-image:url(img/Rate.png)"></body>
+    <!--<body style="background-image:url(img/Rate.png)"></body>-->
     <body>
         <div class="row" style="padding-top: 10px;">
 
