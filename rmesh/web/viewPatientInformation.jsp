@@ -385,8 +385,7 @@
                         } else {
                             out.println("content");
                         } %>" id="multidisciplinary">
-
-
+                        
                         <form action="ProcessAddNote" method="POST">
                             <dl class="accordion" data-accordion>
                                 <dd class="accordion-navigation">
@@ -403,8 +402,8 @@
                                                                 Note notes = null;
                                                                 for (int i = 0; i < notesListRetrieved.size(); i++) {
                                                                     notes = notesListRetrieved.get(i);
-                                                                    out.print("<b>Tutorial Group: </b>" + notes.getTutorialGroup() + "<br>");
-                                                                    out.print("<b>Group Member Names: </b>" + notes.getGrpMemberName() + "<br>");
+                                                                    out.print("<b>Tutorial Group: </b>" + notes.getPracticalGroupID() + "<br>");
+                                                                    out.print("<b>Group Member Names: </b>" + notes.getGrpMemberNames() + "<br>");
                                                                     out.print("<b>Multidisciplinary Note: </b>" + notes.getMultidisciplinaryNote() + "<br>");
 
                                                                     out.println("<br>");
@@ -439,6 +438,10 @@
                                                         <label for="right-label" class="right inline">Multidisciplinary Note</label>
                                                     </div>
                                                     <div class="small-9 columns">
+                                                        <%int totalNotes = notesListRetrieved.size(); 
+                                                        int noteID = totalNotes + 1;
+                                                        %>
+                                                        <input type ="hidden" name ="noteID" value ="<%=noteID%>"/>
                                                         <input type ="text" id= "tutorialGrp" name="tutorialGrp" value="<% if (tutorialGrp == null) {
                                                                 out.print("");
                                                             } else {
@@ -461,12 +464,16 @@
                                         </div>
                                         <div>
                                             </dd>
+                             
                                             <input type="submit" name="buttonChoosen" value="Save" class="button tiny"> 
                                             <input type="submit" name="buttonChoosen" value="Submit" class="button tiny"> 
                                             <input type="button" value="Cancel" class="button tiny" onClick="window.location = 'viewPatientInformation.jsp'"/>
-                                            </form>
+                        </form>
                                             </p>
-                                        </div>
+                        
+                        
+                        
+                    </div>
                                     </div>
 
                                     </div>

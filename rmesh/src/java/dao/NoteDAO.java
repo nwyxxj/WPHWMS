@@ -34,7 +34,7 @@ public class NoteDAO {
 
             rs = stmt.executeQuery();
             while (rs.next()) {
-                note = new Note(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5));
+                note = new Note(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getString(4), rs.getString(5), rs.getString(6));
             }
 
         } catch (SQLException e) {
@@ -58,7 +58,8 @@ public class NoteDAO {
             rs = stmt.executeQuery();
 
             while (rs.next()) {
-                Note newNote = new Note(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5));
+                Note newNote = new Note(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getString(4), rs.getString(5), rs.getString(6));
+                //Note newNote = new Note(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5));
                 noteList.add(newNote);
             }
 
@@ -70,7 +71,7 @@ public class NoteDAO {
         return noteList;
     }
     
-    public static void insertNote(String notes, String tutorialGrp, String grpNames, String nurseID) {
+    public static void insertNote(int noteID, String multidisciplinaryNote, int grpNumber, String grpMemberNames, String practicalGroupID) {
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
@@ -78,18 +79,19 @@ public class NoteDAO {
 
         try {
             conn = ConnectionManager.getConnection();
-            stmt = conn.prepareStatement("INSERT INTO note(multidisciplinaryNote,tutorialGroup,grpMemberName,noteDate,nurseID) VALUES (?,?,?,?,?)");
-           
-            
-            Date dateTime= new Date();
-            stmt.setString(1, notes);
-            stmt.setString(2, tutorialGrp);
-            stmt.setString(3, grpNames);
-            stmt.setString(4, dateTime.toString());
-            stmt.setString(5, nurseID);
-            stmt.executeUpdate();
-        
+//            stmt = conn.prepareStatement("INSERT INTO note(multidisciplinaryNote,tutorialGroup,grpMemberName,noteDate,nurseID) VALUES (?,?,?,?,?)");
+//            stmt = conn.prepareStatement("INSERT INTO note(multidisciplinaryNote,grpNumber,grpMemberNames,notedatetime,practicalGroupID) VALUES (?,?,?,?,?)");
+            stmt = conn.prepareStatement("INSERT INTO note(noteID,multidisciplinaryNote,grpNumber,grpMemberNames,noteDatetime,practicalGroupID) VALUES (?,?,?,?,?,?)");
 
+            Date dateTime= new Date();
+            stmt.setInt(1, noteID);
+            stmt.setString(2, multidisciplinaryNote);
+            stmt.setInt(3, grpNumber);
+            stmt.setString(4, grpMemberNames);
+            stmt.setString(5, dateTime.toString());
+            stmt.setString(6, practicalGroupID);
+            stmt.executeUpdate();
+       
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {

@@ -42,13 +42,13 @@ public class ProcessAddNote extends HttpServlet {
             String resultOfButton = request.getParameter("buttonChoosen");
 
             if (resultOfButton.equals("Submit")) {
-                String notes = (String) request.getParameter("notes");
+                int noteID = Integer.parseInt(request.getParameter("noteID"));
                 String tutorialGrp = (String) request.getParameter("tutorialGrp");
+                String notes = (String) request.getParameter("notes");
                 String grpNames = (String) request.getParameter("grpNames");
 
                 String userLoggedIn = (String) request.getSession().getAttribute("user");
-
-                NoteDAO.insertNote(notes, tutorialGrp, grpNames, userLoggedIn);
+                NoteDAO.insertNote(noteID, tutorialGrp, 1, grpNames, "P01");
 
                 HttpSession session = request.getSession(false);
                 session.setAttribute("active", "multidisciplinary");

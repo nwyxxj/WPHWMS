@@ -14,58 +14,70 @@ public class Note {
     
     private int noteID;
     private String multidisciplinaryNote;
-    private String tutorialGroup;
-    private String grpMemberName;
-    private String noteDate;
+    private int grpNumber; 
+    private String grpMemberNames; 
+    private String noteDatetime;
+    private String practicalGroupID;
 
-    public Note(int noteID, String multidisciplinaryNote, String tutorialGroup, String grpMemberName, String noteDate) {
+    public Note(int noteID, String multidisciplinaryNote, int grpNumber, String grpMemberNames, String noteDatetime, String practicalGroupID) {
         this.noteID = noteID;
         this.multidisciplinaryNote = multidisciplinaryNote;
-        this.tutorialGroup = tutorialGroup;
-        this.grpMemberName = grpMemberName;
-        this.noteDate = noteDate;
-    }
-
-    public String getMultidisciplinaryNote() {
-        return multidisciplinaryNote;
-    }
-
-    public void setMultidisciplinaryNote(String multidisciplinaryNote) {
-        this.multidisciplinaryNote = multidisciplinaryNote;
+        this.grpNumber = grpNumber;
+        this.grpMemberNames = grpMemberNames;
+        this.noteDatetime = noteDatetime;
+        this.practicalGroupID = practicalGroupID;
     }
 
     public int getNoteID() {
         return noteID;
     }
 
+    public String getMultidisciplinaryNote() {
+        return multidisciplinaryNote;
+    }
+
+    public int getGrpNumber() {
+        return grpNumber;
+    }
+
+    public String getGrpMemberNames() {
+        return grpMemberNames;
+    }
+
+    public String getNoteDatetime() {
+        return noteDatetime;
+    }
+
+    public String getPracticalGroupID() {
+        return practicalGroupID;
+    }
+
     public void setNoteID(int noteID) {
         this.noteID = noteID;
     }
 
-    public String getTutorialGroup() {
-        return tutorialGroup;
+    public void setMultidisciplinaryNote(String multidisciplinaryNote) {
+        this.multidisciplinaryNote = multidisciplinaryNote;
     }
 
-    public void setTutorialGroup(String tutorialGroup) {
-        this.tutorialGroup = tutorialGroup;
+    public void setGrpNumber(int grpNumber) {
+        this.grpNumber = grpNumber;
     }
 
-    public String getGrpMemberName() {
-        return grpMemberName;
+    public void setGrpMemberNames(String grpMemberNames) {
+        this.grpMemberNames = grpMemberNames;
     }
 
-    public void setGrpMemberName(String grpMemberName) {
-        this.grpMemberName = grpMemberName;
+    public void setNoteDatetime(String noteDatetime) {
+        this.noteDatetime = noteDatetime;
     }
 
-    public String getNoteDate() {
-        return noteDate;
+    public void setPracticalGroupID(String practicalGroupID) {
+        this.practicalGroupID = practicalGroupID;
     }
 
-    public void setNoteDate(String noteDate) {
-        this.noteDate = noteDate;
-    }
-   
+    
+  
     
     
 }

@@ -7,7 +7,6 @@ package controller;
 
 import dao.ScenarioDAO;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -34,10 +33,12 @@ public class ProcessActivateScenarioAdmin extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         //To retrieve the selected id to activate or deactive
-        String status = (String) request.getParameter("status");
+        
+        //String status = (String) request.getParameter("status");
+        Boolean scenarioStatus =  Boolean.valueOf(request.getParameter("status"));
         String scenarioID = (String) request.getParameter("scenarioID");
         //call scenarioDAO to update the status of the scenario
-        ScenarioDAO.updateScenarioStatus(scenarioID, status);
+        ScenarioDAO.updateScenarioStatus(scenarioID, scenarioStatus);
 
         RequestDispatcher dispatch = getServletContext().getRequestDispatcher("/viewScenarioAdmin.jsp");
         dispatch.forward(request, response);
