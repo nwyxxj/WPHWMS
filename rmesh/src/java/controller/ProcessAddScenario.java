@@ -78,8 +78,8 @@ public class ProcessAddScenario extends HttpServlet {
             //Adding Scenario, Patient, State, etc into the database, don't need to send them to the next page
             PatientDAO.add(patientNRIC, "a", "1", "2", dob, maritalStatus, weight, height, occupation, race, religion, nationality, 1);
             ScenarioDAO.add(scenarioID, scenarioName, scenarioDescription, status, admissionInfo);
-            StateDAO.add(stateID0, scenarioID, RR0, BP0, HR0, SPO0, intake0, output0, temperature0, stateDescription0, patientNRIC);
-            
+            //StateDAO.add(stateID0, scenarioID, RR0, BP0, HR0, SPO0, intake0, output0, temperature0, stateDescription0, patientNRIC);
+            StateDAO.add(stateID0, scenarioID, stateDescription0, true, patientNRIC);
             
             HttpSession session = request.getSession(false);
             session.setAttribute("totalNumberOfStates", totalNumberOfStatesString);

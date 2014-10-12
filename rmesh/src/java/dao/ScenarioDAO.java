@@ -11,7 +11,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.sql.Time;
 import java.util.List;
 
 /**
@@ -33,7 +32,8 @@ public class ScenarioDAO {
 
             rs = stmt.executeQuery();
             while (rs.next()) {
-                scenario = new Scenario(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5));
+                //scenario = new Scenario(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5));
+                scenario = new Scenario(rs.getString(1), rs.getString(2), rs.getString(3), rs.getBoolean(4), rs.getString(5));
             }
 
         } catch (SQLException e) {
@@ -52,12 +52,11 @@ public class ScenarioDAO {
 
         try {
             conn = ConnectionManager.getConnection();
-            stmt = conn.prepareStatement("select * from scenario where status = ?");
-            stmt.setString(1, "activated");
+            stmt = conn.prepareStatement("select * from scenario where scenariostatus = true");
 
             rs = stmt.executeQuery();
             while (rs.next()) {
-                scenarioList.add(new Scenario(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5)));
+                scenarioList.add(new Scenario(rs.getString(1), rs.getString(2), rs.getString(3), rs.getBoolean(4), rs.getString(5)));
             }
 
         } catch (SQLException e) {
@@ -80,7 +79,7 @@ public class ScenarioDAO {
             rs = stmt.executeQuery();
 
             while (rs.next()) {
-                Scenario newScenario = new Scenario(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5));
+                Scenario newScenario = new Scenario(rs.getString(1), rs.getString(2), rs.getString(3), rs.getBoolean(4), rs.getString(5));
                 scenarioList.add(newScenario);
             }
 
@@ -92,14 +91,14 @@ public class ScenarioDAO {
         return scenarioList;
     }
 
-    public static void updateScenarioStatus(String scenarioID, String status) {
+    public static void updateScenarioStatus(String scenarioID, boolean status) {
         Connection conn = null;
         PreparedStatement stmt = null;
 
         try {
             conn = ConnectionManager.getConnection();
             stmt = conn.prepareStatement("UPDATE scenario SET status = ? WHERE  scenarioID = ?");
-            stmt.setString(1, status);
+            stmt.setBoolean(1, status);
             stmt.setString(2, scenarioID);
 
             stmt.executeUpdate();
@@ -129,10 +128,10 @@ public class ScenarioDAO {
         }
     }
 
-    public static void update(String scenarioID, String scenarioName, String status, String scenarioDescription, String admissionInfo) {
+    public static void update(String scenarioID, String scenarioName, boolean scenarioStatus, String scenarioDescription, String admissionInfo) {
         Connection conn = null;
         PreparedStatement preparedStatement = null;
-        String query = "UPDATE scenario SET  scenarioName=?, scenarioDescription=?, status =?, admissionInfo =?  WHERE scenarioID =?";
+        String query = "UPDATE scenario SET  scenarioName=?, scenarioDescription=?, scenarioStatus =?, admissionInfo =?  WHERE scenarioID =?";
 
         try {
             conn = ConnectionManager.getConnection();
@@ -140,7 +139,7 @@ public class ScenarioDAO {
             preparedStatement = conn.prepareStatement(query);
             preparedStatement.setString(1, scenarioName);
             preparedStatement.setString(2, scenarioDescription);
-            preparedStatement.setString(3, status);
+            preparedStatement.setBoolean(3, scenarioStatus);
             preparedStatement.setString(4, admissionInfo);
             preparedStatement.setString(5, scenarioID);
             preparedStatement.executeUpdate();

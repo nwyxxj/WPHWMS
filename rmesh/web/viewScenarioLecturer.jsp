@@ -56,7 +56,7 @@
             %>
 
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <!-- <span class="label"><%= scenario.getStatus()%></span> -->
+            <!-- <span class="label"><%= scenario.isScenarioStatus()%></span> -->
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <%
                 }
@@ -96,7 +96,7 @@
                         %>
                         <a href="#" data-reveal-id="<%=scenarioID%>">
 
-                            <% if (scenario.getStatus().equals("activated")) {%>
+                            <% if (scenario.isScenarioStatus()) {%>
                             <img class="opaque" src="<%=imgName%>" style="float:left; padding-right:5px;"/></a>           
 
                         <% } else {%>
@@ -127,7 +127,9 @@
 
         <%            for (int i = 0; i < scenarioList.size(); i++) {
                 Scenario scenario = scenarioList.get(i);
-                String status = scenario.getStatus();
+                boolean status = scenario.isScenarioStatus();
+                boolean statusTrue = true;
+                boolean statusFalse = false;
         %>
 
         <div id="<%=scenario.getScenarioID()%>" class="reveal-modal" data-reveal>
@@ -135,16 +137,16 @@
             <form action = "ProcessActivateScenario" method = "POST">   
                 <h2>Case Information</h2> 
                 <%
-                    if (status.equals("activated")) {
+                    if (status) {
                 %>
                 Case is currently activated. 
-                <input type ="hidden" id= "status" name = "status" value = "deactivated">
+                <input type ="hidden" id= "status" name = "status" value = "<%=statusFalse%>">
                 <input type ="submit" class="button tiny" value = "Deactivate Case">
 
                 <% } else { %>
 
                 Case is deactivated. 
-                <input type ="hidden" id= "status" name = "status" value = "activated">               
+                <input type ="hidden" id= "status" name = "status" value = "<%=statusTrue%>">               
                 <input type ="submit" class="button tiny" value = "Activate Case">
                 <%  }%>
 

@@ -5,7 +5,6 @@
  */
 package dao;
 
-import entity.Patient;
 import entity.State;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -32,7 +31,8 @@ public class StateDAO {
 
             rs = stmt.executeQuery();
             while (rs.next()) {
-                state = new State(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getDouble(9), rs.getString(10), rs.getString(11));
+                //state = new State(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getDouble(9), rs.getString(10), rs.getString(11));
+                state = new State(rs.getString(1), rs.getString(2), rs.getString(3), rs.getBoolean(4), rs.getString(5));
             }
 
         } catch (SQLException e) {
@@ -42,7 +42,7 @@ public class StateDAO {
         }
         return state;
     }
-    
+
     public static State retrieveActivateScenarioPatient(String scenarioID) {
         Connection conn = null;
         PreparedStatement stmt = null;
@@ -56,7 +56,7 @@ public class StateDAO {
 
             rs = stmt.executeQuery();
             while (rs.next()) {
-                state = new State(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getDouble(9), rs.getString(10), rs.getString(11));
+                state = new State(rs.getString(1), rs.getString(2), rs.getString(3), rs.getBoolean(4), rs.getString(5));
             }
 
         } catch (SQLException e) {
@@ -66,12 +66,28 @@ public class StateDAO {
         }
         return state;
     }
-    
-    public static void add(String stateID, String scenarioID, String RR, String BP, String HR, String SPO, String intake, String output, double temperature, String stateDescription, String patientNRIC) {
+
+//    public static void add(String stateID, String scenarioID, String RR, String BP, String HR, String SPO, String intake, String output, double temperature, String stateDescription, String patientNRIC) {
+//        Connection conn = null;
+//        PreparedStatement preparedStatement = null;
+//        String queryLine = "INSERT INTO state VALUES ('"
+//                + stateID + "','" + scenarioID + "','" + RR + "','" + BP+ "','" + HR+ "','" + SPO+ "','" + intake + "','" + output + "','" + temperature + "','" + stateDescription + "','" + patientNRIC +  "')";
+//
+//        try {
+//            conn = ConnectionManager.getConnection();
+//            preparedStatement = conn.prepareStatement(queryLine);
+//            preparedStatement.executeUpdate();
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        } finally {
+//            ConnectionManager.close(conn, preparedStatement, null);
+//        }
+//    }
+    public static void add(String stateID, String scenarioID, String stateDescription, boolean stateStatus, String patientNRIC) {
         Connection conn = null;
         PreparedStatement preparedStatement = null;
         String queryLine = "INSERT INTO state VALUES ('"
-                + stateID + "','" + scenarioID + "','" + RR + "','" + BP+ "','" + HR+ "','" + SPO+ "','" + intake + "','" + output + "','" + temperature + "','" + stateDescription + "','" + patientNRIC +  "')";
+                + stateID + "','" + scenarioID + "','" + stateDescription + "','" + "','" + stateStatus + patientNRIC + "')";
 
         try {
             conn = ConnectionManager.getConnection();
@@ -84,24 +100,20 @@ public class StateDAO {
         }
     }
 
-    public static void updateState(String stateID, String scenarioID, String RR, String BP, String HR, String SPO, String intake, String output, double temperature) {
+    public static void updateState(String stateID, String scenarioID, String stateDescription, boolean stateStatus, String patientNRIC) {
         Connection conn = null;
         PreparedStatement preparedStatement = null;
-        String query = "UPDATE state SET RR = ?, BP = ?, HR = ?, SPO = ?, intake = ?, output = ?, temperature =? WHERE stateID =? and scenarioID = ?";
+        String query = "UPDATE state SET stateDescription = ?, stateStatus =?, patientNRIC = ? WHERE stateID =? and scenarioID = ?";
 
         try {
             conn = ConnectionManager.getConnection();
 
             preparedStatement = conn.prepareStatement(query);
-            preparedStatement.setString(1, RR);
-            preparedStatement.setString(2, BP);
-            preparedStatement.setString(3, HR);
-            preparedStatement.setString(4, SPO);
-            preparedStatement.setString(5, intake);
-            preparedStatement.setString(6, output);
-            preparedStatement.setDouble(7, temperature);
-            preparedStatement.setString(8, stateID);
-            preparedStatement.setString(9, scenarioID);
+            preparedStatement.setString(1, stateDescription);
+            preparedStatement.setBoolean(2, stateStatus);
+            preparedStatement.setString(3, patientNRIC);
+            preparedStatement.setString(4, stateID);
+            preparedStatement.setString(5, scenarioID);
             preparedStatement.executeUpdate();
 
         } catch (SQLException e) {
@@ -110,7 +122,8 @@ public class StateDAO {
             ConnectionManager.close(conn, preparedStatement, null);
         }
     }
-     public static void delete(String scenarioID) {
+
+    public static void delete(String scenarioID) {
         Connection conn = null;
         PreparedStatement preparedStatement = null;
         String query = "DELETE FROM state WHERE scenarioID =?";

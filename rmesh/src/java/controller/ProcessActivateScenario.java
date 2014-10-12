@@ -39,14 +39,14 @@ public class ProcessActivateScenario extends HttpServlet {
             /* TODO output your page here. You may use following sample code. */
 
             //To retrieve the selected id to activate or deactive
-            String status = (String) request.getParameter("status");
+            boolean status = Boolean.valueOf(request.getParameter("status"));
             String scenarioID = (String) request.getParameter("scenarioID");
             //to know which page it comes from then redirect to the correct page
 
             //call scenarioDAO to update the status of the scenario
             ScenarioDAO.updateScenarioStatus(scenarioID, status);
             
-            if (status.equals("deactivated")) {
+            if (!status) {
                 request.setAttribute("successMsg", "You have successfully deactivated the case!");
             } else {
                 request.setAttribute("successMsg", "You have successfully activated the case!");

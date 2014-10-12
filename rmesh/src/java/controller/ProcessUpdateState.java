@@ -36,8 +36,8 @@ public class ProcessUpdateState extends HttpServlet {
 
         double temperature = Double.parseDouble(temperatureString);
 
-        StateDAO.updateState(stateID, scenarioID, RR, BP, HR, SPO, intake, output, temperature);
-        
+        //StateDAO.updateState(stateID, scenarioID, RR, BP, HR, SPO, intake, output, temperature);
+        StateDAO.updateState(stateID, scenarioID, stateID, true, stateID);
         HttpSession session = request.getSession(false);
         session.setAttribute("active", "vitals");
         session.setAttribute("successMessageUpdateVitals","Vital signs have been updated!"); 

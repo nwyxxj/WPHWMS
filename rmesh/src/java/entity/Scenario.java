@@ -15,14 +15,14 @@ public class Scenario {
     private String scenarioID;
     private String scenarioName;
     private String scenarioDescription;
-    private String status;
+    private boolean scenarioStatus;
     private String admissionInfo;
 
-    public Scenario(String scenarioID, String scenarioName, String scenarioDescription, String status, String admissionInfo) {
+    public Scenario(String scenarioID, String scenarioName, String scenarioDescription, boolean scenarioStatus, String admissionInfo) {
         this.scenarioID = scenarioID;
         this.scenarioName = scenarioName;
         this.scenarioDescription = scenarioDescription;
-        this.status = status;
+        this.scenarioStatus = scenarioStatus;
         this.admissionInfo = admissionInfo;
     }
 
@@ -30,41 +30,43 @@ public class Scenario {
         return scenarioID;
     }
 
-    public void setScenarioID(String scenarioID) {
-        this.scenarioID = scenarioID;
-    }
-
     public String getScenarioName() {
         return scenarioName;
-    }
-
-    public void setScenarioName(String scenarioName) {
-        this.scenarioName = scenarioName;
     }
 
     public String getScenarioDescription() {
         return scenarioDescription;
     }
 
+    public boolean isScenarioStatus() {
+        return scenarioStatus;
+    }
+
+    public void setScenarioID(String scenarioID) {
+        this.scenarioID = scenarioID;
+    }
+
+    public void setScenarioName(String scenarioName) {
+        this.scenarioName = scenarioName;
+    }
+
     public void setScenarioDescription(String scenarioDescription) {
         this.scenarioDescription = scenarioDescription;
     }
 
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public String getAdmissionInfo() {
-        return admissionInfo;
+    public void setScenarioStatus(boolean scenarioStatus) {
+        this.scenarioStatus = scenarioStatus;
     }
 
     public void setAdmissionInfo(String admissionInfo) {
         this.admissionInfo = admissionInfo;
     }
+
+    public String getAdmissionInfo() {
+        return admissionInfo;
+    }
+    
+    
 
   
     

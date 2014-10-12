@@ -6,10 +6,8 @@
 
 package controller;
 
-import dao.NurseDAO;
 import dao.ScenarioDAO;
 import java.io.IOException;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -38,11 +36,13 @@ public class ProcessEditScenario extends HttpServlet {
 
         String scenarioID = request.getParameter("scenarioID");
         String scenarioName = request.getParameter("scenarioName");
-        String status = request.getParameter("status");
+        boolean scenarioStatus = true;
+        //String status = request.getParameter("status");
         String scenarioDescription = request.getParameter("scenarioDescription");
         String admissionInfo = request.getParameter("admissionInfo");
         
-        ScenarioDAO.update(scenarioID, scenarioName, status, scenarioDescription, admissionInfo);
+        //ScenarioDAO.update(scenarioID, scenarioName, status, scenarioDescription, admissionInfo);
+        ScenarioDAO.update(scenarioID, scenarioName, scenarioStatus, scenarioDescription, admissionInfo);
         
         HttpSession session = request.getSession(false);
         session.setAttribute("successMessageCreateScenario","New case has been editted successfully!"); 

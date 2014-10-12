@@ -5,6 +5,7 @@
  */
 package dao;
 
+import entity.Admin;
 import entity.Patient;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -16,7 +17,7 @@ import java.sql.SQLException;
  * @author Administrator
  */
 public class PatientDAO {
-
+    
     public static Patient retrieve(String patientNRIC) {
         Connection conn = null;
         PreparedStatement stmt = null;
@@ -30,7 +31,8 @@ public class PatientDAO {
 
             rs = stmt.executeQuery();
             while (rs.next()) {
-                patient = new Patient(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getDouble(7), rs.getDouble(8), rs.getString(9), rs.getString(10), rs.getString(11), rs.getString(12), rs.getInt(13));
+                //patient = new Patient(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getDouble(7), rs.getDouble(8), rs.getString(9), rs.getString(10), rs.getString(11), rs.getString(12), rs.getInt(13));
+                patient = new Patient(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6),rs.getInt(7));
             }
 
         } catch (SQLException e) {

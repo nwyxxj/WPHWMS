@@ -61,7 +61,8 @@ public class ProcessAddState extends HttpServlet {
             String temperatureString = request.getParameter(temperatureNameRetrieve);
             double temperature = Double.parseDouble(temperatureString);
 
-            StateDAO.add(stateID, scenarioID, RR, BP, HR, SPO, intake, output, temperature, stateDescription, patientNRIC);
+            //StateDAO.add(stateID, scenarioID, RR, BP, HR, SPO, intake, output, temperature, stateDescription, patientNRIC);
+            StateDAO.add(stateID, scenarioID, stateDescription, true, patientNRIC);
             HttpSession session = request.getSession(false);
             session.setAttribute("successMessageCreateScenario","New case has been created successfully!");          
             response.sendRedirect("viewScenarioAdmin.jsp");
