@@ -6,6 +6,7 @@
 package controller;
 
 import dao.StateDAO;
+import dao.VitalDAO;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -23,21 +24,20 @@ public class ProcessUpdateState extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        String RR = (String) request.getParameter("RR");
-        String BP = (String) request.getParameter("BP");
-        String HR = (String) request.getParameter("HR");
-        String SPO = (String) request.getParameter("SPO");
-        String intake = (String) request.getParameter("intake");
-        String output = (String) request.getParameter("output");
-        String stateID = (String) request.getParameter("stateID");
-        String scenarioID = (String) request.getParameter("scenarioID");
-
-        String temperatureString = (String) request.getParameter("temperature");
-
-        double temperature = Double.parseDouble(temperatureString);
+        String patientNRIC = (String) request.getParameter("patientNRIC");
+        double temperature = Double.parseDouble(request.getParameter("temperature"));
+        int RR = Integer.parseInt(request.getParameter("RR"));
+        int BP = Integer.parseInt(request.getParameter("BP"));
+        int HR = Integer.parseInt(request.getParameter("HR"));
+        int SPO = Integer.parseInt(request.getParameter("SPO"));
+        String intake = (String)(request.getParameter("intake"));
+        String output = (String)(request.getParameter("output"));
 
         //StateDAO.updateState(stateID, scenarioID, RR, BP, HR, SPO, intake, output, temperature);
-        StateDAO.updateState(stateID, scenarioID, stateID, true, stateID);
+        //StateDAO.updateState(stateID, scenarioID, stateID, true, stateID);
+        //VitalDAO.updateVital(patientNRIC, temperature, RR, 1, 1, HR, SPO, intake, output);
+        
+        VitalDAO.updateVital("S7843522B", temperature, RR, 55, 55, HR, SPO, intake, output);
         HttpSession session = request.getSession(false);
         session.setAttribute("active", "vitals");
         session.setAttribute("successMessageUpdateVitals","Vital signs have been updated!"); 

@@ -10,7 +10,7 @@ package entity;
  *
  * @author Administrator
  */
-public class vital {
+public class Vital {
     private String vitalDatetime;
     private double temperature; 
     private int RR; 
@@ -22,7 +22,7 @@ public class vital {
     private String output; 
     private String patientNRIC; 
 
-    public vital(String vitalDatetime, double temperature, int RR, int BPsystolic, int BPdiastolic, int HR, int SPO, String intake, String output, String patientNRIC) {
+    public Vital(String vitalDatetime, double temperature, int RR, int BPsystolic, int BPdiastolic, int HR, int SPO, String intake, String output, String patientNRIC) {
         this.vitalDatetime = vitalDatetime;
         this.temperature = temperature;
         this.RR = RR;

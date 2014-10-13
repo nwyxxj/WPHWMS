@@ -349,29 +349,26 @@
                             <form action="ProcessUpdateState" method="POST">
                                 <tr><td><b>Temperature (ºC)</b></td>
                                     <td></td>
-                                    <td><input type="text" name ="temperature" style="width:250px"/></td></tr>
+                                    <td><input type="text" name ="temperature"/></td></tr>
                                 <tr><td><b>Respiratory Rate</b></td>
                                     <td></td>
-                                    <td><input type="text" name = "RR" style="width:250px"/></td></tr>
+                                    <td><input type="text" name = "RR"/></td></tr>
                                 <tr><td><b>Blood Pressure</b></td>
                                     <td></td>
-                                    <td><input type="text" name ="BP" style="width:250px"/></td></tr>
+                                    <td><input type="text" name ="BP"/></td></tr>
                                 <tr><td><b>Heart Rate</b></td>
                                     <td></td>
-                                    <td><input type="text" name ="HR" style="width:250px"/></td></tr>
+                                    <td><input type="text" name ="HR"/></td></tr>
                                 <tr><td><b>SPO (%)</b></td>
                                     <td></td>
-                                    <td><input type="text" name ="SPO" style="width:250px"/></td></tr>
+                                    <td><input type="text" name ="SPO"/></td></tr>
                                 <tr><td><b>Intake</b></td>
                                     <td></td>
-                                    <td><input type="text" name ="intake" style="width:250px"/></td></tr>
+                                    <td><input type="text" name ="intake"/></td></tr>
                                 <tr><td><b>Output</b></td>
                                     <td></td>
                                     <td><input type="text" name ="output" style="width:250px"/></td></tr>
-
-                                <input type="hidden" name ="stateID" value = "<%=stateID%>"/>
-                                <input type="hidden" name ="scenarioID" value = "<%=scenarioID%>"/>
-
+                                <input type ="hidden" name = "patientNRIC" value ="<%=patientNRIC%>">
                                 <input type="Submit" value="Update Vitals" class="button tiny"> 
                             </form>
                         </table>
