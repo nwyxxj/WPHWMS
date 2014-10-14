@@ -75,12 +75,12 @@
                         String scenarioID = scenario.getScenarioID();
                         String scenarioName = scenario.getScenarioName();
                         String scenarioDescription = scenario.getScenarioDescription();
-                        String status = scenario.getStatus();
+                        boolean status = scenario.isScenarioStatus();
                         String admissionInfo = scenario.getAdmissionInfo();%>
                 <tr>
                     <td><%=scenarioID%></td>
                     <td><%=scenarioName%></td>
-                    <td><% if (status.equals("activated")) {%>
+                    <td><% if (status) {%>
                         <font color= limegreen><%=status%></font>
                         <%} else {%>
                         <font color= red><%=status%></font>
@@ -105,13 +105,13 @@
                     <td>
                         <form action ="ProcessActivateScenarioAdmin" method ="POST">    <center>
                                 <input type="hidden" name="scenarioID" value="<%=scenarioID%>">
-                                <% if (status.equals("activated")) {%>
+                                <% if (status) {%>
                                 <input type ="submit" class="button hms tiny" value = "deactivate">
-                                <input type="hidden" name="status" value="deactivated">
+                                <input type="hidden" name="scenarioStatus" value="deactivate">
                                 <%} else {%>
                                 <input type ="submit" class="button hms tiny" value = "activate">
                                 <%}%>
-                                <input type="hidden" name="status" value="activated">        </center>
+                                <input type="hidden" name="scenarioStatus" value="activate">        </center>
                         </form>
 
                     </td>

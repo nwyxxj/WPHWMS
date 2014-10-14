@@ -3,15 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package controller;
 
-import dao.AdminDAO;
-import dao.NurseDAO;
-import dao.LecturerDAO;
-import entity.Lecturer;
-import entity.Admin;
-import entity.Nurse;
+import dao.*;
+import entity.*;
 import java.io.IOException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -27,11 +22,10 @@ import javax.servlet.http.HttpSession;
  */
 @WebServlet(name = "ProcessLogin", urlPatterns = {"/ProcessLogin"})
 public class ProcessLogin extends HttpServlet {
- 
+
     /**
-     * Processes requests for both HTTP
-     * <code>GET</code> and
-     * <code>POST</code> methods.
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
      *
      * @param request servlet request
      * @param response servlet response
@@ -41,25 +35,25 @@ public class ProcessLogin extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-                
+
         HttpSession session = request.getSession();
-        
+
         String userid = null;
         String userType = request.getParameter("userType");
         userid = request.getParameter("userid");
         String password = request.getParameter("password");
-        
+
         // If userid and password is blank
         if (userid == null || password == null) {
             request.setAttribute("error", "Invalid userid/password");
             RequestDispatcher rd = request.getRequestDispatcher("viewMainLogin.jsp");
             rd.forward(request, response);
         }
-        
+
         if (userType.equals("admin")) {
-            
+
             Admin admin = AdminDAO.retrieve(userid);
-            
+
             // If such userid does not exist in DB
             if (admin == null) {
                 request.setAttribute("error", "Invalid userid/password");
@@ -67,7 +61,7 @@ public class ProcessLogin extends HttpServlet {
                 rd.forward(request, response);
             } else {
                 String correctPassword = admin.getAdminPassword();
-                
+
                 // If password matches the one in DB
                 if (correctPassword.equals(password)) {
                     session.setAttribute("user", userid);
@@ -79,16 +73,16 @@ public class ProcessLogin extends HttpServlet {
                 }
             }
         } else if (userType.equals("lecturer")) {
-           
+
             Lecturer lecturer = LecturerDAO.retrieve(userid);
-            
+
             if (lecturer == null) {
                 request.setAttribute("error", "Invalid userid/password");
                 RequestDispatcher rd = request.getRequestDispatcher("viewMainLogin.jsp");
                 rd.forward(request, response);
             } else {
                 String correctPassword = lecturer.getLecturerPassword();
-                
+
                 // If password matches the one in DB
                 if (correctPassword.equals(password)) {
                     session.setAttribute("user", userid);
@@ -99,18 +93,19 @@ public class ProcessLogin extends HttpServlet {
                     rd.forward(request, response);
                 }
             }
-            
-        } else { 
-            
-            Nurse nurse = NurseDAO.retrieve(userid);
-            
+
+        } else {
+
+            //Nurse nurse = NurseDAO.retrieve(userid);
+            PracticalGroup practicalGroup = PracticalGroupDAO.retrieve(userid);
+
             // If no such student exist in DB
-            if (nurse == null) {
+            if (practicalGroup == null) {
                 request.setAttribute("error", "Invalid userid/password");
                 RequestDispatcher rd = request.getRequestDispatcher("viewMainLogin.jsp");
                 rd.forward(request, response);
-            } else { 
-                String correctPassword = nurse.getNursePassword();
+            } else {
+                String correctPassword = practicalGroup.getPracticalGroupPassword();
 
                 if (correctPassword.equals(password)) {
                     session.setAttribute("user", userid);
@@ -123,7 +118,7 @@ public class ProcessLogin extends HttpServlet {
                 }
             }
         }
-        
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -152,7 +147,7 @@ public class ProcessLogin extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-         processRequest(request, response);
+        processRequest(request, response);
     }
 
     /**

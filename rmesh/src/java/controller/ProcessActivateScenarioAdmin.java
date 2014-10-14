@@ -34,11 +34,20 @@ public class ProcessActivateScenarioAdmin extends HttpServlet {
             throws ServletException, IOException {
         //To retrieve the selected id to activate or deactive
         
-        //String status = (String) request.getParameter("status");
-        Boolean scenarioStatus =  Boolean.valueOf(request.getParameter("status"));
+        String scenarioStatus = (String) request.getParameter("scenarioStatus");
+
+        boolean statusToUpdate;
+        if(scenarioStatus.equals("activate")){
+            statusToUpdate = true;
+        }else{
+            statusToUpdate = false;
+        }
+
+        
+        
         String scenarioID = (String) request.getParameter("scenarioID");
         //call scenarioDAO to update the status of the scenario
-        ScenarioDAO.updateScenarioStatus(scenarioID, scenarioStatus);
+        ScenarioDAO.updateScenarioStatus(scenarioID, statusToUpdate);
 
         RequestDispatcher dispatch = getServletContext().getRequestDispatcher("/viewScenarioAdmin.jsp");
         dispatch.forward(request, response);

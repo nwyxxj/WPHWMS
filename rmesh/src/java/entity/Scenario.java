@@ -42,6 +42,10 @@ public class Scenario {
         return scenarioStatus;
     }
 
+    public String getAdmissionInfo() {
+        return admissionInfo;
+    }
+
     public void setScenarioID(String scenarioID) {
         this.scenarioID = scenarioID;
     }
@@ -61,11 +65,9 @@ public class Scenario {
     public void setAdmissionInfo(String admissionInfo) {
         this.admissionInfo = admissionInfo;
     }
-
-    public String getAdmissionInfo() {
-        return admissionInfo;
-    }
     
+    
+
     
 
   

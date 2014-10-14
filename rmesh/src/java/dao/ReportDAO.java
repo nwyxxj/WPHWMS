@@ -32,7 +32,8 @@ public class ReportDAO {
 
             rs = stmt.executeQuery();
             while (rs.next()) {
-                report = new Report(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4));
+                //report = new Report(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4));
+                report = new Report(rs.getString(1), rs.getString(2), rs.getString(3), rs.getBoolean(4), rs.getString(5), rs.getString(6));
             }
 
         } catch (SQLException e) {
@@ -55,7 +56,7 @@ public class ReportDAO {
             rs = stmt.executeQuery();
 
             while (rs.next()) {
-                Report report = new Report(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4));
+                Report report = new Report(rs.getString(1), rs.getString(2), rs.getString(3), rs.getBoolean(4), rs.getString(5), rs.getString(6));
                 reportList.add(report);
             }
 

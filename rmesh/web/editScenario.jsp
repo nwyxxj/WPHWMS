@@ -42,7 +42,7 @@
                                     <input type="text" id="right-label" name="scenarioName" value="<%=retrievedScenario.getScenarioName()%>" required >
                                     <br>
                                     <%
-                                        if (retrievedScenario.getStatus().equals("activated")) { %>
+                                        if (retrievedScenario.isScenarioStatus()) { %>
                                     <input id="right-label" name="status" type="radio" value="activated" checked />activate
                                     <input id="right-label" name="status" type="radio" value="deactivated" /> deactivate
                                     <% } else { %>

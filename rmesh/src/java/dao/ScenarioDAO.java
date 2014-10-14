@@ -97,7 +97,7 @@ public class ScenarioDAO {
 
         try {
             conn = ConnectionManager.getConnection();
-            stmt = conn.prepareStatement("UPDATE scenario SET status = ? WHERE  scenarioID = ?");
+            stmt = conn.prepareStatement("UPDATE scenario SET scenarioStatus = ? WHERE  scenarioID = ?");
             stmt.setBoolean(1, status);
             stmt.setString(2, scenarioID);
 

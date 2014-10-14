@@ -1,10 +1,10 @@
 <%-- 
     Document   : newjsp
-    Created on : Oct 13, 2014, 2:09:31 AM
+    Created on : Oct 15, 2014, 1:33:25 AM
     Author     : Administrator
 --%>
 
-<%@page import="dao.NoteDAO"%>
+<%@page import="dao.ScenarioDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -14,9 +14,24 @@
     </head>
     <body>
         <h1>Hello World!</h1>
+        
         <%
-            //NoteDAO.addNote(6, "asd", 1, "asd123", "1/1/2012", "asd123");
-            NoteDAO.insertNote(6, "asd", 1, "asd123", "1/1/2012", "P01");
+        String scenarioStatus = (String) request.getParameter("scenarioStatus");
+        out.println(scenarioStatus);
+        boolean statusToUpdate;
+        if(scenarioStatus.equals("activate")){
+            statusToUpdate = true;
+        }else{
+            statusToUpdate = false;
+        }
+        out.println(statusToUpdate);
+        
+        
+        String scenarioID = (String) request.getParameter("scenarioID");
+        //call scenarioDAO to update the status of the scenario
+        ScenarioDAO.updateScenarioStatus(scenarioID, statusToUpdate);
+
+      
         
         %>
     </body>

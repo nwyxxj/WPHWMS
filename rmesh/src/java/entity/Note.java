@@ -14,18 +14,18 @@ public class Note {
     
     private int noteID;
     private String multidisciplinaryNote;
-    private int grpNumber; 
     private String grpMemberNames; 
-    private String noteDatetime;
-    private String practicalGroupID;
+    private String noteDatetime; 
+    private String practicalGroupID; 
+    private String scenarioID;
 
-    public Note(int noteID, String multidisciplinaryNote, int grpNumber, String grpMemberNames, String noteDatetime, String practicalGroupID) {
+    public Note(int noteID, String multidisciplinaryNote, String grpMemberNames, String noteDatetime, String practicalGroupID, String scenarioID) {
         this.noteID = noteID;
         this.multidisciplinaryNote = multidisciplinaryNote;
-        this.grpNumber = grpNumber;
         this.grpMemberNames = grpMemberNames;
         this.noteDatetime = noteDatetime;
         this.practicalGroupID = practicalGroupID;
+        this.scenarioID = scenarioID;
     }
 
     public int getNoteID() {
@@ -34,10 +34,6 @@ public class Note {
 
     public String getMultidisciplinaryNote() {
         return multidisciplinaryNote;
-    }
-
-    public int getGrpNumber() {
-        return grpNumber;
     }
 
     public String getGrpMemberNames() {
@@ -52,16 +48,16 @@ public class Note {
         return practicalGroupID;
     }
 
+    public String getScenarioID() {
+        return scenarioID;
+    }
+
     public void setNoteID(int noteID) {
         this.noteID = noteID;
     }
 
     public void setMultidisciplinaryNote(String multidisciplinaryNote) {
         this.multidisciplinaryNote = multidisciplinaryNote;
-    }
-
-    public void setGrpNumber(int grpNumber) {
-        this.grpNumber = grpNumber;
     }
 
     public void setGrpMemberNames(String grpMemberNames) {
@@ -76,8 +72,12 @@ public class Note {
         this.practicalGroupID = practicalGroupID;
     }
 
+    public void setScenarioID(String scenarioID) {
+        this.scenarioID = scenarioID;
+    }
     
-  
+
+    
     
     
 }

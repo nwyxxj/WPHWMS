@@ -13,7 +13,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
-import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -34,7 +33,7 @@ public class NoteDAO {
 
             rs = stmt.executeQuery();
             while (rs.next()) {
-                note = new Note(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getString(4), rs.getString(5), rs.getString(6));
+                note = new Note(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6));
             }
 
         } catch (SQLException e) {
@@ -58,8 +57,7 @@ public class NoteDAO {
             rs = stmt.executeQuery();
 
             while (rs.next()) {
-                Note newNote = new Note(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getString(4), rs.getString(5), rs.getString(6));
-                //Note newNote = new Note(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5));
+                Note newNote = new Note(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6));
                 noteList.add(newNote);
             }
 
@@ -79,10 +77,8 @@ public class NoteDAO {
 
         try {
             conn = ConnectionManager.getConnection();
-//            stmt = conn.prepareStatement("INSERT INTO note(multidisciplinaryNote,tutorialGroup,grpMemberName,noteDate,nurseID) VALUES (?,?,?,?,?)");
-//            stmt = conn.prepareStatement("INSERT INTO note(multidisciplinaryNote,grpNumber,grpMemberNames,notedatetime,practicalGroupID) VALUES (?,?,?,?,?)");
-            stmt = conn.prepareStatement("INSERT INTO note(noteID,multidisciplinaryNote,grpNumber,grpMemberNames,noteDatetime,practicalGroupID) VALUES (?,?,?,?,?,?)");
-
+            stmt = conn.prepareStatement("INSERT INTO note(multidisciplinaryNote,grpMemberNames,noteDatetime,practicalGroupID,scenarioID) VALUES (?,?,?,?,?)");
+          
             Date dateTime= new Date();
             stmt.setInt(1, noteID);
             stmt.setString(2, multidisciplinaryNote);

@@ -36,13 +36,21 @@ public class ProcessEditScenario extends HttpServlet {
 
         String scenarioID = request.getParameter("scenarioID");
         String scenarioName = request.getParameter("scenarioName");
-        boolean scenarioStatus = true;
+        String status = request.getParameter("status");
+        
+        boolean statusToUpdate;
+        if(status.equals("activated")){
+            statusToUpdate = true;
+        }else{
+            statusToUpdate = false;
+        }
+
         //String status = request.getParameter("status");
         String scenarioDescription = request.getParameter("scenarioDescription");
         String admissionInfo = request.getParameter("admissionInfo");
         
         //ScenarioDAO.update(scenarioID, scenarioName, status, scenarioDescription, admissionInfo);
-        ScenarioDAO.update(scenarioID, scenarioName, scenarioStatus, scenarioDescription, admissionInfo);
+        ScenarioDAO.update(scenarioID, scenarioName, statusToUpdate, scenarioDescription, admissionInfo);
         
         HttpSession session = request.getSession(false);
         session.setAttribute("successMessageCreateScenario","New case has been editted successfully!"); 

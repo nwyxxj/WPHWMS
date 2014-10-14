@@ -12,31 +12,41 @@ package entity;
  */
 public class Vital {
     private String vitalDatetime;
+    private String patientNRIC; 
     private double temperature; 
     private int RR; 
     private int BPsystolic;
     private int BPdiastolic;
     private int HR; 
     private int SPO; 
-    private String intake; 
-    private String output; 
-    private String patientNRIC; 
+    private String output;
+    private String oralType;
+    private String oralAmount;
+    private String intravenousType;
+    private String intravenousAmount;
 
-    public Vital(String vitalDatetime, double temperature, int RR, int BPsystolic, int BPdiastolic, int HR, int SPO, String intake, String output, String patientNRIC) {
+    public Vital(String vitalDatetime, String patientNRIC, double temperature, int RR, int BPsystolic, int BPdiastolic, int HR, int SPO, String output, String oralType, String oralAmount, String intravenousType, String intravenousAmount) {
         this.vitalDatetime = vitalDatetime;
+        this.patientNRIC = patientNRIC;
         this.temperature = temperature;
         this.RR = RR;
         this.BPsystolic = BPsystolic;
         this.BPdiastolic = BPdiastolic;
         this.HR = HR;
         this.SPO = SPO;
-        this.intake = intake;
         this.output = output;
-        this.patientNRIC = patientNRIC;
+        this.oralType = oralType;
+        this.oralAmount = oralAmount;
+        this.intravenousType = intravenousType;
+        this.intravenousAmount = intravenousAmount;
     }
 
     public String getVitalDatetime() {
         return vitalDatetime;
+    }
+
+    public String getPatientNRIC() {
+        return patientNRIC;
     }
 
     public double getTemperature() {
@@ -63,20 +73,32 @@ public class Vital {
         return SPO;
     }
 
-    public String getIntake() {
-        return intake;
-    }
-
     public String getOutput() {
         return output;
     }
 
-    public String getPatientNRIC() {
-        return patientNRIC;
+    public String getOralType() {
+        return oralType;
+    }
+
+    public String getOralAmount() {
+        return oralAmount;
+    }
+
+    public String getIntravenousType() {
+        return intravenousType;
+    }
+
+    public String getIntravenousAmount() {
+        return intravenousAmount;
     }
 
     public void setVitalDatetime(String vitalDatetime) {
         this.vitalDatetime = vitalDatetime;
+    }
+
+    public void setPatientNRIC(String patientNRIC) {
+        this.patientNRIC = patientNRIC;
     }
 
     public void setTemperature(double temperature) {
@@ -103,18 +125,25 @@ public class Vital {
         this.SPO = SPO;
     }
 
-    public void setIntake(String intake) {
-        this.intake = intake;
-    }
-
     public void setOutput(String output) {
         this.output = output;
     }
 
-    public void setPatientNRIC(String patientNRIC) {
-        this.patientNRIC = patientNRIC;
+    public void setOralType(String oralType) {
+        this.oralType = oralType;
     }
-    
+
+    public void setOralAmount(String oralAmount) {
+        this.oralAmount = oralAmount;
+    }
+
+    public void setIntravenousType(String intravenousType) {
+        this.intravenousType = intravenousType;
+    }
+
+    public void setIntravenousAmount(String intravenousAmount) {
+        this.intravenousAmount = intravenousAmount;
+    }
     
     
 }

@@ -12,26 +12,38 @@ package entity;
  */
 public class Ward {
     private String wardID;
-    private String wardType;
+    private boolean bedNumber;
+    private boolean availabilityStatus;
 
-    public Ward(String wardID, String wardType) {
+    public Ward(String wardID, boolean bedNumber, boolean availabilityStatus) {
         this.wardID = wardID;
-        this.wardType = wardType;
+        this.bedNumber = bedNumber;
+        this.availabilityStatus = availabilityStatus;
     }
 
     public String getWardID() {
         return wardID;
     }
 
+    public boolean isBedNumber() {
+        return bedNumber;
+    }
+
+    public boolean isAvailabilityStatus() {
+        return availabilityStatus;
+    }
+
     public void setWardID(String wardID) {
         this.wardID = wardID;
     }
 
-    public String getWardType() {
-        return wardType;
+    public void setBedNumber(boolean bedNumber) {
+        this.bedNumber = bedNumber;
     }
 
-    public void setWardType(String wardType) {
-        this.wardType = wardType;
+    public void setAvailabilityStatus(boolean availabilityStatus) {
+        this.availabilityStatus = availabilityStatus;
     }
+    
+    
 }

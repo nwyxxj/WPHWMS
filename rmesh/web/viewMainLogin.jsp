@@ -39,7 +39,7 @@
                             <input type = "password" class = "password" placeholder = "Password" name = "password"></label> 
                         <label>Role: 
                             <select name = "userType">
-                                <option value="student">NPSTUDENT</option>
+                                <option value="practicalGroup">PRACTICALGROUP</option>
                                 <option value="lecturer">NPSTAFF</option>
                                 <option value="admin">ADMIN</option>
                             </select></label> 
