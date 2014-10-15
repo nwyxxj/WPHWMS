@@ -487,10 +487,10 @@
                                                                 Note notes = null;
                                                                 for (int i = 0; i < notesListRetrieved.size(); i++) {
                                                                     notes = notesListRetrieved.get(i);
-                                                                    out.print("<b>Tutorial Group: </b>" + notes.getPracticalGroupID() + "<br>");
+                                                                   // out.print("<b>Practical Group: </b>" + notes.getPracticalGroupID() + "<br>");
                                                                     out.print("<b>Group Member Names: </b>" + notes.getGrpMemberNames() + "<br>");
                                                                     out.print("<b>Multidisciplinary Note: </b>" + notes.getMultidisciplinaryNote() + "<br>");
-
+                                                                    
                                                                     out.println("<br>");
                                                                 }
 
@@ -506,10 +506,10 @@
                                 </dd>
 
                                 <%
-                                    String tutorialGrp = (String) request.getAttribute("tutorialGrp");
+                                    //String practicalGrp = (String) request.getAttribute("practicalGrp");
                                     String grpNames = (String) request.getAttribute("grpNames");
                                     String notes = (String) request.getAttribute("notes");
-
+                                   
                                 %>                           
                                 <dd class="accordion-navigation">
                                     <a href="#newNotes">Enter new notes</a>
@@ -518,26 +518,19 @@
                                             <div class="small-8">
                                                 <div class="row">
                                                     <div class="small-3 columns">
-                                                        <label for="right-label" class="right inline">Tutorial Group</label>
+                                                        
                                                         <label for="right-label" class="right inline">Group Member Names</label>
                                                         <label for="right-label" class="right inline">Multidisciplinary Note</label>
                                                     </div>
                                                     <div class="small-9 columns">
-                                                        <%int totalNotes = notesListRetrieved.size();
-                                                            int noteID = totalNotes + 1;
-                                                        %>
-                                                        <input type ="hidden" name ="noteID" value ="<%=noteID%>"/>
-                                                        <input type ="text" id= "tutorialGrp" name="tutorialGrp" value="<% if (tutorialGrp == null) {
-                                                                out.print("");
-                                                            } else {
-                                                                out.print(tutorialGrp);
-                                                            }%>" required>
-                                                        <input type ="text" id= "grpNames" name="grpNames" value="<% if (grpNames == null) {
+                                                        <input type ="hidden" name="scenarioID" value="<%=scenarioID%>"/>
+                                                       
+                                                        <input type ="text" id= "grpNames" name="grpNames" value="<% if (grpNames == null || grpNames =="") {
                                                                 out.print("");
                                                             } else {
                                                                 out.print(grpNames);
                                                             }%>" required>
-                                                        <textarea name="notes" rows="7" cols="10" required><% if (notes == null) {
+                                                        <textarea name="notes" id="notes" rows="7" cols="10" required><% if (notes == null || notes == "") {
                                                                 out.print("");
                                                             } else {
                                                                 out.print(notes);
@@ -549,7 +542,7 @@
                                         </div>
                                         <div>
                                             </dd>
-
+                                            <br>
                                             <input type="submit" name="buttonChoosen" value="Save" class="button tiny"> 
                                             <input type="submit" name="buttonChoosen" value="Submit" class="button tiny"> 
                                             <input type="button" value="Cancel" class="button tiny" onClick="window.location = 'viewPatientInformation.jsp'"/>
