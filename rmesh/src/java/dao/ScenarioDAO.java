@@ -131,7 +131,7 @@ public class ScenarioDAO {
     public static void update(String scenarioID, String scenarioName, boolean scenarioStatus, String scenarioDescription, String admissionInfo) {
         Connection conn = null;
         PreparedStatement preparedStatement = null;
-        String query = "UPDATE scenario SET  scenarioName=?, scenarioDescription=?, scenarioStatus =?, admissionInfo =?  WHERE scenarioID =?";
+        String query = "UPDATE scenario SET  scenarioName=?, scenarioDescription=?, scenarioStatus =?, admissionNote =?  WHERE scenarioID =?";
 
         try {
             conn = ConnectionManager.getConnection();

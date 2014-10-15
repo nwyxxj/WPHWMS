@@ -15,11 +15,12 @@
         <link rel="stylesheet" href="responsive-tables.css">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <%@include file="/topbar/topbarAdmin.jsp" %>
-        <title>JSP Page</title>
+        <title>HS EMR - Edit Scenario</title>
     </head>
 
     <body>
-        <%            String scenarioID = request.getParameter("scenarioID");
+        <%            
+            String scenarioID = request.getParameter("scenarioID");
             Scenario retrievedScenario = ScenarioDAO.retrieve(scenarioID);
         %>
         <div class="row" style="padding-top: 30px;">

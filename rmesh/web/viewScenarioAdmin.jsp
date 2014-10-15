@@ -36,18 +36,27 @@
         <br/>
     <center><h3>Case Management</h3></center>
     <center>
+        <%
+        //retrieve all the success messages 
+        
+        String successMessageCreateScenario = (String) session.getAttribute("successMessageCreateScenario");
+        String successMessageEditScenario = (String) session.getAttribute("successMessageEditScenario");
+        
+        %>
+        
+        
         <div class ="large-11">
-            <%if (session.getAttribute("successMessageCreateScenario") != null) {%>
+            <%if (successMessageCreateScenario != null) {%>
             <div data-alert class="alert-box success radius">
-                The case has been created successfully! 
+                <%=successMessageCreateScenario%>
                 <a href="#" class="close">&times;</a>
             </div>
             <%}
-                session.removeAttribute("successMessageCreateScenario"); %>
+                session.getAttribute("successMessageCreateScenario"); %>
 
-            <%if (session.getAttribute("successMessageEditScenario") != null) {%>
+            <%if (successMessageEditScenario != null) {%>
             <div data-alert class="alert-box success radius">
-                The case has been created successfully! 
+                <%=successMessageEditScenario%>
                 <a href="#" class="close">&times;</a>
             </div>
             <%}

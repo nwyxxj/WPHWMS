@@ -29,9 +29,7 @@
     </head>
     <body>
         <%            String active = active = (String) session.getAttribute("active");
-
-        %>
-        <%            //retrieve all successfulmessages
+            //retrieve all successfulmessages
             String successMessageUpdateVitals = (String) session.getAttribute("successMessageUpdateVitals");
             String successMessageSavedNotes = (String) session.getAttribute("successMessageSavedNotes");
             String sucessMessageAdministeredMedicine = (String) session.getAttribute("sucessMessageAdministeredMedicine");
@@ -105,7 +103,7 @@
 
                 <div data-alert class="alert-box alert radius"><%=errorMessageMedication%><a href="#" class="close">&times;</a></div>
                 <%session.removeAttribute("errorMessageMedication");
-        }%>
+                    }%>
 
 
                 <div class="tabs-content">
@@ -336,42 +334,132 @@
                             out.println("content");
                         } %>" id="vital">
 
-                        <table border = "0">   
-                            <tr><td></td>
-                                <%
-                                    DateFormat dateFormat = new SimpleDateFormat("h:mm a");
-                                    Date date = new Date();
-                                    String dateString = dateFormat.format(date);
-                                %> 
-                                <td><b>Last Updated</b></td>
-                                <td><b>Current as of <%=dateString%></b></td>
-                            </tr>
-                            <form action="ProcessUpdateState" method="POST">
-                                <tr><td><b>Temperature (ºC)</b></td>
-                                    <td></td>
-                                    <td><input type="text" name ="temperature"/></td></tr>
-                                <tr><td><b>Respiratory Rate</b></td>
-                                    <td></td>
-                                    <td><input type="text" name = "RR"/></td></tr>
-                                <tr><td><b>Blood Pressure</b></td>
-                                    <td></td>
-                                    <td><input type="text" name ="BP"/></td></tr>
-                                <tr><td><b>Heart Rate</b></td>
-                                    <td></td>
-                                    <td><input type="text" name ="HR"/></td></tr>
-                                <tr><td><b>SPO (%)</b></td>
-                                    <td></td>
-                                    <td><input type="text" name ="SPO"/></td></tr>
-                                <tr><td><b>Intake</b></td>
-                                    <td></td>
-                                    <td><input type="text" name ="intake"/></td></tr>
-                                <tr><td><b>Output</b></td>
-                                    <td></td>
-                                    <td><input type="text" name ="output" style="width:250px"/></td></tr>
-                                <input type ="hidden" name = "patientNRIC" value ="<%=patientNRIC%>">
-                                <input type="Submit" value="Update Vitals" class="button tiny"> 
-                            </form>
+                        <form action="newjsp.jsp" method="POST">
+                        <table>
+                            <th>Vital Signs/Input/Output</th>
+                            <th>Last Updated as of </th>
+                            <th>Current as of </th>
+                            <tr><td><b>Temperature</b><img src="img/Historial.jpg"></td>
+                                <td><b>ºC</b></td>
+                                <td><div class="row">
+                                        <div class="small-4 columns">
+                                            <input type="text" name ="temperature" style="width:200px" value= " "/>
+                                        </div>
+                                        <div class="small-4 columns">
+                                            <label for="right-label" class="left inline">ºC</label>
+                                        </div>
+                                    </div></td></tr> 
+                            <tr><td><b>Respiratory Rate<img src="img/Historial.jpg"></b></td>
+                                <td><b> breaths/min</b></td>
+                                <td>
+                                    <div class="row">
+                                        <div class="small-4 columns">
+                                            <input type="text" name ="RR" style="width:200px" value= " "/>
+
+                                        </div>
+                                        <div class="small-4 columns">
+                                            <label for="right-label" class="left inline">breaths/min</label>
+                                        </div>
+                                    </div>
+                            <tr><td><b>Heart Rate<img src="img/Historial.jpg"></b></td>
+                                <td><b> beats/min</b></td>
+                                <td>     <div class="row">
+                                        <div class="small-4 columns">
+                                            <input type="text" name ="HR" style="width:200px" value= " "/>
+
+                                        </div>
+                                        <div class="small-4 columns">
+                                            <label for="right-label" class="left inline">beats/min</label>
+                                        </div>
+                                    </div></td></tr>
+                            <tr><td><b>Blood Pressure<img src="img/Historial.jpg"></b></td>
+                                <td><b>mm/Hg</b></td>
+                                <td><div class="row">
+                                        <div class="small-4 columns">
+                                            <input type="text" name ="BPsystolic" style="width:200px" value= " "/>
+                                        </div>
+                                        <div class="small-4 columns">
+                                            <label for="right-label" class="left inline">mm (Systolic)</label>
+                                        </div>
+                                    </div>
+                                <div class="row">
+                                        <div class="small-4 columns">
+                                            <input type="text" name ="BPdiastolic" style="width:200px" value= " "/>
+                                        </div>
+                                        <div class="small-4 columns">
+                                            <label for="right-label" class="left inline">Hg (Diastolic)</label>
+                                        </div>
+                                    </div>
+                                </td></tr>
+                            <tr><td><b>SPO<img src="img/Historial.jpg"></b></td>
+                                <td><b> % with O<sub>2</sub></b></td>
+                                <td><div class="row">
+                                        <div class="small-4 columns">
+                                            <input type="text" name ="SPO" style="width:200px" value= " "/>
+
+                                        </div>
+                                        <div class="small-4 columns">
+                                            <label for="right-label" class="left inline">% with O<sub>2</sub></label>
+                                        </div>
+                                    </div></td></tr>
+                            <tr><td><b>Intake - Oral/Intragastric</b></td>
+                                <td><b></b></td>
+                                <td><div class="row">
+                                        <div class="small-4 columns">
+                                            <input type="text" name ="oralType" style="width:200px" value= ""/>
+                                        </div>
+                                        <div class="small-4 columns">
+                                            <label for="left-label" class="left inline">Type</label>
+                                        </div>
+                                    </div>
+                                <div class="row">
+                                        <div class="small-4 columns">
+                                            <input type="text" name ="oralAmount" style="width:200px" value= ""/>
+                                        </div>
+                                        <div class="small-4 columns">
+                                            <label for="left-label" class="left inline">Amount</label>
+                                        </div>
+                                    </div>
+                                </td></tr>
+                            
+                            <tr><td><b>Intake - Intravenous</b></td>
+                                <td><b></b></td>
+                                <td><div class="row">
+                                        <div class="small-4 columns">
+                                            <input type="text" name ="intravenousType" style="width:200px" value= ""/>
+                                        </div>
+                                        <div class="small-4 columns">
+                                            <label for="left-label" class="left inline">Type</label>
+                                        </div>
+                                    </div>
+                                <div class="row">
+                                        <div class="small-4 columns">
+                                            <input type="text" name ="intravenousAmount" style="width:200px" value= ""/>
+                                        </div>
+                                        <div class="small-4 columns">
+                                            <label for="left-label" class="left inline">Amount</label>
+                                        </div>
+                                    </div>
+                                </td></tr>
+                            
+                            <tr><td><b>Output</b></td>
+                                <td><b></b></td>
+                                <td><div class="row">
+                                        <div class="small-4 columns">
+                                            <input type="text" name ="output" style="width:200px" value= ""/>
+                                        </div>
+                                        <div class="small-4 columns">
+                                            <label for="left-label" class="left inline"></label>
+                                        </div>
+                                    </div>
+                                </td></tr>
+                      
                         </table>
+                            
+                            <input type="submit" value="Update Vital Signs" class="button tiny"> 
+                        </form>
+
+                     
 
 
                     </div>
@@ -382,7 +470,7 @@
                         } else {
                             out.println("content");
                         } %>" id="multidisciplinary">
-                        
+
                         <form action="ProcessAddNote" method="POST">
                             <dl class="accordion" data-accordion>
                                 <dd class="accordion-navigation">
@@ -393,7 +481,7 @@
                                                 <div class="row">
                                                     <div class="large-12 columns">
                                                         <%
-                                                        if (notesListRetrieved == null || notesListRetrieved.size() == 0) {%>
+                                                            if (notesListRetrieved == null || notesListRetrieved.size() == 0) {%>
                                                         <label for="right-label" class="right inline">No groups have enter their notes yet.</label>
                                                         <% } else {
                                                                 Note notes = null;
@@ -435,8 +523,8 @@
                                                         <label for="right-label" class="right inline">Multidisciplinary Note</label>
                                                     </div>
                                                     <div class="small-9 columns">
-                                                        <%int totalNotes = notesListRetrieved.size(); 
-                                                        int noteID = totalNotes + 1;
+                                                        <%int totalNotes = notesListRetrieved.size();
+                                                            int noteID = totalNotes + 1;
                                                         %>
                                                         <input type ="hidden" name ="noteID" value ="<%=noteID%>"/>
                                                         <input type ="text" id= "tutorialGrp" name="tutorialGrp" value="<% if (tutorialGrp == null) {
@@ -461,16 +549,16 @@
                                         </div>
                                         <div>
                                             </dd>
-                             
+
                                             <input type="submit" name="buttonChoosen" value="Save" class="button tiny"> 
                                             <input type="submit" name="buttonChoosen" value="Submit" class="button tiny"> 
                                             <input type="button" value="Cancel" class="button tiny" onClick="window.location = 'viewPatientInformation.jsp'"/>
-                        </form>
+                                            </form>
                                             </p>
-                        
-                        
-                        
-                    </div>
+
+
+
+                                        </div>
                                     </div>
 
                                     </div>
