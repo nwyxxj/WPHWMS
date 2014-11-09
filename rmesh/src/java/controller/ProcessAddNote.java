@@ -8,6 +8,8 @@ package controller;
 import dao.NoteDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Date;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -42,13 +44,18 @@ public class ProcessAddNote extends HttpServlet {
             String resultOfButton = request.getParameter("buttonChoosen");
 
             if (resultOfButton.equals("Submit")) {
-                int noteID = Integer.parseInt(request.getParameter("noteID"));
-                String tutorialGrp = (String) request.getParameter("tutorialGrp");
+                
                 String notes = (String) request.getParameter("notes");
                 String grpNames = (String) request.getParameter("grpNames");
+                String scenarioID= (String) request.getParameter("scenarioID");
+               
 
                 String userLoggedIn = (String) request.getSession().getAttribute("user");
-                NoteDAO.insertNote(noteID, tutorialGrp, 1, grpNames, "P01");
+               
+                Date date = new Date();
+                String dateString= date.toString();
+                
+                NoteDAO.insertNote(notes, grpNames, dateString , userLoggedIn, scenarioID );
 
                 HttpSession session = request.getSession(false);
                 session.setAttribute("active", "multidisciplinary");
@@ -57,17 +64,19 @@ public class ProcessAddNote extends HttpServlet {
             } else {
 
                 String notes = (String) request.getParameter("notes");
-                String tutorialGrp = (String) request.getParameter("tutorialGrp");
+               // String practicalGrp = (String) request.getParameter("practicalGrp");
                 String grpNames = (String) request.getParameter("grpNames");
 
                 request.setAttribute("notes", notes);
-                request.setAttribute("tutorialGrp", tutorialGrp);
                 request.setAttribute("grpNames", grpNames);
                 
                 HttpSession session = request.getSession(false);
                 session.setAttribute("active", "multidisciplinary");
                 session.setAttribute("successMessageSavedNotes", "You have successfully saved the multidisciplinary notes!");
-                response.sendRedirect("./viewPatientInformation.jsp");
+                //MUST BE Request dispatcher if not saved won't work
+                RequestDispatcher rd = request.getRequestDispatcher("/viewPatientInformation.jsp");
+                rd.forward(request, response); 
+               // response.sendRedirect("./viewPatientInformation.jsp");
             }
 
         } finally {
