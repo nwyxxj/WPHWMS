@@ -334,7 +334,7 @@
                             out.println("content");
                         } %>" id="vital">
 
-                        <form action="newjsp.jsp" method="POST">
+                        <form action="updateState.jsp" method="POST">
                         <table>
                             <th>Vital Signs/Input/Output</th>
                             <th>Last Updated as of </th>
