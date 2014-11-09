@@ -69,7 +69,7 @@ public class NoteDAO {
         return noteList;
     }
     
-    public static void insertNote(String multidisciplinaryNote, String grpMemberNames, String noteDatetime, String praticalGrpID, String scenarioID) {
+    public static void insertNote(int noteID, String multidisciplinaryNote, int grpNumber, String grpMemberNames, String practicalGroupID) {
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
@@ -79,13 +79,13 @@ public class NoteDAO {
             conn = ConnectionManager.getConnection();
             stmt = conn.prepareStatement("INSERT INTO note(multidisciplinaryNote,grpMemberNames,noteDatetime,practicalGroupID,scenarioID) VALUES (?,?,?,?,?)");
           
-            
-            
-            stmt.setString(1, multidisciplinaryNote);
-            stmt.setString(2, grpMemberNames);
-            stmt.setString(3, noteDatetime);
-            stmt.setString(4, praticalGrpID);
-            stmt.setString(5, scenarioID);
+            Date dateTime= new Date();
+            stmt.setInt(1, noteID);
+            stmt.setString(2, multidisciplinaryNote);
+            stmt.setInt(3, grpNumber);
+            stmt.setString(4, grpMemberNames);
+            stmt.setString(5, dateTime.toString());
+            stmt.setString(6, practicalGroupID);
             stmt.executeUpdate();
        
         } catch (SQLException e) {
