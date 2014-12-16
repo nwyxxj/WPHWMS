@@ -28,7 +28,11 @@
         <script src="js/vendor/modernizr.js"></script>
         <script type="text/javascript" src="js/humane.js"></script>
         <script type="text/javascript" src="js/app.js"></script>
+        <link href="css/c3.css" rel="stylesheet" type="text/css">
 
+        <!-- Load d3.js and c3.js -->
+        <script src="js/d3.min.js" charset="utf-8"></script>
+        <script src="js/c3/c3.min.js"></script>
         <script src="js/vendor/jquery.js"></script>
         <script>
 
@@ -297,7 +301,7 @@
                                 <!--  <th>Vital Signs/Input/Output</th> -->
                                 <th></th>
                                 <th>Current as of <%=currentDateFormatted%></th>
-                                <tr><td><b>Temperature</b><img src="img/Historial.jpg"></td>
+                                <tr><td><b>Temperature</b><a href="#" data-reveal-id="chart" style="color:white"><img src="img/Historial.jpg"></a></td>
                                     <td><div class="row">
                                             <div class="small-4 columns" style="width:200px">
                                                 <!--validates for 1 decimal place-->
@@ -502,24 +506,31 @@
 
                     </div>
                     <% }%>
-                    <script>
+                <div id="chart" class="reveal-modal medium" data-reveal>
 
-                        $(document).ready(function () {
-                            $(document).foundation();
-                            var humaneSuccess = humane.create({baseCls: 'humane-original', addnCls: 'humane-original-success', timeout: 8000, clickToClose: true})
-                            var humaneError = humane.create({baseCls: 'humane-original', addnCls: 'humane-original-error', timeout: 8000, clickToClose: true})
+                <iframe src = "viewHistoricalTemp.jsp" frameborder ="0" width = "1000" height = "350"></iframe> 
+                <a class="close-reveal-modal">&#215;</a>
 
-                            var success1 = "<%=success%>";
-                            var error1 = "<%=error%>";
-                            if (success1 !== "") {
-                                humaneSuccess.log(success1);
-                            } else if (error1 !== "") {
-                                humaneError.log(error1);
-                            }
+                </div>
+            <script>
 
-                        });
-                    </script>
-                    </body>
-                    <script type="text/javascript" src="js/humane.js"></script>
+                $(document).ready(function () {
+                    $(document).foundation();
+                    var humaneSuccess = humane.create({baseCls: 'humane-original', addnCls: 'humane-original-success', timeout: 8000, clickToClose: true})
+                    var humaneError = humane.create({baseCls: 'humane-original', addnCls: 'humane-original-error', timeout: 8000, clickToClose: true})
 
-                    </html>
+                    var success1 = "<%=success%>";
+                    var error1 = "<%=error%>";
+                    if (success1 !== "") {
+                        humaneSuccess.log(success1);
+                    } else if (error1 !== "") {
+                        humaneError.log(error1);
+                    }
+
+                });
+            </script>
+                    
+        </body>
+    <script type="text/javascript" src="js/humane.js"></script>
+
+</html>
