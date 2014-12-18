@@ -109,6 +109,7 @@
 //            String intravenousAmoun = vital.getIntravenousAmount();
                     String stateID = retrieveScenarioState.getStateID();
                     String scenarioID = scenarioActivated.getScenarioID();
+                    session.setAttribute("scenarioID", scenarioID);
 
                 %>
                 <br>               
@@ -301,6 +302,7 @@
                                 <!--  <th>Vital Signs/Input/Output</th> -->
                                 <th></th>
                                 <th>Current as of <%=currentDateFormatted%></th>
+                          
                                 <tr><td><b>Temperature</b><a href="#" data-reveal-id="chart" style="color:white"><img src="img/Historial.jpg"></a></td>
                                     <td><div class="row">
                                             <div class="small-4 columns" style="width:200px">
@@ -421,7 +423,7 @@
                                     </td></tr>
 
                             </table>
-                            <input type ="hidden" value ="<%=patientNRIC%>" name = "patientNRIC">
+                            <input type ="hidden" value ="<%=scenarioID%>" name = "scenarioID">
                             <input type="submit" value="Update Vital Signs" class="button tiny"> 
                         </form>
 
@@ -507,7 +509,7 @@
                     </div>
                     <% }%>
                 <div id="chart" class="reveal-modal medium" data-reveal>
-
+                   
                 <iframe src = "viewHistoricalTemp.jsp" frameborder ="0" width = "1000" height = "350"></iframe> 
                 <a class="close-reveal-modal">&#215;</a>
 

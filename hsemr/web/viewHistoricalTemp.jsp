@@ -4,6 +4,9 @@
     Author     : weiyi.ngow.2012
 --%>
 
+<%@page import="entity.Vital"%>
+<%@page import="java.util.List"%>
+<%@page import="dao.VitalDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -17,21 +20,41 @@
         <script src="js/c3/c3.min.js"></script>
     </head>
     <body>
+        
+        <% 
+           //retrieve list of temperature based on scenario
+           String scenarioID= (String) session.getAttribute("scenarioID");
+           List<Double> tempList= VitalDAO.retrieveTemp(scenarioID); 
+           
+           //converting templist to string for mainpulation
+           String tempStringArr= tempList.toString();
+           String withoutbracket = tempStringArr.replace("[", ""); 
+           
+           String dataTemp= withoutbracket.replace("]", "") ;
+           out.println(dataTemp);
+        %>
+            
         <div id="chart"></div>
  
             <script type="text/javascript">
+                var data1 = "<%=dataTemp%>";
+              
             var chart = c3.generate({
                 bindto: '#chart',
                 data: {
                 x: 'x',
                 xFormat: '%Y',
                 columns: [
-        //            ['x', '2012-12-31', '2013-01-01', '2013-01-02', '2013-01-03', '2013-01-04', '2013-01-05'],
+                 // ['x', '2012-12-31', '2013-01-01', '2013-01-02', '2013-01-03', '2013-01-04', '2013-01-05'],
                     ['x', '2010', '2011', '2012', '2013', '2014', '2015'],
-                    ['data1', 30, 200, 100, 400, 150, 250],
-                    ['data2', 130, 340, 200, 500, 250, 350]
-                ]
+                    
+                 // ['data1', 30, 20, 50, 40, 50],
+                    ['data1', <% out.println(dataTemp); %>],
+                    ['data2', 30.5, 39, 45, 50, 60]
+                ],
+                labels: true
             },
+            
             axis: {
                 x: {
                     type: 'timeseries',
