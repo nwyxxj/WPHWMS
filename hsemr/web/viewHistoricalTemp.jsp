@@ -4,6 +4,9 @@
     Author     : weiyi.ngow.2012
 --%>
 
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.text.DateFormat"%>
+<%@page import="java.util.Date"%>
 <%@page import="entity.Vital"%>
 <%@page import="java.util.List"%>
 <%@page import="dao.VitalDAO"%>
@@ -25,20 +28,28 @@
            //retrieve list of temperature based on scenario
            String scenarioID= (String) session.getAttribute("scenarioID");
            List<Double> tempList= VitalDAO.retrieveTemp(scenarioID); 
+           //retrieve vitals related to current case
+           List<Vital> vitals = VitalDAO.retrieveAllVitalByScenarioID("scenarioID");
+           List<Date> vitalsDateTime = VitalDAO.retrieveVitalTime(vitals);           
            
+           DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+           for (Date datetime : vitalsDateTime) {
+               //why can't print
+               out.println(df.format(datetime));
+           }
            //converting templist to string for mainpulation
            String tempStringArr= tempList.toString();
            String withoutbracket = tempStringArr.replace("[", ""); 
            
            String dataTemp= withoutbracket.replace("]", "") ;
-           out.println(dataTemp);
+          
         %>
             
         <div id="chart"></div>
  
             <script type="text/javascript">
-                var data1 = "<%=dataTemp%>";
-              
+            var data1 = "<%=dataTemp%>";
+            var dates = "<%=vitalsDateTime%>"  
             var chart = c3.generate({
                 bindto: '#chart',
                 data: {
@@ -46,11 +57,10 @@
                 xFormat: '%Y',
                 columns: [
                  // ['x', '2012-12-31', '2013-01-01', '2013-01-02', '2013-01-03', '2013-01-04', '2013-01-05'],
-                    ['x', '2010', '2011', '2012', '2013', '2014', '2015'],
+                 ['x', dates],
                     
                  // ['data1', 30, 20, 50, 40, 50],
-                    ['data1', <% out.println(dataTemp); %>],
-                    ['data2', 30.5, 39, 45, 50, 60]
+                    ['data1', <% out.println(dataTemp); %>]
                 ],
                 labels: true
             },
@@ -60,7 +70,7 @@
                     type: 'timeseries',
                     // if true, treat x value as localtime (Default)
                     // if false, convert to UTC internally
-                    localtime: true,
+                    localtime: false,
                     tick: {
                         format: '%Y-%m-%d %H:%M:%S'
                     }

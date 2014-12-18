@@ -59,12 +59,12 @@ public class VitalDAO {
 
         try {
             conn = ConnectionManager.getConnection();
-            stmt = conn.prepareStatement("select * from vital where scenarioID = ?");
+            stmt = conn.prepareStatement("select * from vital where scenarioID = ? order by vitalDatetime desc");
             stmt.setString(1, scenarioID);
 
             rs = stmt.executeQuery();
             while (rs.next()) {
-                Vital vital = new Vital(rs.getDate(1), rs.getString(2), rs.getDouble(3), rs.getInt(4), rs.getInt(5), rs.getInt(6), rs.getInt(7), rs.getInt(8), rs.getString(9), rs.getString(10), rs.getString(11), rs.getString(12), rs.getString(13));
+                Vital vital = new Vital(rs.getTimestamp(1), rs.getString(2), rs.getDouble(3), rs.getInt(4), rs.getInt(5), rs.getInt(6), rs.getInt(7), rs.getInt(8), rs.getString(9), rs.getString(10), rs.getString(11), rs.getString(12), rs.getString(13));
                 vitalsList.add(vital);
             }
 
@@ -100,6 +100,17 @@ public class VitalDAO {
         return vital;
     }
     
+    public static List<Date> retrieveVitalTime(List<Vital> vitalsList) {
+        
+        List<Date> returnVitalTimeList = new ArrayList<Date>();
+        
+        for (Vital vital : vitalsList) {
+            Date vitalDate = vital.getVitalDatetime();
+            returnVitalTimeList.add(vitalDate);
+        }
+     
+        return returnVitalTimeList;
+    }
     
       public static void add(String scenarioID, double temperature, int RR, int BPsystolic, int BPdiastolic, int HR, int SPO, String output, String oralType, String oralAmount, String intravenousType, String intravenousAmount) {
         Connection conn = null;
