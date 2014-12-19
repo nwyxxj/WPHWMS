@@ -53,8 +53,7 @@
            //converting templist to string for mainpulation
            String tempStringArr= tempList.toString();
            String withoutbracket = tempStringArr.replace("[", ""); 
-           
-           String dataTemp= withoutbracket.replace("]", "") ;
+           String dataOfTemp= withoutbracket.replace("]", "") ;
           
         %>
             
@@ -71,13 +70,12 @@
                 x: 'x',
                 xFormat: '%Y',
                 columns: [
-                 // ['x', '2012-12-31', '2013-01-01', '2013-01-02', '2013-01-03', '2013-01-04', '2013-01-05'],
-                 //['x', new Date ('2012-01-02 22:25:15'), new Date ('2012-02-02 22:25:17'), new Date ('2012-02-02 22:25:20'),new Date ('2012-02-02 22:25:23')],
-                 
+                 //['x', '2012-12-31', '2013-01-01', '2013-01-02', '2013-01-03', '2013-01-04', '2013-01-05'],
+                 //['x', new Date ('2012-01-02 22:25:15'), new Date ('2012-02-02 22:25:17'), new Date ('2012-02-02 22:25:20'),new Date ('2012-02-02 22:25:23')], 
                  ['x', <% out.println(vitalsDate); %>],
                     
-                 // ['data1', 30, 20, 50, 40, 50],
-                    ['Temperature Data', <% out.println(dataTemp); %>]
+                 // e.g. ['data1', 30, 20, 50, 40, 50],
+                 ['Temperature Data', <% out.println(dataOfTemp); %>]
                 ],
                 labels: true
             },
@@ -90,9 +88,12 @@
                     localtime: true,
                      
                     tick: {
-                        format: '%Y-%m-%d %H:%M:%S'
                         
-                    }
+                        format: '%Y-%m-%d %H:%M:%S',
+                        rotate: 45,
+                        multiline: false
+                    },
+                    height: 100
                 }
             }
         });

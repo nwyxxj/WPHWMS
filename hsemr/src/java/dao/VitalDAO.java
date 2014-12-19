@@ -24,6 +24,59 @@ import java.util.TimeZone;
  */
 public class VitalDAO {
     
+    public static List<Integer> retrieveHR(String scenarioID) {
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        List<Integer> hrList= new ArrayList<Integer>();
+
+        try {
+            conn = ConnectionManager.getConnection();
+            stmt = conn.prepareStatement("select HR from vital where scenarioID = ? order by vitalDatetime desc");
+            stmt.setString(1, scenarioID);
+
+            rs = stmt.executeQuery();
+            
+            while (rs.next()) {
+                int hr= rs.getInt(4);
+                hrList.add(hr);
+            }
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionManager.close(conn, stmt, rs);
+        }
+        return hrList;
+    }
+    
+    public static List<Integer> retrieveRR(String scenarioID) {
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        List<Integer> rrList= new ArrayList<Integer>();
+
+        try {
+            conn = ConnectionManager.getConnection();
+            stmt = conn.prepareStatement("select RR from vital where scenarioID = ? order by vitalDatetime desc");
+            stmt.setString(1, scenarioID);
+
+            rs = stmt.executeQuery();
+            
+            while (rs.next()) {
+                int rr= rs.getInt(1);
+                rrList.add(rr);
+                
+            }
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionManager.close(conn, stmt, rs);
+        }
+        return rrList;
+    }
+    
      public static List<Double> retrieveTemp(String scenarioID) {
         Connection conn = null;
         PreparedStatement stmt = null;

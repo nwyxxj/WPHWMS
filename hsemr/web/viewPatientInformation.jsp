@@ -303,7 +303,7 @@
                                 <th></th>
                                 <th>Current as of <%=currentDateFormatted%></th>
                           
-                                <tr><td><b>Temperature</b><a href="#" data-reveal-id="chart" style="color:white"><img src="img/Historial.jpg"></a></td>
+                                <tr><td><b>Temperature</b><a href="#" data-reveal-id="tempchart" style="color:white"><img src="img/Historial.jpg"></a></td>
                                     <td><div class="row">
                                             <div class="small-4 columns" style="width:200px">
                                                 <!--validates for 1 decimal place-->
@@ -314,7 +314,7 @@
                                         </div></td>
                                 </tr> 
 
-                                <tr><td><b>Respiratory Rate<img src="img/Historial.jpg"></b></td>
+                                <tr><td><b>Respiratory Rate</b><a href="#" data-reveal-id="RRchart" style="color:white"><img src="img/Historial.jpg"></a></td>
                                     <td><div class="row">
                                             <div class="small-4 columns" style="width:200px">
                                                 <input type="text" name ="RR" maxlength="2" pattern ="integer"/>
@@ -326,7 +326,7 @@
                                         </div>
                                 </tr>
 
-                                <tr><td><b>Heart Rate<img src="img/Historial.jpg"></b></td>
+                                <tr><td><b>Heart Rate</b><a href="#" data-reveal-id="HRchart" style="color:white"><img src="img/Historial.jpg"></a></td>
                                     <td><div class="row">
                                             <div class="small-4 columns" style="width:200px">
                                                 <!--validates between 0 - 200-->
@@ -508,12 +508,33 @@
 
                     </div>
                     <% }%>
-                <div id="chart" class="reveal-modal medium" data-reveal>
+                
+                <!-- Reveal model for temperature chart -->
+               <div id="tempchart" class="reveal-modal medium" data-reveal>
                    
                 <iframe src = "viewHistoricalTemp.jsp" frameborder ="0" width = "1000" height = "350"></iframe> 
                 <a class="close-reveal-modal">&#215;</a>
 
                 </div>
+                
+                
+                 <!-- Reveal model for Respiratory chart -->
+               <div id="RRchart" class="reveal-modal medium" data-reveal>
+                   
+                <iframe src = "viewHistoricalRR.jsp" frameborder ="0" width = "1000" height = "350"></iframe> 
+                <a class="close-reveal-modal">&#215;</a>
+ 
+                </div>
+                 
+                 
+                <!-- Reveal model for Heart Rate chart -->
+               <div id="HRchart" class="reveal-modal medium" data-reveal>
+                   
+                <iframe src = "viewHistoricalHR.jsp" frameborder ="0" width = "1000" height = "350"></iframe> 
+                <a class="close-reveal-modal">&#215;</a>
+ 
+                </div>
+                 
             <script>
 
                 $(document).ready(function () {
