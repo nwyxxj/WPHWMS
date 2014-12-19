@@ -292,7 +292,7 @@
                             DateFormat dateFormatter = new SimpleDateFormat("dd-M-yyyy H:m:s");
                             dateFormatter.setTimeZone(TimeZone.getTimeZone("Singapore"));
                             String currentDateFormatted = dateFormatter.format(currentDateTime);
-
+           
                         %>
                         <form data-abide action="ProcessAddVital" method="POST">
                             <table width='65%'>

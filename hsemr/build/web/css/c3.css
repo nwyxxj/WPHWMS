@@ -123,6 +123,14 @@
   fill-opacity: .1;
 }
 
+.c3-region.regionY {
+  fill: red;
+}
+
+.c3-region.regionY2 {
+  fill: green;
+}
+
 /*-- Brush --*/
 
 .c3-brush .extent {

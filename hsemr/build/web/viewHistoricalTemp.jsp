@@ -29,14 +29,27 @@
            String scenarioID= (String) session.getAttribute("scenarioID");
            List<Double> tempList= VitalDAO.retrieveTemp(scenarioID); 
            //retrieve vitals related to current case
-           List<Vital> vitals = VitalDAO.retrieveAllVitalByScenarioID("scenarioID");
+           List<Vital> vitals = VitalDAO.retrieveAllVitalByScenarioID(scenarioID);
+           
+           //get dates of all vitals
            List<Date> vitalsDateTime = VitalDAO.retrieveVitalTime(vitals);           
            
+           //format date to be printed in string format
            DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-           for (Date datetime : vitalsDateTime) {
-               //why can't print
-               out.println(df.format(datetime));
+           //a string to store all dates in format to be used in javascript 
+           //e.g. new Date ('2012-01-02 22:25:15'), new Date ('2012-02-02 22:25:17'), new Date ('2012-02-02 22:25:20'),new Date ('2012-02-02 22:25:23') 
+           String vitalsDate = ""; 
+           if (vitalsDateTime.size() > 0) { 
+                for (int i = 0; i < vitalsDateTime.size(); i++ ) {
+                    if (i != vitalsDateTime.size()-1) {
+                        vitalsDate += "new Date ('" + df.format(vitalsDateTime.get(i)) + "'), ";
+                    } else { 
+                        vitalsDate += "new Date ('" + df.format(vitalsDateTime.get(i)) + "')";
+                    }
+                }
            }
+
+                     
            //converting templist to string for mainpulation
            String tempStringArr= tempList.toString();
            String withoutbracket = tempStringArr.replace("[", ""); 
@@ -48,19 +61,23 @@
         <div id="chart"></div>
  
             <script type="text/javascript">
-            var data1 = "<%=dataTemp%>";
-            var dates = "<%=vitalsDateTime%>"  
             var chart = c3.generate({
                 bindto: '#chart',
+                size: {
+                    height: 300,
+                    width: 650
+                },
                 data: {
                 x: 'x',
                 xFormat: '%Y',
                 columns: [
                  // ['x', '2012-12-31', '2013-01-01', '2013-01-02', '2013-01-03', '2013-01-04', '2013-01-05'],
-                 ['x', dates],
+                 //['x', new Date ('2012-01-02 22:25:15'), new Date ('2012-02-02 22:25:17'), new Date ('2012-02-02 22:25:20'),new Date ('2012-02-02 22:25:23')],
+                 
+                 ['x', <% out.println(vitalsDate); %>],
                     
                  // ['data1', 30, 20, 50, 40, 50],
-                    ['data1', <% out.println(dataTemp); %>]
+                    ['Temperature Data', <% out.println(dataTemp); %>]
                 ],
                 labels: true
             },
@@ -70,9 +87,11 @@
                     type: 'timeseries',
                     // if true, treat x value as localtime (Default)
                     // if false, convert to UTC internally
-                    localtime: false,
+                    localtime: true,
+                     
                     tick: {
                         format: '%Y-%m-%d %H:%M:%S'
+                        
                     }
                 }
             }
