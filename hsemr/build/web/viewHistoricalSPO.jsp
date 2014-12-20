@@ -4,6 +4,13 @@
     Author     : weiyi.ngow.2012
 --%>
 
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.text.DateFormat"%>
+<%@page import="entity.Vital"%>
+<%@page import="java.util.Date"%>
+<%@page import="dao.VitalDAO"%>
+<%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -17,37 +24,83 @@
         <script src="js/c3/c3.min.js"></script>
     </head>
     <body>
+        <% 
+           //retrieve list of SPO based on scenario
+           String scenarioID= (String) session.getAttribute("scenarioID");
+           List<Integer> spoList= VitalDAO.retrieveSPO(scenarioID); 
+           
+           //testing purpose
+           out.println(spoList);
+           
+           //retrieve vitals related to current case
+           List<Vital> vitals = VitalDAO.retrieveAllVitalByScenarioID(scenarioID);
+           
+           //get dates of all vitals
+           List<Date> vitalsDateTime = VitalDAO.retrieveVitalTime(vitals);           
+           
+           //format date to be printed in string format
+           DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+           //a string to store all dates in format to be used in javascript 
+           //e.g. new Date ('2012-01-02 22:25:15'), new Date ('2012-02-02 22:25:17'), new Date ('2012-02-02 22:25:20'),new Date ('2012-02-02 22:25:23') 
+           String vitalsDate = ""; 
+           if (vitalsDateTime.size() > 0) { 
+                for (int i = 0; i < vitalsDateTime.size(); i++ ) {
+                    if (i != vitalsDateTime.size()-1) {
+                        vitalsDate += "new Date ('" + df.format(vitalsDateTime.get(i)) + "'), ";
+                    } else { 
+                        vitalsDate += "new Date ('" + df.format(vitalsDateTime.get(i)) + "')";
+                    }
+                }
+           }
+
+                     
+           //converting spolist to string for mainpulation
+           String spoStringArr= spoList.toString();
+           String withoutbracket = spoStringArr.replace("[", ""); 
+           String dataOfSPO= withoutbracket.replace("]", "") ;
+          
+        %>
         <div id="chart"></div>
  
             <script type="text/javascript">
+            <script type="text/javascript">
             var chart = c3.generate({
-                 bindto: '#chart',
-                data: {
-                columns: [
-                    ['data1', 30, 20, 50, 40, 60, 50],
-                    ['data2', 200, 130, 90, 240, 130, 220],
-                    ['data3', 300, 200, 160, 400, 250, 250],
-                    ['data4', 200, 130, 90, 240, 130, 220],
-                    ['data5', 130, 120, 150, 140, 160, 150],
-                    ['data6', 90, 70, 20, 50, 60, 120],
-                ],
-                type: 'bar',
-                types: {
-                    data3: 'spline',
-                    data4: 'line',
-                    data6: 'area',
+                bindto: '#chart',
+                size: {
+                    height: 300,
+                    width: 650
                 },
-                groups: [
-                    ['data1','data2']
-                ]
+                data: {
+                x: 'x',
+                xFormat: '%Y',
+                columns: [
+                 //['x', '2012-12-31', '2013-01-01', '2013-01-02', '2013-01-03', '2013-01-04', '2013-01-05'],
+                 //['x', new Date ('2012-01-02 22:25:15'), new Date ('2012-02-02 22:25:17'), new Date ('2012-02-02 22:25:20'),new Date ('2012-02-02 22:25:23')], 
+                 ['x', <% out.println(vitalsDate); %>],
+                    
+                 // e.g. ['data1', 30, 20, 50, 40, 50],
+                 ['SPO Data', <% out.println(dataOfSPO); %>]
+                ],
+                labels: true
+            },
+            
+            axis: {
+                x: {
+                    type: 'timeseries',
+                    // if true, treat x value as localtime (Default)
+                    // if false, convert to UTC internally
+                    localtime: true,
+                     
+                    tick: {
+                        
+                        format: '%Y-%m-%d %H:%M:%S',
+                        rotate: 45,
+                        multiline: false
+                    },
+                    height: 100
+                }
             }
         });
-//        chart.load({
-//            columns: [
-//            ['data1', 300, 100, 250, 150, 300, 150, 500],
-//            ['data2', 100, 200, 150, 50, 100, 250]
-//            ]
-//        });
         </script>  
     </body>
 </html>

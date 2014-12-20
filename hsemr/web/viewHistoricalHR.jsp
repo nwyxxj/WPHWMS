@@ -26,9 +26,12 @@
     <body>
         
         <% 
-           //retrieve list of respiratory rate based on scenario
+           //retrieve list of heart rate rate based on scenario
            String scenarioID= (String) session.getAttribute("scenarioID");
            List<Integer> hrList= VitalDAO.retrieveHR(scenarioID); 
+           
+           //testing purpose
+           out.println(hrList);
            
            //retrieve vitals related to current case
            List<Vital> vitals = VitalDAO.retrieveAllVitalByScenarioID(scenarioID);
@@ -52,7 +55,7 @@
            }
 
                      
-           //converting rrlist to string for mainpulation
+           //converting hrlist to string for mainpulation
            String hrStringArr= hrList.toString();
            String withoutbracket = hrStringArr.replace("[", ""); 
            String dataOfHR= withoutbracket.replace("]", "") ;

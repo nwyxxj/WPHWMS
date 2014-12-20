@@ -24,6 +24,32 @@ import java.util.TimeZone;
  */
 public class VitalDAO {
     
+    public static List<Integer> retrieveSPO(String scenarioID) {
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        List<Integer> spoList= new ArrayList<Integer>();
+
+        try {
+            conn = ConnectionManager.getConnection();
+            stmt = conn.prepareStatement("select SPO from vital where scenarioID = ? order by vitalDatetime desc");
+            stmt.setString(1, scenarioID);
+
+            rs = stmt.executeQuery();
+            
+            while (rs.next()) {
+                int spo= rs.getInt(5);
+                spoList.add(spo);
+            }
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionManager.close(conn, stmt, rs);
+        }
+        return spoList;
+    }
+    
     public static List<Integer> retrieveHR(String scenarioID) {
         Connection conn = null;
         PreparedStatement stmt = null;

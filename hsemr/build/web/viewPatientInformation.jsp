@@ -361,7 +361,7 @@
 
                                         </div>
                                     </td></tr>
-                                <tr><td><b>SPO<img src="img/Historial.jpg"></b></td>
+                                <tr><td><b>SPO</b><a href="#" data-reveal-id="SPOchart" style="color:white"><img src="img/Historial.jpg"></a></td>
 
                                     <td><div class="row">
                                             <div class="small-4 columns" style="width:200px">
@@ -534,6 +534,16 @@
                 <a class="close-reveal-modal">&#215;</a>
  
                 </div>
+                
+                <!-- Reveal model for SPO chart -->
+               <div id="SPOchart" class="reveal-modal medium" data-reveal>
+                   
+                <iframe src = "viewHistoricalSPO.jsp" frameborder ="0" width = "1000" height = "350"></iframe> 
+                <a class="close-reveal-modal">&#215;</a>
+ 
+                </div>
+                
+                
                  
             <script>
 

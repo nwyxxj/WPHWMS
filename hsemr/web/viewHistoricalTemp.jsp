@@ -23,7 +23,7 @@
         <script src="js/c3/c3.min.js"></script>
     </head>
     <body>
-        
+        <h3>Temperature Chart</h3>
         <% 
            //retrieve list of temperature based on scenario
            String scenarioID= (String) session.getAttribute("scenarioID");
