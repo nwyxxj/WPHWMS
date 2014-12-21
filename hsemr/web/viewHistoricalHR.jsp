@@ -34,7 +34,7 @@
            out.println(hrList);
            
            //retrieve vitals related to current case
-           List<Vital> vitals = VitalDAO.retrieveAllVitalByScenarioID(scenarioID);
+           List<Vital> vitals = VitalDAO.retrieveHRByScenarioID(scenarioID);
            
            //get dates of all vitals
            List<Date> vitalsDateTime = VitalDAO.retrieveVitalTime(vitals);           
@@ -78,10 +78,8 @@
                         ['x',<% out.println(vitalsDate); %>],
                         ['Heart Rate',  <% out.println(dataOfHR); %>]
                       ],
-
                     labels: true,
                     type: 'line',
-                   
                 },
     
                 axis: { 
@@ -98,7 +96,7 @@
                        
                    },
                     y: {
-                        label: 'Temperature (ºC)',
+                        label: 'Heart Rate (bpm)',
                         padding: {top: 200, bottom: 50, right: 200, left: 250}
                         
                     }

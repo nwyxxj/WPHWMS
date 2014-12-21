@@ -61,7 +61,11 @@
         %>
         <h3>Temperature Chart</h3>           
         <div id="chart"></div>
- 
+            <%
+                if (vitalsDate == null || vitalsDate.equals("")) {
+                    out.println("<h5>No data to be shown</h5>");
+                }
+            %>
             <script type="text/javascript">
                 
             var chart = c3.generate({

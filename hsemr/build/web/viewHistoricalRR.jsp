@@ -80,7 +80,7 @@
                     x: 'x',
                     columns: [
                         ['x',<% out.println(vitalsDate); %>],
-                        ['temperature',  <% out.println(dataOfRR); %>]
+                        ['Respiratory Rate',  <% out.println(dataOfRR); %>]
                       ],
 
                     labels: true,
@@ -102,8 +102,8 @@
                        
                    },
                     y: {
-                        label: 'Respiratory Rate (breaths/min)',
-                        padding: {top: 300, bottom: 50, right: 200, left: 250}
+                        label: 'Respiratory Rate (per min)',
+                        padding: {top: 300, bottom: 100, right: 200, left: 250}
                         
                     }
 
