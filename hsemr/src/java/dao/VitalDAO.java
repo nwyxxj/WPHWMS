@@ -38,7 +38,7 @@ public class VitalDAO {
             rs = stmt.executeQuery();
             
             while (rs.next()) {
-                int spo= rs.getInt(5);
+                int spo= rs.getInt(1);
                 spoList.add(spo);
             }
             
@@ -293,6 +293,32 @@ public class VitalDAO {
         try {
             conn = ConnectionManager.getConnection();
             stmt = conn.prepareStatement("select * from vital where scenarioID = ? AND HR > 0 order by vitalDatetime asc");
+            stmt.setString(1, scenarioID);
+
+            rs = stmt.executeQuery();
+            while (rs.next()) {
+                Vital vital = new Vital(rs.getTimestamp(1), rs.getString(2), rs.getDouble(3), rs.getInt(4), rs.getInt(5), rs.getInt(6), rs.getInt(7), rs.getInt(8), rs.getString(9), rs.getString(10), rs.getString(11), rs.getString(12), rs.getString(13));
+                vitalsList.add(vital);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionManager.close(conn, stmt, rs);
+        }
+        return vitalsList;
+    }
+    
+    // SPO
+    public static List<Vital> retrieveSPOByScenarioID(String scenarioID) {
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        List<Vital> vitalsList = new ArrayList<Vital>();
+
+        try {
+            conn = ConnectionManager.getConnection();
+            stmt = conn.prepareStatement("select * from vital where scenarioID = ? AND SPO > 0 order by vitalDatetime asc");
             stmt.setString(1, scenarioID);
 
             rs = stmt.executeQuery();

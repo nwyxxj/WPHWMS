@@ -1,6 +1,6 @@
 <%-- 
     Document   : viewHistoricalTemp
-    Created on : Dec 16, 2014, 3:27:19 PM
+    Created on : Dec 19, 2014, 3:27:19 PM
     Author     : weiyi.ngow.2012
 --%>
 
@@ -37,7 +37,7 @@
            //format date to be printed in string format
            DateFormat df = new SimpleDateFormat("Y-M-d H:mm:ss");
            //a string to store all dates in format to be used in javascript 
-           //e.g. new Date ('2012-01-02 22:25:15'), new Date ('2012-02-02 22:25:17'), new Date ('2012-02-02 22:25:20'),new Date ('2012-02-02 22:25:23') 
+           //e.g. new Date ('2012-01-02T22:25:15'), new Date ('2012-02-02T22:25:17'), new Date ('2012-02-02T22:25:20'),new Date ('2012-02-02T22:25:23') 
            String vitalsDate = ""; 
            if (vitalsDateTime.size() > 0) { 
                 for (int i = 0; i < vitalsDateTime.size(); i++ ) {
@@ -62,9 +62,9 @@
         <h3>Temperature Chart</h3>           
         <div id="chart"></div>
             <%
-                if (vitalsDate == null || vitalsDate.equals("")) {
-                    out.println("<h5>No data to be shown</h5>");
-                }
+                if (tempList == null || tempList.size() == 0) {
+                    out.println("<h5>There is no historial data at the moment.</h5>");
+                } else { 
             %>
             <script type="text/javascript">
                 
@@ -94,12 +94,13 @@
                             text: 'Time',
                             position: 'outer-right'
                         },
+                        
                         tick: { 
                            format: '%Y-%m-%d %H:%M:%S', 
                             rotate: 45,
                             multiline: false
                        },
-                       height: 100
+                       height: 100,
                        
                    },
                     y: {
@@ -129,10 +130,8 @@
 //            ['data2', 100, 200, 150, 50, 100, 250]
 //            ]
 //        });
-            
-
-
         </script>  
+        <% } %>
     </body>
     
 </html>

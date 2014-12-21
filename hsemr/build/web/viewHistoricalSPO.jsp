@@ -1,6 +1,6 @@
 <%-- 
     Document   : viewHistoricalTemp
-    Created on : Dec 16, 2014, 3:27:19 PM
+    Created on : Dec 19, 2014, 3:27:19 PM
     Author     : weiyi.ngow.2012
 --%>
 
@@ -28,31 +28,30 @@
            //retrieve list of SPO based on scenario
            String scenarioID= (String) session.getAttribute("scenarioID");
            List<Integer> spoList= VitalDAO.retrieveSPO(scenarioID); 
-           
-           //testing purpose
-           out.println(spoList);
+
            
            //retrieve vitals related to current case
-           List<Vital> vitals = VitalDAO.retrieveAllVitalByScenarioID(scenarioID);
+           List<Vital> vitals = VitalDAO.retrieveSPOByScenarioID(scenarioID);
            
            //get dates of all vitals
            List<Date> vitalsDateTime = VitalDAO.retrieveVitalTime(vitals);           
            
            //format date to be printed in string format
-           DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+           DateFormat df = new SimpleDateFormat("Y-M-d H:mm:ss");
            //a string to store all dates in format to be used in javascript 
-           //e.g. new Date ('2012-01-02 22:25:15'), new Date ('2012-02-02 22:25:17'), new Date ('2012-02-02 22:25:20'),new Date ('2012-02-02 22:25:23') 
+           //e.g. new Date ('2012-01-02T22:25:15'), new Date ('2012-02-02T22:25:17'), new Date ('2012-02-02T22:25:20'),new Date ('2012-02-02T22:25:23')  
            String vitalsDate = ""; 
            if (vitalsDateTime.size() > 0) { 
                 for (int i = 0; i < vitalsDateTime.size(); i++ ) {
+                    String dateTimeVital = df.format(vitalsDateTime.get(i));
+                    dateTimeVital = dateTimeVital.replace(" ", "T");
                     if (i != vitalsDateTime.size()-1) {
-                        vitalsDate += "new Date ('" + df.format(vitalsDateTime.get(i)) + "'), ";
+                        vitalsDate += "new Date ('" + dateTimeVital + "'), ";
                     } else { 
-                        vitalsDate += "new Date ('" + df.format(vitalsDateTime.get(i)) + "')";
+                        vitalsDate += "new Date ('" + dateTimeVital + "')";
                     }
                 }
            }
-
                      
            //converting spolist to string for mainpulation
            String spoStringArr= spoList.toString();
@@ -60,47 +59,79 @@
            String dataOfSPO= withoutbracket.replace("]", "") ;
           
         %>
+       <h3>SPO Chart</h3>           
+       
         <div id="chart"></div>
- 
+        
+            <%
+           if (spoList == null || spoList.size() == 0) {
+               out.println("<h5>There is no historial data at the moment.</h5>");
+           } else { 
+          %>
             <script type="text/javascript">
-            <script type="text/javascript">
+                
             var chart = c3.generate({
                 bindto: '#chart',
-                size: {
-                    height: 300,
-                    width: 650
+                padding: {
+                    left: 60, //at least 60 for y axis to be seen
+                    right: 100 // add 10px for some spacing
                 },
                 data: {
-                x: 'x',
-                xFormat: '%Y',
-                columns: [
-                 //['x', '2012-12-31', '2013-01-01', '2013-01-02', '2013-01-03', '2013-01-04', '2013-01-05'],
-                 //['x', new Date ('2012-01-02 22:25:15'), new Date ('2012-02-02 22:25:17'), new Date ('2012-02-02 22:25:20'),new Date ('2012-02-02 22:25:23')], 
-                 ['x', <% out.println(vitalsDate); %>],
-                    
-                 // e.g. ['data1', 30, 20, 50, 40, 50],
-                 ['SPO Data', <% out.println(dataOfSPO); %>]
-                ],
-                labels: true
-            },
-            
-            axis: {
-                x: {
-                    type: 'timeseries',
-                    // if true, treat x value as localtime (Default)
-                    // if false, convert to UTC internally
-                    localtime: true,
-                     
-                    tick: {
+                    x: 'x',
+                    columns: [
+                        ['x',<% out.println(vitalsDate); %>],
+                        ['SPO',  <% out.println(dataOfSPO); %>]
+                      ],
+
+                    labels: true,
+                    type: 'line',
+                   
+                },
+    
+                axis: { 
+                    x: { 
+                       type: 'timeseries',
+                       
+                       label: { // ADD
+                            text: 'Time',
+                            position: 'outer-right'
+                        },
                         
-                        format: '%Y-%m-%d %H:%M:%S',
-                        rotate: 45,
-                        multiline: false
+                        tick: { 
+                           format: '%Y-%m-%d %H:%M:%S', 
+                            rotate: 45,
+                            multiline: false
+                       },
+                       height: 100,
+                       
+                   },
+                    y: {
+                        label: { // ADD
+                            text: 'SPO (%)',
+                            position: 'outer-middle'
+                        }
+                    }
+
+                },
+                grid: {
+                    x: {
+                        show: true
                     },
-                    height: 100
+                    y: {
+                        show: true
+                    }
                 }
-            }
-        });
+
+            });
+            chart.resize({height:300, width:700});
+
+//        chart.load({
+//            columns: [
+//            ['data1', 300, 100, 250, 150, 300, 150, 500],
+//            ['data2', 100, 200, 150, 50, 100, 250]
+//            ]
+//        });
         </script>  
+        <% } %>
     </body>
 </html>

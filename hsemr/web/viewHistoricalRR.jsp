@@ -1,6 +1,6 @@
 <%-- 
     Document   : viewHistoricalTemp
-    Created on : Dec 16, 2014, 3:27:19 PM
+    Created on : Dec 19, 2014, 3:27:19 PM
     Author     : weiyi.ngow.2012
 --%>
 
@@ -37,7 +37,7 @@
            //format date to be printed in string format
            DateFormat df = new SimpleDateFormat("Y-M-d H:mm:ss");
            //a string to store all dates in format to be used in javascript 
-           //e.g. new Date ('2012-01-02 22:25:15'), new Date ('2012-02-02 22:25:17'), new Date ('2012-02-02 22:25:20'),new Date ('2012-02-02 22:25:23') 
+           //e.g. new Date ('2012-01-02T22:25:15'), new Date ('2012-02-02T22:25:17'), new Date ('2012-02-02T22:25:20'),new Date ('2012-02-02T22:25:23') 
            String vitalsDate = ""; 
            if (vitalsDateTime.size() > 0) { 
                 for (int i = 0; i < vitalsDateTime.size(); i++ ) {
@@ -65,9 +65,9 @@
         <div id="chart"></div>
         
             <%
-           if (vitalsDate == null || vitalsDate.equals("")) {
-               out.println("<h5>No data to be shown</h5>");
-           }
+           if (rrList == null || rrList.size() == 0) {
+               out.println("<h5>There is no historial data at the moment.</h5>");
+           } else {
            
           %>
             <script type="text/javascript">
@@ -75,7 +75,7 @@
             var chart = c3.generate({
                 bindto: '#chart',
                 padding: {
-                    left: 50,
+                    left: 60, //at least 60 for y axis to be seen
                     right: 100 // add 10px for some spacing
                 },
                 data: {
@@ -92,8 +92,12 @@
     
                 axis: { 
                     x: { 
-                       type: 'timeseries',  
-                       label: 'Time',
+                       type: 'timeseries',
+                       
+                       label: { // ADD
+                            text: 'Time',
+                            position: 'outer-right'
+                        },
                         
                         tick: { 
                            format: '%Y-%m-%d %H:%M:%S', 
@@ -104,8 +108,11 @@
                        
                    },
                     y: {
-                        label: 'Respiratory Rate (per min)',
-                        padding: {top: 300, bottom: 100, right: 200, left: 250}
+                        
+                        label: { // ADD
+                            text: 'Respiratory Rate (breaths per min)',
+                            position: 'outer-middle'
+                        }
                         
                     }
 
@@ -128,9 +135,7 @@
 //            ['data2', 100, 200, 150, 50, 100, 250]
 //            ]
 //        });
-            
-
-
         </script>  
+        <% } %>
     </body>
 </html>
