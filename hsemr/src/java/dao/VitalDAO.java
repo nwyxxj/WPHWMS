@@ -32,7 +32,7 @@ public class VitalDAO {
 
         try {
             conn = ConnectionManager.getConnection();
-            stmt = conn.prepareStatement("select SPO from vital where scenarioID = ? order by vitalDatetime desc");
+            stmt = conn.prepareStatement("select SPO from vital where scenarioID = ? AND SPO > 0 order by vitalDatetime desc");
             stmt.setString(1, scenarioID);
 
             rs = stmt.executeQuery();
@@ -58,7 +58,7 @@ public class VitalDAO {
 
         try {
             conn = ConnectionManager.getConnection();
-            stmt = conn.prepareStatement("select HR from vital where scenarioID = ? order by vitalDatetime asc");
+            stmt = conn.prepareStatement("select HR from vital where scenarioID = ? AND HR > 0 order by vitalDatetime asc");
             stmt.setString(1, scenarioID);
 
             rs = stmt.executeQuery();
@@ -84,7 +84,7 @@ public class VitalDAO {
 
         try {
             conn = ConnectionManager.getConnection();
-            stmt = conn.prepareStatement("select RR from vital where scenarioID = ? order by vitalDatetime asc");
+            stmt = conn.prepareStatement("select RR from vital where scenarioID = ? AND RR > 0 order by vitalDatetime asc");
             stmt.setString(1, scenarioID);
 
             rs = stmt.executeQuery();
@@ -111,7 +111,7 @@ public class VitalDAO {
 
         try {
             conn = ConnectionManager.getConnection();
-            stmt = conn.prepareStatement("select temperature from vital where scenarioID = ? order by vitalDatetime asc");
+            stmt = conn.prepareStatement("select temperature from vital where scenarioID = ? AND temperature > 0 order by vitalDatetime asc");
             stmt.setString(1, scenarioID);
 
             rs = stmt.executeQuery();

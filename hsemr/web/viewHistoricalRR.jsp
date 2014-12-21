@@ -35,7 +35,7 @@
            List<Date> vitalsDateTime = VitalDAO.retrieveVitalTime(vitals);           
            
            //format date to be printed in string format
-           DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+           DateFormat df = new SimpleDateFormat("Y-M-d H:mm:ss");
            //a string to store all dates in format to be used in javascript 
            //e.g. new Date ('2012-01-02 22:25:15'), new Date ('2012-02-02 22:25:17'), new Date ('2012-02-02 22:25:20'),new Date ('2012-02-02 22:25:23') 
            String vitalsDate = ""; 
@@ -63,10 +63,12 @@
        <h3>Respiratory Rate Chart</h3>           
        
         <div id="chart"></div>
+        
             <%
            if (vitalsDate == null || vitalsDate.equals("")) {
                out.println("<h5>No data to be shown</h5>");
            }
+           
           %>
             <script type="text/javascript">
                 
