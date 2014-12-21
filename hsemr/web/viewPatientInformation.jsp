@@ -337,7 +337,7 @@
                                         </div></td>
                                 </tr>
 
-                                <tr><td><b>Blood Pressure<img src="img/Historial.jpg"></b></td>
+                                <tr><td><b>Blood Pressure<a href="#" data-reveal-id="BPchart" style="color:white"><img src="img/Historial.jpg"></a></td>
                                     <td><div class="row">
                                             <div class="small-4 columns" style="width:200px">
                                                 <!--<input type="text" name ="BPsystolic" style="width:200px" value= "0" maxlength = "3" pattern = "^(\d{2,3}|\d{2})$"/>-->
@@ -512,7 +512,7 @@
                 <!-- Reveal model for temperature chart -->
                <div id="tempchart" class="reveal-modal medium" data-reveal>
                    
-                <iframe src = "viewHistoricalTemp.jsp" frameborder ="0" width = "1000" height = "350"></iframe> 
+                <iframe src = "viewHistoricalTemp.jsp" frameborder ="0" width = "1500" height = "350"></iframe> 
                 <a class="close-reveal-modal">&#215;</a>
 
                 </div>
@@ -534,7 +534,13 @@
                 <a class="close-reveal-modal">&#215;</a>
  
                 </div>
-                
+                <div id="BPchart" class="reveal-modal medium" data-reveal>
+                <!-- Reveal model for Blood Pressure chart -->
+                <iframe src = "viewHistoricalBP.jsp" frameborder ="0" width = "1000" height = "350"></iframe> 
+                <a class="close-reveal-modal">&#215;</a>
+ 
+                </div>
+                 
                 <!-- Reveal model for SPO chart -->
                <div id="SPOchart" class="reveal-modal medium" data-reveal>
                    

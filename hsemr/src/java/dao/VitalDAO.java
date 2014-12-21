@@ -111,7 +111,7 @@ public class VitalDAO {
 
         try {
             conn = ConnectionManager.getConnection();
-            stmt = conn.prepareStatement("select temperature from vital where scenarioID = ? order by vitalDatetime desc");
+            stmt = conn.prepareStatement("select temperature from vital where scenarioID = ? order by vitalDatetime asc");
             stmt.setString(1, scenarioID);
 
             rs = stmt.executeQuery();
@@ -138,7 +138,7 @@ public class VitalDAO {
 
         try {
             conn = ConnectionManager.getConnection();
-            stmt = conn.prepareStatement("select * from vital where scenarioID = ? order by vitalDatetime desc");
+            stmt = conn.prepareStatement("select * from vital where scenarioID = ? order by vitalDatetime asc");
             stmt.setString(1, scenarioID);
 
             rs = stmt.executeQuery();
@@ -191,6 +191,7 @@ public class VitalDAO {
         return returnVitalTimeList;
     }
     
+    
       public static void add(String scenarioID, double temperature, int RR, int BPsystolic, int BPdiastolic, int HR, int SPO, String output, String oralType, String oralAmount, String intravenousType, String intravenousAmount) {
         Connection conn = null;
         PreparedStatement preparedStatement = null;
@@ -226,5 +227,58 @@ public class VitalDAO {
         } finally {
             ConnectionManager.close(conn, preparedStatement, null);
         }
+    }
+      
+      
+      // Retrieve individual vitals' dates
+      // Temperature
+      public static List<Vital> retrieveTempByScenarioID(String scenarioID) {
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        List<Vital> vitalsList = new ArrayList<Vital>();
+
+        try {
+            conn = ConnectionManager.getConnection();
+            stmt = conn.prepareStatement("select * from vital where scenarioID = ? AND temperature > 0 order by vitalDatetime asc");
+            stmt.setString(1, scenarioID);
+
+            rs = stmt.executeQuery();
+            while (rs.next()) {
+                Vital vital = new Vital(rs.getTimestamp(1), rs.getString(2), rs.getDouble(3), rs.getInt(4), rs.getInt(5), rs.getInt(6), rs.getInt(7), rs.getInt(8), rs.getString(9), rs.getString(10), rs.getString(11), rs.getString(12), rs.getString(13));
+                vitalsList.add(vital);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionManager.close(conn, stmt, rs);
+        }
+        return vitalsList;
+    }
+      
+      public static List<Vital> retrieveRRByScenarioID(String scenarioID) {
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        List<Vital> vitalsList = new ArrayList<Vital>();
+
+        try {
+            conn = ConnectionManager.getConnection();
+            stmt = conn.prepareStatement("select * from vital where scenarioID = ? AND RR > 0 order by vitalDatetime asc");
+            stmt.setString(1, scenarioID);
+
+            rs = stmt.executeQuery();
+            while (rs.next()) {
+                Vital vital = new Vital(rs.getTimestamp(1), rs.getString(2), rs.getDouble(3), rs.getInt(4), rs.getInt(5), rs.getInt(6), rs.getInt(7), rs.getInt(8), rs.getString(9), rs.getString(10), rs.getString(11), rs.getString(12), rs.getString(13));
+                vitalsList.add(vital);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionManager.close(conn, stmt, rs);
+        }
+        return vitalsList;
     }
 }
