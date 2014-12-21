@@ -71,7 +71,7 @@
             var chart = c3.generate({
                 bindto: '#chart',
                 padding: {
-                    left: 50,
+                    left: 60, //at least 60 for y axis to be seen
                     right: 100 // add 10px for some spacing
                 },
                 data: {
@@ -88,20 +88,25 @@
     
                 axis: { 
                     x: { 
-                       type: 'timeseries',  
-                       label: 'Time',
-                        
+                       type: 'timeseries',
+                       
+                       label: { // ADD
+                            text: 'Time',
+                            position: 'outer-right'
+                        },
                         tick: { 
                            format: '%Y-%m-%d %H:%M:%S', 
                             rotate: 45,
                             multiline: false
                        },
-                       height: 100,
+                       height: 100
                        
                    },
                     y: {
-                        label: 'Temperature (ºC)',
-                        padding: {top: 200, bottom: 50, right: 200, left: 250}
+                         label: { // ADD
+                            text: 'Temperature (ºC)',
+                            position: 'outer-middle'
+                        }
                         
                     }
 
