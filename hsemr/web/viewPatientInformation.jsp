@@ -610,8 +610,10 @@
                 <a class="close-reveal-modal">&#215;</a>
  
                 </div>
-                <div id="BPchart" class="reveal-modal medium" data-reveal>
+                
                 <!-- Reveal model for Blood Pressure chart -->
+                <div id="BPchart" class="reveal-modal medium" data-reveal>
+                
                 <iframe src = "viewHistoricalBP.jsp" frameborder ="0" width = "1000" height = "350"></iframe> 
                 <a class="close-reveal-modal">&#215;</a>
  
