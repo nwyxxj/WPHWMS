@@ -67,6 +67,23 @@ public class ScenarioDAO {
         return scenario;
     }
 
+        public static void add(String scenarioID, String scenarioName, String scenarioDescription, String status, String admissionInfo) {
+        Connection conn = null;
+        PreparedStatement preparedStatement = null;
+        String queryLine = "INSERT INTO scenario VALUES ('"
+                + scenarioID + "','" + scenarioName + "','" + scenarioDescription + "','" + status + "','" + admissionInfo + "')";
+
+        try {
+            conn = ConnectionManager.getConnection();
+            preparedStatement = conn.prepareStatement(queryLine);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionManager.close(conn, preparedStatement, null);
+        }
+    }
+
     public static List<Scenario> retrieveAll() {
         Connection conn = null;
         PreparedStatement stmt = null;
