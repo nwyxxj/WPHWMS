@@ -70,8 +70,9 @@
        <h3>Blood Pressure Chart</h3>    
        
         <div id="chart"></div>
- 
-             <%
+            
+             
+        <%
            if (bpSystolicList == null ||  bpDiastolicList== null || bpSystolicList.size() == 0 || bpDiastolicList.size() == 0) {
                out.println("<h5>There is no historial data at the moment.</h5>");
            } else { 
