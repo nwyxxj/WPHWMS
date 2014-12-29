@@ -44,11 +44,11 @@ public class StateDAO {
         return state;
     }
     
-        public static void add(String stateID, String scenarioID, String stateDescription, boolean stateStatus, String patientNRIC) {
+        public static void add(String stateID, String scenarioID, String stateDescription, int stateStatus, String patientNRIC) {
         Connection conn = null;
         PreparedStatement preparedStatement = null;
         String queryLine = "INSERT INTO state VALUES ('"
-                + stateID + "','" + scenarioID + "','" + stateDescription + "','" + "','" + stateStatus + patientNRIC + "')";
+                + stateID + "','" + scenarioID + "','" + stateDescription + "','" + stateStatus + "','" + patientNRIC + "')";
 
         try {
             conn = ConnectionManager.getConnection();

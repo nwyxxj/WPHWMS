@@ -7,7 +7,9 @@
 package controller;
 
 import dao.*;
+import entity.Ward;
 import java.io.IOException;
+import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -39,6 +41,7 @@ public class ProcessAddScenario extends HttpServlet {
             String scenarioName = request.getParameter("scenarioName");
             String scenarioDescription = request.getParameter("scenarioDescription");
             String status = request.getParameter("status");
+            int scenarioStatusInt= Integer.parseInt(status);
             String admissionInfo = request.getParameter("admissionInfo");
             String scenarioID = "SC" + (ScenarioDAO.retrieveAll().size() + 1);
 
@@ -48,38 +51,45 @@ public class ProcessAddScenario extends HttpServlet {
             String lastName = request.getParameter("lastName");
             String gender = request.getParameter("gender");
             String dob = request.getParameter("DOB");
-            String maritalStatus = request.getParameter("maritalStatus");
-            String weightString = request.getParameter("weight");
-            double weight = Double.parseDouble(weightString);
-
-            String heightString = request.getParameter("height");
-            double height = Double.parseDouble(heightString);
-
-            String occupation = request.getParameter("occupation");
-            String race = request.getParameter("race");
-            String religion = request.getParameter("religion");
-            String nationality = request.getParameter("nationality");
+            String allergy = request.getParameter("allergy");
+            String wardID= (String) request.getParameter("ward");
+            
 
             //Retrieve patient's default state
             String stateID0 = "ST0";
-            String RR0 = request.getParameter("RR0");
-            String BP0 = request.getParameter("BP0");
-            String HR0 = request.getParameter("HR0");
-            String SPO0 = request.getParameter("SPO0");
-            String intake0 = request.getParameter("intake0");
-            String output0 = request.getParameter("output0");
             String temperatureString0 = request.getParameter("temperature0");
             double temperature0 = Double.parseDouble(temperatureString0);
-            String stateDescription0 = ""; //empty for the default state only
-
+            String RRString0 = request.getParameter("RR0");
+            int RR0= Integer.parseInt(RRString0);
+            String HRString0 = request.getParameter("HR0");
+            int HR0= Integer.parseInt(HRString0);
+            String BPSString0 = request.getParameter("BPS");
+            int BPS0= Integer.parseInt(BPSString0);
+            String BPDString0 = request.getParameter("BPD");
+            int BPD0= Integer.parseInt(BPDString0);
+            String SPOString0 = request.getParameter("SPO0");
+            int SPO0= Integer.parseInt(SPOString0);
+ 
+            String stateDescription0 = "default state"; //for the default state only
+            
+            //to generate the number of states to fill up
             String totalNumberOfStatesString = request.getParameter("totalNumberOfStates");
             //int totalNumberOfStates = Integer.parseInt(totalNumberOfStatesString);
 
+            //getting ward information to add new patient to a new bed
+            Ward wardInfo= WardDAO.retrieve(wardID);
+            int newBed= wardInfo.getBedNumber()+1;
+            
             //Adding Scenario, Patient, State, etc into the database, don't need to send them to the next page
-            PatientDAO.add(patientNRIC, "a", "1", "2", dob, stateID0, 1);
-            ScenarioDAO.add(scenarioID, scenarioName, scenarioDescription, status, admissionInfo);
-            //StateDAO.add(stateID0, scenarioID, RR0, BP0, HR0, SPO0, intake0, output0, temperature0, stateDescription0, patientNRIC);
-            StateDAO.add(stateID0, scenarioID, stateDescription0, true, patientNRIC);
+            //*ORDER OF adding into db, THIS SEQ is important. don't shift it: 
+            WardDAO.add(wardID, newBed, 1); // 1 because bed is now occupied
+            PatientDAO.add(patientNRIC, firstName, lastName, gender, dob, wardID, newBed);
+            AllergyPatientDAO.add(patientNRIC, allergy);
+            ScenarioDAO.add(scenarioID, scenarioName, scenarioDescription, scenarioStatusInt, admissionInfo);
+            StateDAO.add(stateID0, scenarioID, stateDescription0, 1, patientNRIC); //1 because default state status will be activate
+            VitalDAO.add(scenarioID, temperature0, RR0, BPS0, BPD0, HR0, SPO0, "", "", "", "", "");
+           //StateDAO.add(stateID0, scenarioID, RR0, BP0, HR0, SPO0, intake0, output0, temperature0, stateDescription0, patientNRIC);
+            
             
             HttpSession session = request.getSession(false);
             session.setAttribute("totalNumberOfStates", totalNumberOfStatesString);

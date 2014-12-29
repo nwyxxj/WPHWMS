@@ -66,8 +66,8 @@
                 <div class="row">
                     <div class="large-4 columns">
                         <label>Status</label>
-                        <input type="radio" value="activated" name = "status"> Activated <br/>
-                        <input type="radio" value="deactivated" name = "status"> Deactivated
+                        <input type="radio" value="1" name = "status"> Activated <br/>
+                        <input type="radio" value="0" name = "status"> Deactivated
                     </div>
                 </div>
 
@@ -98,52 +98,30 @@
                 <!--New Row 2-->
                 <div class="row">
                     <div class="large-4 columns">
-                        <label>Gender</label>
-                        <input type="radio" value="Male" name = "gender"> Male <br/>
-                        <input type="radio" value="Female" name = "gender"> Female
-                    </div>
-                    <div class="large-4 columns">
                         <label>Date of Birth</label>
                         <input type="text" id="datepicker" name = "DOB" value = "19/11/1992">
                     </div>
                     <div class="large-4 columns">
-                        <label>Marital Status</label>
-                        <select name="maritalStatus">
-                            <option>Single</option>
-                            <option>Married</option>
-                            <option>Divorced</option>
-                            <option>Separated</option>
-                            <option>Widowed</option>
-                            <option>NA</option>
-                        </select>
+                        <label>Allergy</label>
+                         <input type="text" name ="allergy" value = "No Allergy" />
                     </div>
                 </div>
                 <!--New Row 3-->
                 <div class="row">
                     <div class="large-4 columns">
-                        <label>Weight</label>
-                        <input type="text" name="weight" value = "1">
+                        <label>Gender</label>
+                        <input type="radio" value="Male" name = "gender"> Male <br/>
+                        <input type="radio" value="Female" name = "gender"> Female
                     </div>
                     <div class="large-4 columns">
-                        <label>Height</label>
-                        <input type="text" name="height" value ="1">
-                    </div>
-                    <div class="large-4 columns">
-                        <label>Occupation</label>
-                        <input type="text" name="occupation" value = "vampire">
-                    </div>
-                    <div class="large-4 columns">
-                        <label>Race</label>
-                        <input type="text" name="race" value = "vampire">
-                    </div>
-                    <div class="large-4 columns">
-                        <label>Religion</label>
-                        <input type="text" name="religion" value = "vampire">
-                    </div>
-                    <div class="large-4 columns">
-                        <label>Nationality</label>
-                        <input type="text" name="nationality" value = "vampire">
-                    </div>
+                        <label>Ward Selection</label>
+                        <select name="ward">
+                            <option>ward 1</option>
+                            <option>ward 2</option>
+                            <option>ward 3</option>
+                            <option>ward 4</option>
+                        </select>
+                    </div>       
                 </div>
             </div>
         </dd>
@@ -154,33 +132,30 @@
                 <div style="margin-left:100px;"> Leave empty if not applicable.</div><br/>
                 <div class="row">
                     <div class="large-4 columns">
-                        <label>Respiratory Rate</label>
-                        <input type="text" name="RR0" value = "11">
+                        <label>Temperature</label>
+                        <input type="text" name="temperature0" value = "17">
                     </div>
                     <div class="large-4 columns">
-                        <label>Blood Pressure</label>
-                        <input type="text" name="BP0" value = "12">
+                        <label>Respiratory Rate</label>
+                        <input type="text" name="RR0" value = "11">
                     </div>
                     <div class="large-4 columns">
                         <label>Heart Rate</label>
                         <input type="text" name="HR0" value = "13">
                     </div>
                     <div class="large-4 columns">
+                        <label>Blood Pressure Systolic</label>
+                        <input type="text" name="BPS" value = "12">
+                    </div>
+                    <div class="large-4 columns">
+                        <label>Blood Pressure Diastolic</label>
+                        <input type="text" name="BPD" value = "12">
+                    </div>
+                    <div class="large-4 columns">
                         <label>SPO</label>
                         <input type="text" name="SPO0" value = "14">
                     </div>
-                    <div class="large-4 columns">
-                        <label>Intake</label>
-                        <input type="text" name="intake0" value = "15">
-                    </div>
-                    <div class="large-4 columns">
-                        <label>Output</label>
-                        <input type="text" name="output0" value = "16">
-                    </div>
-                    <div class="large-4 columns">
-                        <label>Temperature</label>
-                        <input type="text" name="temperature0" value = "17">
-                    </div>
+                   
                     <div class="large-4 columns"></div>
                     <div class="large-4 columns"></div>
                 </div>

@@ -67,11 +67,11 @@ public class ScenarioDAO {
         return scenario;
     }
 
-        public static void add(String scenarioID, String scenarioName, String scenarioDescription, String status, String admissionInfo) {
+        public static void add(String scenarioID, String scenarioName, String scenarioDescription, int scenarioStatus, String admissionInfo) {
         Connection conn = null;
         PreparedStatement preparedStatement = null;
         String queryLine = "INSERT INTO scenario VALUES ('"
-                + scenarioID + "','" + scenarioName + "','" + scenarioDescription + "','" + status + "','" + admissionInfo + "')";
+                + scenarioID + "','" + scenarioName + "','" + scenarioDescription + "','" + scenarioStatus + "','" + admissionInfo + "')";
 
         try {
             conn = ConnectionManager.getConnection();
