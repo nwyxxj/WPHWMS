@@ -28,11 +28,12 @@
             });
         </script>
 
-        <title>Create Scenario</title>
+        <title>Case Setup - Create </title>
     </head>
     <body>
 
     <center><h1>Case Set Up</h1>
+        <h2>Step 1: Create case</h2>
 
         <form action ="ProcessAddScenario" method ="POST">
             <div class="row">
@@ -63,16 +64,6 @@
                         <textarea style = "resize:vertical"  name="admissionInfo" rows="2" cols="10" value = "Her last vitals are..."></textarea>
                     </div>
                 </center>
-                <div class="row">
-                    <div class="large-4 columns">
-                        <label>Status</label>
-                        <input type="radio" value="1" name = "status"> Activated <br/>
-                        <input type="radio" value="0" name = "status"> Deactivated
-                    </div>
-                </div>
-
-
-
         </dd>
         <dd class="accordion-navigation">
             <a href="#panel2">Patient's Information</a>

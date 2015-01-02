@@ -40,8 +40,6 @@ public class ProcessAddScenario extends HttpServlet {
              //Retrieve case information
             String scenarioName = request.getParameter("scenarioName");
             String scenarioDescription = request.getParameter("scenarioDescription");
-            String status = request.getParameter("status");
-            int scenarioStatusInt= Integer.parseInt(status);
             String admissionInfo = request.getParameter("admissionInfo");
             String scenarioID = "SC" + (ScenarioDAO.retrieveAll().size() + 1);
 
@@ -85,7 +83,7 @@ public class ProcessAddScenario extends HttpServlet {
             WardDAO.add(wardID, newBed, 1); // 1 because bed is now occupied
             PatientDAO.add(patientNRIC, firstName, lastName, gender, dob, wardID, newBed);
             AllergyPatientDAO.add(patientNRIC, allergy);
-            ScenarioDAO.add(scenarioID, scenarioName, scenarioDescription, scenarioStatusInt, admissionInfo);
+            ScenarioDAO.add(scenarioID, scenarioName, scenarioDescription, 0, admissionInfo);
             StateDAO.add(stateID0, scenarioID, stateDescription0, 1, patientNRIC); //1 because default state status will be activate
             VitalDAO.add(scenarioID, temperature0, RR0, BPS0, BPD0, HR0, SPO0, "", "", "", "", "");
            //StateDAO.add(stateID0, scenarioID, RR0, BP0, HR0, SPO0, intake0, output0, temperature0, stateDescription0, patientNRIC);
