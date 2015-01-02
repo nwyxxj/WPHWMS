@@ -101,7 +101,7 @@ public class ProcessReportUpload extends HttpServlet {
                     "There was an error: " + ex.getMessage());
         }
         // redirects client to message page
-        getServletContext().getRequestDispatcher("/createState.jsp").forward(
+        getServletContext().getRequestDispatcher("/createStateWithReports.jsp").forward(
                 request, response);
     }
 }

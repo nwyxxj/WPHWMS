@@ -97,7 +97,8 @@ public class ProcessAddScenario extends HttpServlet {
             //request.setAttribute("scenarioID", scenarioID);
 
             //request.setAttribute("patientNRIC", patientNRIC);
-            RequestDispatcher rd = request.getRequestDispatcher("createState.jsp");
+            //RequestDispatcher rd = request.getRequestDispatcher("createState.jsp");
+            RequestDispatcher rd = request.getRequestDispatcher("createStateWithReports.jsp");
             rd.forward(request, response);
     }
 
