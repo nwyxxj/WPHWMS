@@ -35,7 +35,7 @@
     <center><h1>Case Set Up</h1>
         <h2>Step 1: Create case</h2>
 
-        <form action ="ProcessAddScenario" method ="POST">
+        <form action ="newjsp.jsp" method ="POST">
             <div class="row">
                 <div class="small-8">
                     <div class="row">

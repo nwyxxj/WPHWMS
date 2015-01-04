@@ -40,23 +40,30 @@ public class PatientDAO {
         }
         return patient;
     }
-
-    public static void add(String patientNRIC, String firstName, String lastName, String gender, String dob, String wardID, int bedNumber) {
+ 
+    public static void add(String patientNRIC, String firstName, String lastName, String gender, String DOB) {
         Connection conn = null;
         PreparedStatement preparedStatement = null;
-        String queryLine = "INSERT INTO patient VALUES ('"
-                + patientNRIC + "','" + firstName + "','" + lastName + "','" + gender + "','" + dob + "','" + wardID+ "','" + bedNumber + "')";
+        String query = "INSERT INTO patient (patientNRIC, firstName, lastName, gender, DOB) VALUES (?,?,?,?,?)";
 
         try {
             conn = ConnectionManager.getConnection();
-            preparedStatement = conn.prepareStatement(queryLine);
+            preparedStatement = conn.prepareStatement(query);
+            
+            preparedStatement.setString(1, patientNRIC);
+            preparedStatement.setString(2, firstName);
+            preparedStatement.setString(3, lastName);
+            preparedStatement.setString(4, gender);
+            preparedStatement.setString(5, DOB);
             preparedStatement.executeUpdate();
+
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
             ConnectionManager.close(conn, preparedStatement, null);
         }
     }
+    
     
     public static String retrieveAllergy(String patientNRIC) {
         Connection conn = null;

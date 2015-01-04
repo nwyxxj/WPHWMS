@@ -43,17 +43,24 @@ public class StateDAO {
         }
         return state;
     }
+
     
-        public static void add(String stateID, String scenarioID, String stateDescription, int stateStatus, String patientNRIC) {
+    public static void add(String stateID, String scenarioID, String stateDescription, int stateStatus, String patientNRIC) {
         Connection conn = null;
         PreparedStatement preparedStatement = null;
-        String queryLine = "INSERT INTO state VALUES ('"
-                + stateID + "','" + scenarioID + "','" + stateDescription + "','" + stateStatus + "','" + patientNRIC + "')";
+        String query = "INSERT INTO state (stateID, scenarioID, stateDescription, stateStatus, patientNRIC) VALUES (?,?,?,?,?)";
 
         try {
             conn = ConnectionManager.getConnection();
-            preparedStatement = conn.prepareStatement(queryLine);
+            preparedStatement = conn.prepareStatement(query);
+            
+            preparedStatement.setString(1, stateID);
+            preparedStatement.setString(2, scenarioID);
+            preparedStatement.setString(3, stateDescription);
+            preparedStatement.setInt(4, stateStatus);
+            preparedStatement.setString(5, patientNRIC);
             preparedStatement.executeUpdate();
+
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {

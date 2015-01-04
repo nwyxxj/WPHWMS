@@ -10,8 +10,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.TimeZone;
 
 /**
  *
@@ -66,17 +70,25 @@ public class ScenarioDAO {
         }
         return scenario;
     }
-
-        public static void add(String scenarioID, String scenarioName, String scenarioDescription, int scenarioStatus, String admissionInfo) {
+ 
+    public static void add(String scenarioID, String scenarioName, String scenarioDescription, int scenarioStatus, String admissionNote, String wardID, int bedNumber) {
         Connection conn = null;
         PreparedStatement preparedStatement = null;
-        String queryLine = "INSERT INTO scenario VALUES ('"
-                + scenarioID + "','" + scenarioName + "','" + scenarioDescription + "','" + scenarioStatus + "','" + admissionInfo + "')";
+        String query = "INSERT INTO scenario (scenarioID, scenarioName, scenarioDescription, scenarioStatus, admissionNote, wardID, bedNumber) VALUES (?,?,?,?,?,?,?)";
 
         try {
             conn = ConnectionManager.getConnection();
-            preparedStatement = conn.prepareStatement(queryLine);
+            preparedStatement = conn.prepareStatement(query);
+            
+            preparedStatement.setString(1, scenarioID);
+            preparedStatement.setString(2, scenarioName);
+            preparedStatement.setString(3, scenarioDescription);
+            preparedStatement.setInt(4, scenarioStatus);
+            preparedStatement.setString(5, admissionNote);
+            preparedStatement.setString(6, wardID);
+            preparedStatement.setInt(7, bedNumber);
             preparedStatement.executeUpdate();
+
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {

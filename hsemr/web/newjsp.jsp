@@ -1,46 +1,25 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+<%-- 
+    Document   : newjsp
+    Created on : Jan 4, 2015, 2:22:27 AM
+    Author     : Administrator
+--%>
 
-package controller;
-
-import dao.*;
-import entity.Ward;
-import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
-/**
- *
- * @author Administrator
- */
-@WebServlet(name = "ProcessAddScenario", urlPatterns = {"/ProcessAddScenario"})
-public class ProcessAddScenario extends HttpServlet {
-
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+<%@page import="entity.*"%>
+<%@page import="dao.*"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>JSP Page</title>
+    </head>
+    <body>
+        <h1>Hello World!</h1>
         
-             //Retrieve case information
+        <%
+        
+        
+                    //Retrieve case information
             String scenarioName = request.getParameter("scenarioName");
             String scenarioDescription = request.getParameter("scenarioDescription");
             String admissionInfo = request.getParameter("admissionInfo");
@@ -83,23 +62,23 @@ public class ProcessAddScenario extends HttpServlet {
             
             //Adding Scenario, Patient, State, etc into the database, don't need to send them to the next page
             //*ORDER OF adding into db, THIS SEQ is important. don't shift it 
+            PatientDAO.add(patientNRIC, firstName, lastName, gender, dobString);
             WardDAO.add(wardID, newBed, 1); // 1 because bed is now occupied
 //            PatientDAO.add(patientNRIC, firstName, lastName, gender, dob, wardID, newBed);
-            PatientDAO.add(patientNRIC, firstName, lastName, gender, dobString);
             
-            System.out.println(patientNRIC);
-            System.out.println(firstName);
-            System.out.println(lastName);
-            System.out.println(gender);
-            System.out.println(dobString);
+            
+            out.println(patientNRIC);
+            out.println(firstName);
+            out.println(lastName);
+            out.println(gender);
+            out.println(dobString);
             
             AllergyPatientDAO.add(patientNRIC, allergy);
             ScenarioDAO.add(scenarioID, scenarioName, scenarioDescription, 0, admissionInfo, wardID, newBed);
             StateDAO.add(stateID0, scenarioID, stateDescription0, 0, patientNRIC); //1 because default state status will be activate
             VitalDAO.add(scenarioID, temperature0, RR0, BPS0, BPD0, HR0, SPO0, "", "", "", "", "");
            //StateDAO.add(stateID0, scenarioID, RR0, BP0, HR0, SPO0, intake0, output0, temperature0, stateDescription0, patientNRIC);
-            
-            HttpSession session = request.getSession(false);
+           
             session.setAttribute("totalNumberOfStates", totalNumberOfStatesString);
             session.setAttribute("scenarioID", scenarioID);
             session.setAttribute("patientNRIC", patientNRIC);
@@ -111,45 +90,7 @@ public class ProcessAddScenario extends HttpServlet {
             //response.sendRedirect("createState.jsp");
 //            RequestDispatcher rd = request.getRequestDispatcher("createState.jsp");
 //            rd.forward(request, response);
-    }
-
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
-    }
-
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
-    }
-
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
-
-}
+        
+        %>
+    </body>
+</html>

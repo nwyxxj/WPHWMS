@@ -34,10 +34,12 @@
             for (int i = 0; i < totalNumberOfStates; i++) {
                 //to differentiate different states
                 String stateDescription = "stateDescription" + (i + 1);
+                String stateID = "ST" + (i+1);
         %>
         <!--<form action ="ProcessAddState" method ="POST">-->
             <center>
             <h2>State <%=i + 1%></h2>
+            
             
             <div class="row">
                 <div class = "large-12">
@@ -55,12 +57,17 @@
               Please upload ONE at a time. <br>
               
               <form action = "ProcessReportUpload" method = "POST" enctype = "multipart/form-data"> 
-                  <input type ="file" name = "file"/>
-                  <br> <input type ="submit" value = "Upload Report" />
+                  <input type ="file" name = "file"/><br>
+                  Report Name <input type ="text" name ="reportName"/>
+                  <input type ="hidden" name ="scenarioID" value ="<%=scenarioID%>"/>
+                  <input type ="hidden" name ="stateID" value ="<%=stateID%>"/>
+                  
+                  <input type ="submit" class ="button" value ="Upload Report">
+                  
               </form><br>   
               <a class="close-reveal-modal">&#215;</a>
             </div>
-                </center>
+            </center>
 
 
             <%   }
