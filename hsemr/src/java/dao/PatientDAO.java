@@ -30,7 +30,7 @@ public class PatientDAO {
 
             rs = stmt.executeQuery();
             while (rs.next()) {
-                patient = new Patient(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getInt(7));
+                patient = new Patient(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5));
             }
 
         } catch (SQLException e) {

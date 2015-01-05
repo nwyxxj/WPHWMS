@@ -73,6 +73,7 @@
                     retrieveScenarioState = StateDAO.retrieveActivateState(scenarioActivated.getScenarioID());
 
                     patientNRIC = retrieveScenarioState.getPatientNRIC();
+                    
                     retrievePatient = PatientDAO.retrieve(patientNRIC);
 
                     //retrieve case's information

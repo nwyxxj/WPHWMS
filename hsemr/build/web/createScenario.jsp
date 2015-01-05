@@ -33,9 +33,9 @@
     <body>
 
     <center><h1>Case Set Up</h1>
-        <h2>Step 1: Create case</h2>
-
-        <form action ="newjsp.jsp" method ="POST">
+    <h2>Step 1: Create case</h2>
+       
+    <form data-abide action ="ProcessAddScenario" method ="POST">
             <div class="row">
                 <div class="small-8">
                     <div class="row">
@@ -49,7 +49,7 @@
                 </div>
             </div>
 
-    </center>    
+      
     <dl class="accordion" data-accordion>
         <dd class="accordion-navigation">
             <a href="#panel1">Case Information</a>
@@ -58,50 +58,61 @@
                 <center>
                     <div class="large-9">
                         <label>Case Description</label>
-                        <textarea style = "resize:vertical"  name="scenarioDescription" rows="2" cols="10" value = "A woman is being admitted..."></textarea>
+                        <textarea style = "resize:vertical"  name="scenarioDescription" rows="2" cols="10" required></textarea>
 
                         <label>Admission Information</label>
-                        <textarea style = "resize:vertical"  name="admissionInfo" rows="2" cols="10" value = "Her last vitals are..."></textarea>
+                        <textarea style = "resize:vertical"  name="admissionInfo" rows="2" cols="10" required></textarea>
                     </div>
                 </center>
+            </div>
         </dd>
+        
         <dd class="accordion-navigation">
             <a href="#panel2">Patient's Information</a>
             <div id="panel2" class="content">
                 <!--New row 1-->
                 <div class="row">
+
+                <div class="row">
                     <div class="large-4 columns">
                         <label>Patient's NRIC
-                            <input type="text" name ="patientNRIC" value = "S7843522A"/>
+                            <input type="text" maxlength="9" name ="patientNRIC" value = "S7843522A" required pattern ="^[SFTG]\d{7}[A-Z]$"/>
+                            <small class="error">Please enter a valid NRIC according to Singapore's standard.</small>
                         </label>
+                        
                     </div>
                     <div class="large-4 columns">
                         <label>First Name
-                            <input type="text" name ="firstName" value = "Bella"/>
+                            <input type="text" name ="firstName" value = "Bella" required pattern ="^[a-zA-Z]+$"/>
+                            <small class="error">Only alphabets accepted.</small>
                         </label>
                     </div>
                     <div class="large-4 columns">
                         <label>Last Name
-                            <input type="text" name ="lastName" value = "Cullen" />
+                            <input type="text" name ="lastName" value = "Cullen" required pattern ="^[a-zA-Z]+$"/>
+                            <small class="error">Only alphabets accepted.</small>
                         </label>
                     </div>
                 </div>
+                    
                 <!--New Row 2-->
                 <div class="row">
                     <div class="large-4 columns">
                         <label>Date of Birth</label>
-                        <input type="text" id="datepicker" name = "DOB" value = "19/11/1992">
+                        <input type="text" id="datepicker" name = "DOB" value = "19/11/1992" required pattern = "^(((0[1-9]|[12]\d|3[01])\/(0[13578]|1[02])\/((19|[2-9]\d)\d{2}))|((0[1-9]|[12]\d|30)\/(0[13456789]|1[012])\/((19|[2-9]\d)\d{2}))|((0[1-9]|1\d|2[0-8])\/02\/((19|[2-9]\d)\d{2}))|(29\/02\/((1[6-9]|[2-9]\d)(0[48]|[2468][048]|[13579][26])|((16|[2468][048]|[3579][26])00))))$">
+                        <small class="error">Please enter in DD/MM/YYYY.</small>
                     </div>
                     <div class="large-4 columns">
                         <label>Allergy</label>
-                         <input type="text" name ="allergy" value = "No Allergy" />
+                        <input type="text" name ="allergy" value = "No Allergy" required pattern ="^[a-zA-Z ]+$"/>
+                        <small class="error">Only alphabets accepted.</small>
                     </div>
                 </div>
                 <!--New Row 3-->
                 <div class="row">
                     <div class="large-4 columns">
                         <label>Gender</label>
-                        <input type="radio" value="Male" name = "gender"> Male <br/>
+                        <input type="radio" value="Male" name = "gender" required> Male <br/>
                         <input type="radio" value="Female" name = "gender"> Female
                     </div>
                     <div class="large-4 columns">
@@ -124,27 +135,33 @@
                 <div class="row">
                     <div class="large-4 columns">
                         <label>Temperature</label>
-                        <input type="text" name="temperature0" value = "17">
+                        <input type="text" name="temperature0" maxlength="4" value = "17" pattern ="[0-9]+(\.[0-9][0-9]?)?">
+                        <small class="error">Must be numeric, cannot contain alphabets. E.g: 37.3 or 37</small>
                     </div>
                     <div class="large-4 columns">
                         <label>Respiratory Rate</label>
-                        <input type="text" name="RR0" value = "11">
+                        <input type="text" name="RR0" value = "11" maxlength = "2" pattern ="integer">
+                        <small class="error">RR must be 2 digits.</small>
                     </div>
                     <div class="large-4 columns">
                         <label>Heart Rate</label>
-                        <input type="text" name="HR0" value = "13">
+                        <input type="text" name="HR0" value = "13" pattern ="^([0-9]|[1-9][0-9]|[1][0-9][0-9]|20[0-0])$">
+                        <small class="error">HR must be between 0 - 200.</small>
                     </div>
                     <div class="large-4 columns">
                         <label>Blood Pressure Systolic</label>
-                        <input type="text" name="BPS" value = "12">
-                    </div>
+                        <input type="text" name="BPS" maxlength ="3" value = "12" pattern = "integer">
+                        <small class="error">BP systolic must be numeric and between 2 to 3 digits.</small>
+                    </div> 
                     <div class="large-4 columns">
                         <label>Blood Pressure Diastolic</label>
-                        <input type="text" name="BPD" value = "12">
+                        <input type="text" name="BPD" maxlength ="3" value = "12" pattern = "integer">
+                        <small class="error">BP diastolic must be numeric and between 2 to 3 digits.</small>
                     </div>
                     <div class="large-4 columns">
                         <label>SPO</label>
-                        <input type="text" name="SPO0" value = "14">
+                        <input type="text" name="SPO0" maxlength = "3" value = "14" pattern ="^[0-9][0-9]?$|^100$">
+                        <small class="error">SPO must be numeric and between 0 - 100%.</small>
                     </div>
                    
                     <div class="large-4 columns"></div>
@@ -165,51 +182,8 @@
                     </div>
                 </center>
 
-
-                <!--                State 1
-                                <center><div class="large-9">
-                                        <label>State Description</label>
-                                        <textarea style = "resize:vertical" name="stateDescription1" rows="2" cols="10"></textarea>
-                                    </div></center>
-                                <div class="row">
-                                    <div class="large-4 columns">
-                                        <label>Respiratory Rate</label>
-                                        <input type="text" name="RR1">
-                                    </div>
-                                    <div class="large-4 columns">
-                                        <label>Blood Pressure</label>
-                                        <input type="text" name="BP1">
-                                    </div>
-                                    <div class="large-4 columns">
-                                        <label>Heart Rate</label>
-                                        <input type="text" name="HR1">
-                                    </div>
-                                    <div class="large-4 columns">
-                                        <label>SPO</label>
-                                        <input type="text" name="SPO1">
-                                    </div>
-                                    <div class="large-4 columns">
-                                        <label>Intake</label>
-                                        <input type="text" name="intake1">
-                                    </div>
-                                    <div class="large-4 columns">
-                                        <label>Output</label>
-                                        <input type="text" name="output1">
-                                    </div>
-                
-                                    <div class="large-4 columns">
-                                        <label>Temperature</label>
-                                        <input type="text" name="temperature1">
-                                    </div>-->
-
             </div>
-            <!--Add more states button-->
-            <!--            <div class="input_fields_wrap">
-                            <button class="add_field_button">Add More States</button>
-                        </div>-->
-            <!--End of add more states-->
-            </div>
-            </div>
+           
         </dd>
     </dl>
     <br/>
@@ -217,43 +191,11 @@
 </form>
 
 
-<!--<script>
-    $(document).ready(function() {
-        var max_fields = 15; //maximum input boxes allowed
-        var wrapper = $(".input_fields_wrap"); //Fields wrapper
-        var add_button = $(".add_field_button"); //Add button ID
+    <script src="js/vendor/jquery.js"></script>
+    <script src="js/foundation.min.js"></script>
 
-        var x = 2; //initlal text box count, first box already added above
-        $(add_button).click(function(e) { //on add input button click
-            e.preventDefault();
-            if (x < max_fields) { //max input box allowed
-                x++; //text box increment
-                $(wrapper).append('<div><br>State X <center><div class = "large-9"><label>State Description</label><textarea name = "stateDescription" rows = "2" cols = "10"></textarea></div></center><div class = "row">\n\
-                           <div class ="large-4 columns"><label>Respiratory Rate</label><input type="text" name="RR2"/></div>\n\
-                           <div class ="large-4 columns"><label>Blood Pressure</label><input type="text" name="BP"/></div>\n\
-                           <div class ="large-4 columns"><label>Heart Rate</label><input type="text" name="HR"/></div>\n\
-                           <div class ="large-4 columns"><label>SPO</label><input type="text" name="SPO"/></div>\n\
-                           <div class ="large-4 columns"><label>Intake</label><input type="text" name="intake"/></div>\n\
-                           <div class ="large-4 columns"><label>Output</label><input type="text" name="output"/></div>\n\
-                           <div class ="large-4 columns"><label>Temperature</label><input type="text" name="temperature"/></div>\n\
-                           </div>\n\
-                           <a href = "#" class = "remove_field">Remove State</a></div>'); //add input box
-            }
-        });
-
-        $(wrapper).on("click", ".remove_field", function(e) { //user click on remove text
-            e.preventDefault();
-            $(this).parent('div').remove();
-            x--;
-        })
-    });
-</script>-->
-
-<script src="js/vendor/jquery.js"></script>
-<script src="js/foundation.min.js"></script>
-
-<script>
-            $(document).foundation();
-</script>
+    <script>
+                $(document).foundation();
+    </script>
 </body>
 </html>

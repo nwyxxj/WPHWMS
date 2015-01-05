@@ -38,9 +38,7 @@ public class ProcessAddScenario extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        
-             //Retrieve case information
+            throws ServletException, IOException {//Retrieve case information
             String scenarioName = request.getParameter("scenarioName");
             String scenarioDescription = request.getParameter("scenarioDescription");
             String admissionInfo = request.getParameter("admissionInfo");
@@ -78,28 +76,21 @@ public class ProcessAddScenario extends HttpServlet {
             //int totalNumberOfStates = Integer.parseInt(totalNumberOfStatesString);
 
             //getting ward information to add new patient to a new bed
-            Ward wardInfo= WardDAO.retrieve(wardID);
+            Ward wardInfo = WardDAO.retrieve(wardID);
             int newBed= wardInfo.getBedNumber()+1;
             
             //Adding Scenario, Patient, State, etc into the database, don't need to send them to the next page
             //*ORDER OF adding into db, THIS SEQ is important. don't shift it 
-            WardDAO.add(wardID, newBed, 1); // 1 because bed is now occupied
-//            PatientDAO.add(patientNRIC, firstName, lastName, gender, dob, wardID, newBed);
             PatientDAO.add(patientNRIC, firstName, lastName, gender, dobString);
-            
-            System.out.println(patientNRIC);
-            System.out.println(firstName);
-            System.out.println(lastName);
-            System.out.println(gender);
-            System.out.println(dobString);
-            
+            WardDAO.add(wardID, newBed, 1); // 1 because bed is now occupied
             AllergyPatientDAO.add(patientNRIC, allergy);
             ScenarioDAO.add(scenarioID, scenarioName, scenarioDescription, 0, admissionInfo, wardID, newBed);
             StateDAO.add(stateID0, scenarioID, stateDescription0, 0, patientNRIC); //1 because default state status will be activate
             VitalDAO.add(scenarioID, temperature0, RR0, BPS0, BPD0, HR0, SPO0, "", "", "", "", "");
            //StateDAO.add(stateID0, scenarioID, RR0, BP0, HR0, SPO0, intake0, output0, temperature0, stateDescription0, patientNRIC);
-            
+           
             HttpSession session = request.getSession(false);
+            
             session.setAttribute("totalNumberOfStates", totalNumberOfStatesString);
             session.setAttribute("scenarioID", scenarioID);
             session.setAttribute("patientNRIC", patientNRIC);
@@ -108,9 +99,10 @@ public class ProcessAddScenario extends HttpServlet {
 
             //request.setAttribute("patientNRIC", patientNRIC);
             //RequestDispatcher rd = request.getRequestDispatcher("createState.jsp");
-            //response.sendRedirect("createState.jsp");
-//            RequestDispatcher rd = request.getRequestDispatcher("createState.jsp");
-//            rd.forward(request, response);
+            //response.sendRedirect("createStateWithReports.jsp");
+            RequestDispatcher rd = request.getRequestDispatcher("createStateWithReports.jsp");
+            rd.forward(request, response);
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

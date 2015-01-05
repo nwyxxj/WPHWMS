@@ -13,7 +13,10 @@
         <link rel="stylesheet" href="//code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css">
         <script src="//code.jquery.com/jquery-1.10.2.js"></script>
         <script src="//code.jquery.com/ui/1.11.1/jquery-ui.js"></script>
+        <script type="text/javascript" src="js/humane.js"></script>
+        <script type="text/javascript" src="js/app.js"></script>
         <link rel="stylesheet" href="/resources/demos/style.css">
+        
     </head>
     <body>
 
@@ -24,7 +27,23 @@
         <h2>Step 2: Create State(s)</h2>
         </center>
     
-        <%          
+        <%  
+        
+            String success = "";
+            String error = "";
+            
+            if (session.getAttribute("success") != null) {
+
+                        success = (String) session.getAttribute("success");
+                        session.setAttribute("success", "");
+            }
+            
+            if (session.getAttribute("error") != null) {
+
+                        error = (String) session.getAttribute("error");
+                        session.setAttribute("error", "");
+            }
+            
             String totalNumberOfStatesString = (String) session.getAttribute("totalNumberOfStates");
             int totalNumberOfStates = Integer.parseInt(totalNumberOfStatesString);
 
@@ -57,8 +76,8 @@
               Please upload ONE at a time. <br>
               
               <form action = "ProcessReportUpload" method = "POST" enctype = "multipart/form-data"> 
+                  Please ensure that your file is named to what you want it to be shown.
                   <input type ="file" name = "file"/><br>
-                  Report Name <input type ="text" name ="reportName"/>
                   <input type ="hidden" name ="scenarioID" value ="<%=scenarioID%>"/>
                   <input type ="hidden" name ="stateID" value ="<%=stateID%>"/>
                   
@@ -116,6 +135,25 @@
                 })
             });
         </script>
+        
+        <script>
+
+            $(document).ready(function() {
+                $(document).foundation();
+                var humaneSuccess = humane.create({baseCls: 'humane-original', addnCls: 'humane-original-success', timeout: 8000, clickToClose: true})
+                var humaneError = humane.create({baseCls: 'humane-original', addnCls: 'humane-original-error', timeout: 8000, clickToClose: true})
+
+                var success1 = "<%=success%>";
+                var error1 = "<%=error%>";
+                if (success1 !== "") {
+                    humaneSuccess.log(success1);
+                } else if (error1 !== "") {
+                    humaneError.log(error1);
+                }
+
+            });
+        </script>
+        <script type="text/javascript" src="js/humane.js"></script>
 
     </body>
 </html>

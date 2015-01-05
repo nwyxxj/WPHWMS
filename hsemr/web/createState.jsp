@@ -37,14 +37,14 @@
         %>
         <form action ="ProcessAddState" method ="POST">
             <center>
-            <h2>State <%=i + 1%></h2>
-            
-            <div class="row">
-                <div class = "large-12">
-                    <label>State Description</label>
-                    <textarea style = "resize:vertical" name = "<%=stateDescription%>" rows = "2" cols = "10"></textarea>
+                <h2>State <%=i + 1%></h2>
+
+                <div class="row">
+                    <div class = "large-12">
+                        <label>State Description</label>
+                        <textarea style = "resize:vertical" name = "<%=stateDescription%>" rows = "2" cols = "10"></textarea>
+                    </div>
                 </div>
-            </div>
 
             <!--                    
                     <label>Is report applicable for this state? </label> 
